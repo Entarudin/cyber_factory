@@ -1,7 +1,7 @@
 import { registerAs } from '@nestjs/config';
 
 import { DatabaseEnvironmentVariables } from './app-env.validation';
-import { validateUtil } from 'src/common/validate.utils';
+import { validateUtil } from '../../common/validate.utils';
 import { IDatabaseConfig } from './database-config.interface';
 
 export default registerAs('database', (): IDatabaseConfig => {

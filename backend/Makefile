@@ -10,13 +10,13 @@ backend-wait-db:
 	sleep 5
 
 app-migration:
-	docker-compose run --rm $(appContainer) npx typeorm migration:run
+	docker-compose run --rm $(appContainer) npm run migration:run
 
 migration-gen:
-	docker-compose run --rm $(appContainer) npx typeorm migration:generate -n $(n) -d ./src/$(m)/dao/migrations && sudo chown -R ${USER}:${USER} src/$(m)
+	docker-compose run --rm $(appContainer) npm run migration:generate $(n)
 
 migration-run:
-	docker-compose run --rm $(appContainer) npx typeorm migration:run
+	docker-compose run --rm $(appContainer) npm run migration:run
 
 migration-revert:
-	docker-compose run --rm $(appContainer) npx typeorm migration:revert
+	docker-compose run --rm $(appContainer) npm run migration:down
