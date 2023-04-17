@@ -1,10 +1,13 @@
+import { TokenPair } from '../../../tokens/dao/entity/token-pair.entity';
 import { RoleEntity } from '../../../roles/dao/entity/role.entity';
 import {
   Column,
   CreateDateColumn,
   Entity,
+  JoinColumn,
   JoinTable,
   ManyToMany,
+  OneToMany,
   PrimaryGeneratedColumn,
 } from 'typeorm';
 
@@ -14,10 +17,10 @@ export class UserEntity {
   id: number;
 
   @Column({ unique: true, type: 'varchar' })
-  public email: string;
+  email: string;
 
   @Column({ type: 'varchar' })
-  public passwordHash: string;
+  passwordHash: string;
 
   @CreateDateColumn({
     type: 'timestamp',
@@ -29,5 +32,14 @@ export class UserEntity {
     eager: true,
   })
   @JoinTable()
-  public roles!: RoleEntity[];
+  roles!: RoleEntity[];
+
+  @OneToMany(() => TokenPair, (token) => token.user, {
+    eager: true,
+    cascade: true,
+    onDelete: 'CASCADE',
+    onUpdate: 'CASCADE',
+  })
+  @JoinColumn({ referencedColumnName: 'userId' })
+  tokens!: TokenPair[];
 }

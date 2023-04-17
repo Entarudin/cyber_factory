@@ -11,10 +11,10 @@ import {
 @Entity({ name: 'roles' })
 export class RoleEntity {
   @PrimaryGeneratedColumn()
-  public id?: number;
+  id?: number;
 
   @Column({ type: 'enum', enum: RolesEnum, default: RolesEnum.USER })
-  public name: RolesEnum;
+  name: RolesEnum;
 
   @CreateDateColumn({
     type: 'timestamp',
