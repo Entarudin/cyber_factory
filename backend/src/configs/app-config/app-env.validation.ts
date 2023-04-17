@@ -1,6 +1,6 @@
 import { IsEnum, IsNumber } from 'class-validator';
 
-enum Environment {
+export enum Environment {
   dev = 'dev',
   test = 'test',
   prod = 'prod',
