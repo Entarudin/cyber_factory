@@ -3,6 +3,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { RolesRepository } from './roles.repository';
 import { RoleEntity } from '../dao/entity/role.entity';
+import { RolesEnum } from 'src/common/roles.enum';
 
 @Injectable()
 export class PostrgresRolesRepository extends RolesRepository {
@@ -35,5 +36,13 @@ export class PostrgresRolesRepository extends RolesRepository {
 
   public async delete(id: number): Promise<void> {
     await this.repository.delete(id);
+  }
+
+  public findByName(name: string): Promise<RoleEntity> {
+    return this.repository.findOne({
+      where: {
+        name: name as RolesEnum,
+      },
+    });
   }
 }
