@@ -1,24 +1,37 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { SnakeNamingStrategy } from 'typeorm-naming-strategies';
-import { IDatabaseConfig } from '../configs/database-config';
-import { DatabaseConfigModule } from '../configs/database-config/database-config.module';
+import {
+  IDatabaseConfig,
+  DatabaseConfigModule,
+} from '../configs/database-config';
+import { ConfigNamespacesEnum } from '../common/config-namespaces.enum';
 import { ConfigService } from '@nestjs/config';
+import { AppConfigModule, IAppConfig } from '../configs/app-config';
 
 @Module({
   imports: [
     TypeOrmModule.forRootAsync({
-      imports: [DatabaseConfigModule],
+      imports: [DatabaseConfigModule, AppConfigModule],
       useFactory: (configService: ConfigService) => {
-        const config = configService.get<IDatabaseConfig>('database');
+        const databaseConfig = configService.get<IDatabaseConfig>(
+          ConfigNamespacesEnum.DATABASE,
+        );
+        const appConfig = configService.get<IAppConfig>(
+          ConfigNamespacesEnum.APP,
+        );
         return {
           type: 'postgres',
-          host: config.host,
-          port: config.port,
-          username: config.user,
-          password: config.password,
-          database: config.database,
+          host: databaseConfig.host,
+          port: databaseConfig.port,
+          username: databaseConfig.username,
+          password: databaseConfig.password,
+          database: databaseConfig.database,
           autoLoadEntities: true,
+          logging: !appConfig.isProd,
+          dropSchema: false,
+          synchronize: false,
+          migrationsRun: true,
           namingStrategy: new SnakeNamingStrategy(),
         };
       },
