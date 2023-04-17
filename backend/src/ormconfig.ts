@@ -10,17 +10,11 @@ export default new DataSource({
   username: process.env.POSTGRES_USER,
   password: process.env.POSTGRES_PASSWORD,
   database: process.env.POSTGRES_DATABASE,
-  entities: [
-    __dirname + '/**/*.entity{.ts,.js}',
-    __dirname + '/**/dao/*.entity{.ts,.js}',
-  ],
+  entities: [__dirname + '/**/dao/entity/*.entity{.ts,.js}'],
   dropSchema: false,
   synchronize: false,
   migrationsRun: true,
   logging: true,
-  migrations: [
-    __dirname + '/**/migrations/*{.ts,.js}',
-    __dirname + '/**/dao/migrations/*{.ts,.js}',
-  ],
+  migrations: [__dirname + '/**/dao/migrations/*{.ts,.js}'],
   namingStrategy: new SnakeNamingStrategy(),
 });
