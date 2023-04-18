@@ -1,6 +1,6 @@
 import { NotFoundException } from '@nestjs/common';
 
-export class UserByIdNotFoundExeption extends NotFoundException {
+export class UserByIdNotFoundException extends NotFoundException {
   constructor() {
     super(`User with id not found`);
   }

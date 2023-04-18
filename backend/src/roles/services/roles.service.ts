@@ -1,9 +1,9 @@
 import { Injectable } from '@nestjs/common';
 import { RoleEntity } from '../dao/entity/role.entity';
 import {
-  RoleAlreadyExistByNameExeption,
-  RoleByIdNotFoundExeption,
-} from './../exeptions';
+  RoleAlreadyExistByNameException,
+  RoleByIdNotFoundException,
+} from '../exceptions';
 import { RolesRepository } from '../repositories/roles.repository';
 
 @Injectable()
@@ -27,7 +27,7 @@ export class RolesService {
   private async checkExistRoleById(id: number): Promise<RoleEntity> {
     const existsRole = await this.rolesRepository.getById(id);
     if (!existsRole) {
-      throw new RoleByIdNotFoundExeption();
+      throw new RoleByIdNotFoundException();
     }
     return existsRole;
   }
@@ -35,7 +35,7 @@ export class RolesService {
   private async checkExistRoleByName(name: string): Promise<RoleEntity> {
     const existsRole = await this.findByName(name);
     if (existsRole) {
-      throw new RoleAlreadyExistByNameExeption();
+      throw new RoleAlreadyExistByNameException();
     }
     return existsRole;
   }

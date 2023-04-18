@@ -1,6 +1,6 @@
 import { UnauthorizedException } from '@nestjs/common';
 
-export class IncorectAuthDataExeption extends UnauthorizedException {
+export class IncorectAuthDataException extends UnauthorizedException {
   constructor() {
     super('Incorect login or password');
   }

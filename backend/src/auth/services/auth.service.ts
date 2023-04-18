@@ -3,13 +3,13 @@ import { BcryptService } from 'src/bcrypt/services';
 import { TokenPair } from 'src/tokens/dao/entity/token-pair.entity';
 import { TokensService } from 'src/tokens/services/tokens.service';
 import { CreateUserDto } from 'src/users/dtos';
-import { UserAlreadyExistByEmailExeption } from 'src/users/exeptions';
+import { UserAlreadyExistByEmailException } from 'src/users/exceptions';
 import { UsersService } from 'src/users/services';
 import { AuthRefreshDto } from '../dtos/auth-refresh.dto';
 import {
-  IncorectAuthDataExeption,
+  IncorectAuthDataException,
   RefreshTokenExpiredException,
-} from '../exeptions';
+} from '../exceptions';
 import { UserEntity } from 'src/users/dao/entity/user.entity';
 import { LoginUserDto } from '../dtos/login-user.dto';
 
@@ -24,7 +24,7 @@ export class AuthService {
   public async registration(dto: CreateUserDto): Promise<TokenPair> {
     const existUser = await this.userService.getUserByEmail(dto.email);
     if (existUser) {
-      throw new UserAlreadyExistByEmailExeption();
+      throw new UserAlreadyExistByEmailException();
     }
     const user = await this.userService.create(dto);
     const tokens = await this.tokenService.generateTokens(user);
@@ -61,14 +61,14 @@ export class AuthService {
   private async validateUser(fields: LoginUserDto): Promise<UserEntity> {
     const user = await this.userService.getUserByEmail(fields.email);
     if (!user) {
-      throw new IncorectAuthDataExeption();
+      throw new IncorectAuthDataException();
     }
     const passwordEquals = await this.bcryptService.compareHash(
       fields.password,
       user.passwordHash,
     );
     if (!passwordEquals) {
-      throw new IncorectAuthDataExeption();
+      throw new IncorectAuthDataException();
     }
     return user;
   }

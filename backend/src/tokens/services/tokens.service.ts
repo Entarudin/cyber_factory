@@ -5,7 +5,7 @@ import { ConfigService } from '@nestjs/config';
 import { RoleEntity } from 'src/roles/dao/entity/role.entity';
 import { CreateTokenDto } from '../dtos';
 import { TokenPair } from '../dao/entity/token-pair.entity';
-import { TokensByRefreshTokenNotFoundExeption } from '../exeptions';
+import { TokensByRefreshTokenNotFoundException } from '../exceptions';
 import { UserEntity } from 'src/users/dao/entity/user.entity';
 import { IJwtConfig } from 'src/configs/jwt-config';
 import { ConfigNamespacesEnum } from 'src/common/config-namespaces.enum';
@@ -43,7 +43,7 @@ export class TokensService {
   public async deleteToken(refreshToken: string): Promise<void> {
     const findToken = await this.findByRefreshToken(refreshToken);
     if (!findToken) {
-      throw new TokensByRefreshTokenNotFoundExeption();
+      throw new TokensByRefreshTokenNotFoundException();
     }
     await this.tokensRepository.delete(findToken.id);
   }

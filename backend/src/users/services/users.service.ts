@@ -4,8 +4,8 @@ import { RolesService } from 'src/roles/services';
 import { CreateUserDto, UpdateUserDto } from '../dtos';
 import { UserEntity } from '../dao/entity/user.entity';
 import { BcryptService } from 'src/bcrypt/services';
-import { UserByIdNotFoundExeption } from '../exeptions';
-import { RoleByNameNotFoundExeption } from 'src/roles/exeptions';
+import { UserByIdNotFoundException } from '../exceptions';
+import { RoleByNameNotFoundException } from 'src/roles/exceptions';
 import { RoleEntity } from 'src/roles/dao/entity/role.entity';
 
 @Injectable()
@@ -51,7 +51,7 @@ export class UsersService {
   private async getUserExistById(id: number): Promise<UserEntity> {
     const existUser = await this.findById(id);
     if (!existUser) {
-      throw new UserByIdNotFoundExeption();
+      throw new UserByIdNotFoundException();
     }
     return existUser;
   }
@@ -59,7 +59,7 @@ export class UsersService {
   private async getRoleExistByName(roleName: string): Promise<RoleEntity> {
     const existsRole = await this.rolesService.findByName(roleName);
     if (!existsRole) {
-      throw new RoleByNameNotFoundExeption();
+      throw new RoleByNameNotFoundException();
     }
     return existsRole;
   }
