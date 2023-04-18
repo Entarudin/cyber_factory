@@ -11,4 +11,4 @@ import { RolesModule } from 'src/roles/roles.module';
   providers: [AuthService],
   controllers: [AuthController],
 })
-export class AutnModule {}
+export class AuthModule {}

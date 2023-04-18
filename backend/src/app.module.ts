@@ -1,13 +1,14 @@
 import { ClassSerializerInterceptor, Module } from '@nestjs/common';
 import { DatabaseModule } from './database/database.module';
 import { ConfigModule } from '@nestjs/config';
-import { AutnModule } from './auth/auth.module';
-import { APP_FILTER, APP_INTERCEPTOR } from '@nestjs/core';
+import { AuthModule } from './auth/auth.module';
+import { APP_FILTER, APP_INTERCEPTOR, RouterModule } from '@nestjs/core';
 import { GlobalExceptionsFilter } from './common/fillters/global-exeptions.fillter';
 import { UsersModule } from './users/users.module';
 import { TokensModule } from './tokens/tokens.module';
 import { RolesModule } from './roles/roles.module';
 import { JwtConfigModule } from './configs/jwt-config';
+import { ROUTES } from './routes';
 
 @Module({
   imports: [
@@ -16,7 +17,8 @@ import { JwtConfigModule } from './configs/jwt-config';
     UsersModule,
     TokensModule,
     RolesModule,
-    AutnModule,
+    AuthModule,
+    RouterModule.register(ROUTES),
     ConfigModule.forRoot({
       isGlobal: true,
       envFilePath: '.env',
