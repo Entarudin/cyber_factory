@@ -25,6 +25,10 @@ export class TokensService {
   ) {}
 
   public async create(dto: CreateTokenDto): Promise<TokenPair> {
+    const countTokens = await this.getCountTokensByUserId(dto.userId);
+    if (countTokens && countTokens >= 10) {
+      await this.tokensRepository.deleteByUserId(dto.userId);
+    }
     const tokenPair = new TokenPair();
     tokenPair.accessToken = dto.accessToken;
     tokenPair.refreshToken = dto.refreshToken;
@@ -91,9 +95,6 @@ export class TokensService {
   );
 
   private async generateAccessToken(paylod: JwtTokenPaylod): Promise<string> {
-    console.log(this.configService.get(ConfigNamespacesEnum.JWT));
-    console.log(this.jwtConfig);
-
     return this.jwtService.sign(paylod, {
       secret: this.jwtConfig.accessTokenSecret,
       expiresIn: this.jwtConfig.accessTokenExpiration,
@@ -105,5 +106,10 @@ export class TokensService {
       secret: this.jwtConfig.refreshTokenSecret,
       expiresIn: this.jwtConfig.refreshTokenExpiration,
     });
+  }
+
+  private async getCountTokensByUserId(userId: number): Promise<number> {
+    const [, count] = await this.tokensRepository.findByUserId(userId);
+    return count;
   }
 }
