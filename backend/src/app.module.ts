@@ -1,8 +1,8 @@
-import { Module } from '@nestjs/common';
+import { ClassSerializerInterceptor, Module } from '@nestjs/common';
 import { DatabaseModule } from './database/database.module';
 import { ConfigModule } from '@nestjs/config';
 import { AutnModule } from './auth/auth.module';
-import { APP_FILTER } from '@nestjs/core';
+import { APP_FILTER, APP_INTERCEPTOR } from '@nestjs/core';
 import { GlobalExceptionsFilter } from './common/fillters/global-exeptions.fillter';
 import { UsersModule } from './users/users.module';
 import { TokensModule } from './tokens/tokens.module';
@@ -27,6 +27,10 @@ import { JwtConfigModule } from './configs/jwt-config';
     {
       provide: APP_FILTER,
       useClass: GlobalExceptionsFilter,
+    },
+    {
+      provide: APP_INTERCEPTOR,
+      useClass: ClassSerializerInterceptor,
     },
   ],
 })

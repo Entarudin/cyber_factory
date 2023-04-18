@@ -11,8 +11,7 @@ import {
   RefreshTokenExpiredException,
 } from '../exeptions';
 import { UserEntity } from 'src/users/dao/entity/user.entity';
-
-export type LoginUserType = Omit<CreateUserDto, 'role'>;
+import { LoginUserDto } from '../dtos/login-user.dto';
 
 @Injectable()
 export class AuthService {
@@ -32,7 +31,7 @@ export class AuthService {
     return tokens;
   }
 
-  public async login(fields: LoginUserType): Promise<TokenPair> {
+  public async login(fields: LoginUserDto): Promise<TokenPair> {
     const user = await this.validateUser(fields);
     const tokens = await this.tokenService.generateTokens(user);
     return tokens;
@@ -59,13 +58,13 @@ export class AuthService {
     await this.tokenService.deleteToken(dto.refreshToken);
   }
 
-  private async validateUser(fields: LoginUserType): Promise<UserEntity> {
+  private async validateUser(fields: LoginUserDto): Promise<UserEntity> {
     const user = await this.userService.getUserByEmail(fields.email);
     if (!user) {
       throw new IncorectAuthDataExeption();
     }
     const passwordEquals = await this.bcryptService.compareHash(
-      fields.passwordHash,
+      fields.password,
       user.passwordHash,
     );
     if (!passwordEquals) {

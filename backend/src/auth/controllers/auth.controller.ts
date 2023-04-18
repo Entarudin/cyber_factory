@@ -1,35 +1,42 @@
 import { Controller, Post, Body } from '@nestjs/common';
-import { ApiTags } from '@nestjs/swagger';
-import { AuthService, LoginUserType } from '../services/auth.service';
+import { ApiOkResponse, ApiTags } from '@nestjs/swagger';
+import { AuthService } from '../services/auth.service';
 import { CreateUserDto } from 'src/users/dtos';
-import { TokenPair } from 'src/tokens/dao/entity/token-pair.entity';
-import { AuthRefreshDto } from '../dtos/auth-refresh.dto';
+import { AuthResponse } from './auth.response';
+import { LoginUserDto, AuthRefreshDto } from '../dtos';
 
-@ApiTags('auth')
+@ApiTags('Authentication')
 @Controller('auth')
 export class AuthController {
   constructor(private readonly authService: AuthService) {}
 
   @Post('/registration')
-  public async registration(@Body() dto: CreateUserDto): Promise<TokenPair> {
-    const tokens = await this.authService.registration(dto);
-    return tokens;
+  @ApiOkResponse({
+    type: AuthResponse,
+  })
+  public async registration(@Body() dto: CreateUserDto): Promise<AuthResponse> {
+    return new AuthResponse(await this.authService.registration(dto));
   }
 
   @Post('/login')
-  public async login(@Body() dto: LoginUserType): Promise<TokenPair> {
-    const tokens = await this.authService.login(dto);
-    return tokens;
+  @ApiOkResponse({
+    type: AuthResponse,
+  })
+  public async login(@Body() dto: LoginUserDto): Promise<AuthResponse> {
+    return new AuthResponse(await this.authService.login(dto));
   }
 
   @Post('/refresh')
-  public async refresh(@Body() dto: AuthRefreshDto): Promise<TokenPair> {
-    const tokens = await this.authService.refresh(dto);
-    return tokens;
+  @ApiOkResponse({
+    type: AuthResponse,
+  })
+  public async refresh(@Body() dto: AuthRefreshDto): Promise<AuthResponse> {
+    return new AuthResponse(await this.authService.refresh(dto));
   }
 
   @Post('/logout')
+  @ApiOkResponse()
   public async logout(@Body() dto: AuthRefreshDto): Promise<void> {
-    return await this.authService.logout(dto);
+    await this.authService.logout(dto);
   }
 }

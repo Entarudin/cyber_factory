@@ -7,7 +7,8 @@ import {
   Logger,
 } from '@nestjs/common';
 
-import { Request, Response } from 'express';
+import { Response } from 'express';
+import { ApiExceptionResponse } from '../exceptions/api-exception';
 
 @Catch()
 export class GlobalExceptionsFilter implements ExceptionFilter {
@@ -16,8 +17,6 @@ export class GlobalExceptionsFilter implements ExceptionFilter {
   catch(exception: any, host: ArgumentsHost) {
     const ctx = host.switchToHttp();
     const response = ctx.getResponse<Response>();
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    const request = ctx.getRequest<Request>();
 
     const httpStatus =
       exception instanceof HttpException
@@ -32,17 +31,8 @@ export class GlobalExceptionsFilter implements ExceptionFilter {
       this.logger.warn(exception);
     }
 
-    const responseBody = {
-      status: httpStatus,
-      success: false,
-      error: exception.message,
-      message:
-        httpStatus === HttpStatus.INTERNAL_SERVER_ERROR
-          ? 'Sorry we are experiencing technical problems.'
-          : exception.messages,
-      timestamp: new Date().toISOString(),
-    };
-
-    response.status(httpStatus).json(responseBody);
+    response
+      .status(httpStatus)
+      .json(new ApiExceptionResponse(exception.message, httpStatus));
   }
 }

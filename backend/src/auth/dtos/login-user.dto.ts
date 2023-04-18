@@ -1,7 +1,7 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { IsDefined, IsEmail, IsString } from 'class-validator';
 
-export class UpdateUserDto {
+export class LoginUserDto {
   @ApiProperty({
     type: String,
     required: true,
@@ -16,5 +16,5 @@ export class UpdateUserDto {
   })
   @IsString()
   @IsDefined()
-  readonly passwordHash: string;
+  readonly password: string;
 }
