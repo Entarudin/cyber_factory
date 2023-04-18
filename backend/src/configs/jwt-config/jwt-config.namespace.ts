@@ -6,7 +6,7 @@ import { validateUtil } from 'src/common/validate.utils';
 
 import { ConfigNamespacesEnum } from 'src/common/config-namespaces.enum';
 
-export default registerAs(ConfigNamespacesEnum.APP, (): IJwtConfig => {
+export default registerAs(ConfigNamespacesEnum.JWT, (): IJwtConfig => {
   validateUtil(process.env, JwtEnvironmentVariables);
   return {
     accessTokenSecret: process.env.JWT_ACCESS_SECRET,

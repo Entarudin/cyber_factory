@@ -44,4 +44,15 @@ export class PostgresTokensPairsRepository extends TokensPairsRepository {
   public async delete(id: number): Promise<void> {
     await this.repository.delete(id);
   }
+
+  public async deleteByUserId(userId: number): Promise<void> {
+    await this.repository.delete(userId);
+  }
+  public async findByUserId(userId: number): Promise<[TokenPair[], number]> {
+    return await this.repository.findAndCount({
+      where: {
+        userId,
+      },
+    });
+  }
 }

@@ -22,7 +22,7 @@ export class UsersService {
     const user = new UserEntity();
     user.email = dto.email;
     user.passwordHash = passwordHash;
-    user.roles.push(role);
+    user.roles = [role];
     return await this.usersRepository.save(user);
   }
 

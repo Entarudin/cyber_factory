@@ -91,6 +91,9 @@ export class TokensService {
   );
 
   private async generateAccessToken(paylod: JwtTokenPaylod): Promise<string> {
+    console.log(this.configService.get(ConfigNamespacesEnum.JWT));
+    console.log(this.jwtConfig);
+
     return this.jwtService.sign(paylod, {
       secret: this.jwtConfig.accessTokenSecret,
       expiresIn: this.jwtConfig.accessTokenExpiration,
