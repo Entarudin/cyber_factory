@@ -19,7 +19,7 @@ export async function useSwagger(app: INestApplication): Promise<void> {
 
   const document = SwaggerModule.createDocument(app, config);
 
-  SwaggerModule.setup('/docs', app, document, {
+  SwaggerModule.setup('/api/v1/docs', app, document, {
     customSiteTitle: 'Cyber Factory',
   });
 }
