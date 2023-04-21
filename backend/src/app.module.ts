@@ -9,6 +9,7 @@ import { TokensModule } from './tokens/tokens.module';
 import { RolesModule } from './roles/roles.module';
 import { JwtConfigModule } from './configs/jwt-config';
 import { ROUTES } from './routes';
+import { HealthModule } from './health/health.module';
 
 @Module({
   imports: [
@@ -18,6 +19,7 @@ import { ROUTES } from './routes';
     TokensModule,
     RolesModule,
     AuthModule,
+    HealthModule,
     RouterModule.register(ROUTES),
     ConfigModule.forRoot({
       isGlobal: true,
