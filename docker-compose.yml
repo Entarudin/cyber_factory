@@ -1,6 +1,6 @@
 version: "3.8"
 services:
-  backend:
+  cyber_factory_backend:
     build:
       dockerfile: docker/backend/Dockerfile
       context: .
@@ -13,10 +13,10 @@ services:
     ports:
       - "5000:5000"
     depends_on:
-      - postgres
+      - cyber_factory_postgres
     networks:
       - cyber_factory
-  postgres:
+  cyber_factory_postgres:
     image: postgres:12.3-alpine
     container_name: cyber_factory_postgres
     restart: always
@@ -32,7 +32,7 @@ services:
       - "~/${DOCKER_SHARED_VOLUME_PATH}/postgres/${POSTGRES_DATABASE}:/var/lib/postgresql/data"
     networks:
       - cyber_factory
-  frontend:
+  cyber_factory_frontend:
     build:
       dockerfile: docker/frontend/Dockerfile
       context: .
@@ -48,3 +48,4 @@ services:
 networks:
   cyber_factory:
       name: cyber_factory
+  
