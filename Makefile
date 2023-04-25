@@ -4,6 +4,7 @@ include ./environments/$(ENV)/.env
 use_secrets: 
 	cp ./environments/$(ENV)/.env ./.
 	cp ./environments/$(ENV)/.env ./backend
+	cp ./environments/$(ENV)/.env ./frontend
 
 down:
 	docker-compose down
