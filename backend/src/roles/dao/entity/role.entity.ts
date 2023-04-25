@@ -1,5 +1,5 @@
-import { RolesEnum } from '../../../common/roles.enum';
-import { UserEntity } from '../../../users/dao/entity/user.entity';
+import { RolesEnum } from '@/common/roles.enum';
+import { UserEntity } from '@/users/dao/entity/user.entity';
 import {
   Column,
   CreateDateColumn,

@@ -1,6 +1,6 @@
 import { InjectRepository } from '@nestjs/typeorm';
-import { TokenPair } from '../dao/entity/token-pair.entity';
-import { TokensPairsRepository } from './tokens-pairs.repository';
+import { TokenPair } from '@/tokens/dao/entity/token-pair.entity';
+import { TokensPairsRepository } from '@/tokens/repositories/tokens-pairs.repository';
 import { Repository } from 'typeorm';
 import { Injectable } from '@nestjs/common';
 

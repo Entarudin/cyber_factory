@@ -1,4 +1,4 @@
-import { TokenPair } from '../dao/entity/token-pair.entity';
+import { TokenPair } from '@/tokens/dao/entity/token-pair.entity';
 
 export abstract class TokensPairsRepository {
   public abstract save(token: TokenPair): Promise<TokenPair>;

@@ -1,4 +1,4 @@
-import { UserEntity } from '../../../users/dao/entity/user.entity';
+import { UserEntity } from '@/users/dao/entity/user.entity';
 import {
   Column,
   CreateDateColumn,

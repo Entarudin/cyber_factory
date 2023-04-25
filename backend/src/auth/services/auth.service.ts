@@ -1,17 +1,17 @@
 import { Injectable } from '@nestjs/common';
-import { BcryptService } from 'src/bcrypt/services';
-import { TokenPair } from 'src/tokens/dao/entity/token-pair.entity';
-import { TokensService } from 'src/tokens/services/tokens.service';
-import { CreateUserDto } from 'src/users/dtos';
-import { UserAlreadyExistByEmailException } from 'src/users/exceptions';
-import { UsersService } from 'src/users/services';
-import { AuthRefreshDto } from '../dtos/auth-refresh.dto';
+import { BcryptService } from '@/bcrypt/services';
+import { TokenPair } from '@/tokens/dao/entity/token-pair.entity';
+import { TokensService } from '@/tokens/services/tokens.service';
+import { CreateUserDto } from '@/users/dtos';
+import { UserAlreadyExistByEmailException } from '@/users/exceptions';
+import { UsersService } from '@/users/services';
+import { AuthRefreshDto } from '@/auth/dtos/auth-refresh.dto';
 import {
   IncorectAuthDataException,
   RefreshTokenExpiredException,
-} from '../exceptions';
-import { UserEntity } from 'src/users/dao/entity/user.entity';
-import { LoginUserDto } from '../dtos/login-user.dto';
+} from '@/auth/exceptions';
+import { UserEntity } from '@/users/dao/entity/user.entity';
+import { LoginUserDto } from '@/auth/dtos/login-user.dto';
 
 @Injectable()
 export class AuthService {

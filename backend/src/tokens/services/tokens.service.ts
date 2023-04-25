@@ -1,14 +1,14 @@
 import { Injectable } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
-import { TokensPairsRepository } from '../repositories/tokens-pairs.repository';
+import { TokensPairsRepository } from '@/tokens/repositories/tokens-pairs.repository';
 import { ConfigService } from '@nestjs/config';
-import { RoleEntity } from 'src/roles/dao/entity/role.entity';
-import { CreateTokenDto } from '../dtos';
-import { TokenPair } from '../dao/entity/token-pair.entity';
-import { TokensByRefreshTokenNotFoundException } from '../exceptions';
-import { UserEntity } from 'src/users/dao/entity/user.entity';
-import { IJwtConfig } from 'src/configs/jwt-config';
-import { ConfigNamespacesEnum } from 'src/common/config-namespaces.enum';
+import { RoleEntity } from '@/roles/dao/entity/role.entity';
+import { CreateTokenDto } from '@/tokens/dtos';
+import { TokenPair } from '@/tokens/dao/entity/token-pair.entity';
+import { TokensByRefreshTokenNotFoundException } from '@/tokens/exceptions';
+import { UserEntity } from '@/users/dao/entity/user.entity';
+import { IJwtConfig } from '@configs/jwt-config';
+import { ConfigNamespacesEnum } from '@common/config-namespaces.enum';
 
 export type JwtTokenPaylod = {
   id: number;

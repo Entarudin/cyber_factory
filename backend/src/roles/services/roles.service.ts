@@ -1,10 +1,10 @@
 import { Injectable } from '@nestjs/common';
-import { RoleEntity } from '../dao/entity/role.entity';
+import { RoleEntity } from '@/roles/dao/entity/role.entity';
 import {
   RoleAlreadyExistByNameException,
   RoleByIdNotFoundException,
-} from '../exceptions';
-import { RolesRepository } from '../repositories/roles.repository';
+} from '@/roles/exceptions';
+import { RolesRepository } from '@/roles/repositories/roles.repository';
 
 @Injectable()
 export class RolesService {

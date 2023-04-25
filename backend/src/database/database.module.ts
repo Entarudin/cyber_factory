@@ -4,10 +4,10 @@ import { SnakeNamingStrategy } from 'typeorm-naming-strategies';
 import {
   IDatabaseConfig,
   DatabaseConfigModule,
-} from '../configs/database-config';
-import { ConfigNamespacesEnum } from '../common/config-namespaces.enum';
+} from '@configs/database-config';
+import { ConfigNamespacesEnum } from '@common/config-namespaces.enum';
 import { ConfigService } from '@nestjs/config';
-import { AppConfigModule, IAppConfig } from '../configs/app-config';
+import { AppConfigModule, IAppConfig } from '@configs/app-config';
 
 @Module({
   imports: [

@@ -1,10 +1,13 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { UserEntity } from './dao/entity/user.entity';
-import { UsersService } from './services';
-import { PostrgresUsersRepository, UsersRepository } from './repositories';
-import { BcryptModule } from 'src/bcrypt/bcrypt.module';
-import { RolesModule } from 'src/roles/roles.module';
+import { UserEntity } from '@/users/dao/entity/user.entity';
+import { UsersService } from '@/users/services';
+import {
+  PostrgresUsersRepository,
+  UsersRepository,
+} from '@/users/repositories';
+import { BcryptModule } from '@/bcrypt/bcrypt.module';
+import { RolesModule } from '@/roles/roles.module';
 
 @Module({
   imports: [TypeOrmModule.forFeature([UserEntity]), BcryptModule, RolesModule],

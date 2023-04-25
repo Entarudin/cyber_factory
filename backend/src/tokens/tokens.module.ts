@@ -1,13 +1,13 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { TokenPair } from './dao/entity/token-pair.entity';
+import { TokenPair } from '@/tokens/dao/entity/token-pair.entity';
 import { JwtModule } from '@nestjs/jwt';
-import { JwtConfigModule } from 'src/configs/jwt-config';
-import { TokensService } from './services/tokens.service';
+import { JwtConfigModule } from '@configs/jwt-config';
+import { TokensService } from '@/tokens/services/tokens.service';
 import {
   PostgresTokensPairsRepository,
   TokensPairsRepository,
-} from './repositories';
+} from '@/tokens/repositories';
 
 @Module({
   imports: [

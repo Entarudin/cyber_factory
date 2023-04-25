@@ -1,7 +1,7 @@
 import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 
-import appConfigNamespace from './app-config.namespace';
+import appConfigNamespace from '@configs/app-config/app-config.namespace';
 
 @Module({
   imports: [ConfigModule.forFeature(appConfigNamespace)],

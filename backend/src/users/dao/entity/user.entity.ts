@@ -1,5 +1,5 @@
-import { TokenPair } from '../../../tokens/dao/entity/token-pair.entity';
-import { RoleEntity } from '../../../roles/dao/entity/role.entity';
+import { TokenPair } from '@/tokens/dao/entity/token-pair.entity';
+import { RoleEntity } from '@/roles/dao/entity/role.entity';
 import {
   Column,
   CreateDateColumn,

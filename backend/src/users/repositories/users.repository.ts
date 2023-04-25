@@ -1,4 +1,4 @@
-import { UserEntity } from '../dao/entity/user.entity';
+import { UserEntity } from '@/users/dao/entity/user.entity';
 
 export abstract class UsersRepository {
   public abstract save(user: UserEntity): Promise<UserEntity>;

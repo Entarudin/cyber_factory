@@ -1,12 +1,12 @@
 import { Injectable, NotImplementedException } from '@nestjs/common';
-import { UsersRepository } from '../repositories/users.repository';
-import { RolesService } from 'src/roles/services';
-import { CreateUserDto, UpdateUserDto } from '../dtos';
-import { UserEntity } from '../dao/entity/user.entity';
-import { BcryptService } from 'src/bcrypt/services';
-import { UserByIdNotFoundException } from '../exceptions';
-import { RoleByNameNotFoundException } from 'src/roles/exceptions';
-import { RoleEntity } from 'src/roles/dao/entity/role.entity';
+import { UsersRepository } from '@/users/repositories/users.repository';
+import { RolesService } from '@/roles/services';
+import { CreateUserDto, UpdateUserDto } from '@/users/dtos';
+import { UserEntity } from '@/users/dao/entity/user.entity';
+import { BcryptService } from '@/bcrypt/services';
+import { UserByIdNotFoundException } from '@/users/exceptions';
+import { RoleByNameNotFoundException } from '@/roles/exceptions';
+import { RoleEntity } from '@/roles/dao/entity/role.entity';
 
 @Injectable()
 export class UsersService {

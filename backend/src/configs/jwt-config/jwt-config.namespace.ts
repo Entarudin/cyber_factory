@@ -1,10 +1,8 @@
 import { registerAs } from '@nestjs/config';
 
-import { JwtEnvironmentVariables } from './jwt-env.validation';
-import { IJwtConfig } from './jwt-config.interface';
-import { validateUtil } from 'src/common/validate.utils';
-
-import { ConfigNamespacesEnum } from 'src/common/config-namespaces.enum';
+import { JwtEnvironmentVariables, IJwtConfig } from '@configs/jwt-config';
+import { validateUtil } from '@common/validate.utils';
+import { ConfigNamespacesEnum } from '@common/config-namespaces.enum';
 
 export default registerAs(ConfigNamespacesEnum.JWT, (): IJwtConfig => {
   validateUtil(process.env, JwtEnvironmentVariables);

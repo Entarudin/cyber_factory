@@ -1,7 +1,7 @@
 import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 
-import databaseConfigNamespace from './database-config.namespace';
+import databaseConfigNamespace from '@configs/database-config/database-config.namespace';
 
 @Module({
   imports: [ConfigModule.forFeature(databaseConfigNamespace)],

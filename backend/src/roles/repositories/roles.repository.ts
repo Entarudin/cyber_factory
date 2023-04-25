@@ -1,4 +1,4 @@
-import { RoleEntity } from '../dao/entity/role.entity';
+import { RoleEntity } from '@/roles/dao/entity/role.entity';
 
 export abstract class RolesRepository {
   public abstract save(role: RoleEntity): Promise<RoleEntity>;
