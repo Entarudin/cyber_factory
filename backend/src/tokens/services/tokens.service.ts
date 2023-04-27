@@ -33,11 +33,11 @@ export class TokensService {
     tokenPair.accessToken = dto.accessToken;
     tokenPair.refreshToken = dto.refreshToken;
     tokenPair.userId = dto.userId;
-    return await this.tokensRepository.save(tokenPair);
+    return this.tokensRepository.save(tokenPair);
   }
 
   public async findByRefreshToken(refreshToken: string): Promise<TokenPair> {
-    return await this.tokensRepository.findByRefreshToken(refreshToken);
+    return this.tokensRepository.findByRefreshToken(refreshToken);
   }
 
   public async deleteToken(refreshToken: string): Promise<void> {
@@ -61,16 +61,19 @@ export class TokensService {
       refreshToken,
       userId: user.id,
     };
-    return await this.create(dto);
+    return this.create(dto);
   }
 
   public async validateAccessToken(
     token: string,
   ): Promise<JwtTokenPaylod | null> {
     try {
-      const userData: JwtTokenPaylod = this.jwtService.verify(token, {
-        secret: this.jwtConfig.accessTokenSecret,
-      });
+      const userData: JwtTokenPaylod = await this.jwtService.verifyAsync(
+        token,
+        {
+          secret: this.jwtConfig.accessTokenSecret,
+        },
+      );
       return userData;
     } catch (e) {
       return null;
@@ -81,9 +84,12 @@ export class TokensService {
     token: string,
   ): Promise<JwtTokenPaylod | null> {
     try {
-      const userData: JwtTokenPaylod = this.jwtService.verify(token, {
-        secret: this.jwtConfig.refreshTokenSecret,
-      });
+      const userData: JwtTokenPaylod = await this.jwtService.verifyAsync(
+        token,
+        {
+          secret: this.jwtConfig.refreshTokenSecret,
+        },
+      );
       return userData;
     } catch (e) {
       return null;
@@ -95,14 +101,14 @@ export class TokensService {
   );
 
   private async generateAccessToken(paylod: JwtTokenPaylod): Promise<string> {
-    return this.jwtService.sign(paylod, {
+    return this.jwtService.signAsync(paylod, {
       secret: this.jwtConfig.accessTokenSecret,
       expiresIn: this.jwtConfig.accessTokenExpiration,
     });
   }
 
   private async generateRefreshToken(paylod: JwtTokenPaylod): Promise<string> {
-    return this.jwtService.sign(paylod, {
+    return this.jwtService.signAsync(paylod, {
       secret: this.jwtConfig.refreshTokenSecret,
       expiresIn: this.jwtConfig.refreshTokenExpiration,
     });

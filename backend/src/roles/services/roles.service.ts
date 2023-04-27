@@ -11,7 +11,7 @@ export class RolesService {
   constructor(private readonly rolesRepository: RolesRepository) {}
 
   public async findByName(name: string): Promise<RoleEntity> {
-    return await this.rolesRepository.findByName(name);
+    return this.rolesRepository.findByName(name);
   }
 
   public async delete(id: number): Promise<void> {
@@ -20,8 +20,7 @@ export class RolesService {
   }
 
   public async findAll(): Promise<RoleEntity[]> {
-    const roles = await this.rolesRepository.findAll();
-    return roles;
+    return this.rolesRepository.findAll();
   }
 
   private async checkExistRoleById(id: number): Promise<RoleEntity> {

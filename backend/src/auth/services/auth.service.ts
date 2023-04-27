@@ -27,14 +27,12 @@ export class AuthService {
       throw new UserAlreadyExistByEmailException();
     }
     const user = await this.userService.create(dto);
-    const tokens = await this.tokenService.generateTokens(user);
-    return tokens;
+    return this.tokenService.generateTokens(user);
   }
 
   public async login(fields: LoginUserDto): Promise<TokenPair> {
     const user = await this.validateUser(fields);
-    const tokens = await this.tokenService.generateTokens(user);
-    return tokens;
+    return this.tokenService.generateTokens(user);
   }
 
   public async refresh(dto: AuthRefreshDto): Promise<TokenPair> {
@@ -50,8 +48,7 @@ export class AuthService {
     }
     const user = await this.userService.findById(userData.id);
     await this.tokenService.deleteToken(dto.refreshToken);
-    const tokens = await this.tokenService.generateTokens(user);
-    return tokens;
+    return this.tokenService.generateTokens(user);
   }
 
   public async logout(dto: AuthRefreshDto): Promise<void> {

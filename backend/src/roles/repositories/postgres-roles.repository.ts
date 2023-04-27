@@ -15,15 +15,15 @@ export class PostrgresRolesRepository extends RolesRepository {
   }
 
   public async save(role: RoleEntity): Promise<RoleEntity> {
-    return await this.repository.save(role);
+    return this.repository.save(role);
   }
 
   public async findAll(): Promise<RoleEntity[]> {
-    return await this.repository.find({});
+    return this.repository.find({});
   }
 
   public async getById(id: number): Promise<RoleEntity> {
-    return await this.repository.findOne({
+    return this.repository.findOne({
       where: {
         id,
       },
@@ -31,7 +31,7 @@ export class PostrgresRolesRepository extends RolesRepository {
   }
 
   public async update(role: RoleEntity): Promise<RoleEntity> {
-    return await this.repository.save(role);
+    return this.repository.save(role);
   }
 
   public async delete(id: number): Promise<void> {

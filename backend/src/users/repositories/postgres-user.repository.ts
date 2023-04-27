@@ -14,19 +14,19 @@ export class PostrgresUsersRepository extends UsersRepository {
   }
 
   public async save(user: UserEntity): Promise<UserEntity> {
-    return await this.repository.save(user);
+    return this.repository.save(user);
   }
 
   public async findByEmail(email: string): Promise<UserEntity> {
-    return await this.repository.findOneBy({ email });
+    return this.repository.findOneBy({ email });
   }
 
   public async findAll(): Promise<UserEntity[]> {
-    return await this.repository.find();
+    return this.repository.find();
   }
 
   public async getById(id: number): Promise<UserEntity> {
-    return await this.repository.findOne({
+    return this.repository.findOne({
       where: {
         id,
       },
@@ -34,7 +34,7 @@ export class PostrgresUsersRepository extends UsersRepository {
   }
 
   public async update(user: UserEntity): Promise<UserEntity> {
-    return await this.repository.save(user);
+    return this.repository.save(user);
   }
 
   public async delete(id: number): Promise<void> {

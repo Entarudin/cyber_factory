@@ -56,7 +56,7 @@ export class PostgresTokensPairsRepository extends TokensPairsRepository {
   }
 
   public async findByUserId(userId: number): Promise<[TokenPair[], number]> {
-    return await this.repository.findAndCount({
+    return this.repository.findAndCount({
       where: {
         userId: userId,
       },

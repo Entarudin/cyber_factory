@@ -23,15 +23,15 @@ export class UsersService {
     user.email = dto.email;
     user.passwordHash = passwordHash;
     user.roles = [role];
-    return await this.usersRepository.save(user);
+    return this.usersRepository.save(user);
   }
 
   public async findById(id: number): Promise<UserEntity> {
-    return await this.usersRepository.getById(id);
+    return this.usersRepository.getById(id);
   }
 
   public async findAll(): Promise<UserEntity[]> {
-    return await this.usersRepository.findAll();
+    return this.usersRepository.findAll();
   }
 
   public async delete(id: number): Promise<void> {
@@ -40,7 +40,7 @@ export class UsersService {
   }
 
   public async getUserByEmail(email: string): Promise<UserEntity | undefined> {
-    return await this.usersRepository.findByEmail(email);
+    return this.usersRepository.findByEmail(email);
   }
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -65,7 +65,6 @@ export class UsersService {
   }
 
   private async generatePasswordHash(password: string): Promise<string> {
-    const passwordHash = await this.bcryptService.generateHash(password);
-    return passwordHash;
+    return this.bcryptService.generateHash(password);
   }
 }
