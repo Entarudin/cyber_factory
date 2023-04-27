@@ -33,6 +33,12 @@ export class GlobalExceptionsFilter implements ExceptionFilter {
 
     response
       .status(httpStatus)
-      .json(new ApiExceptionResponse(exception.message, httpStatus));
+      .json(
+        new ApiExceptionResponse(
+          exception.message,
+          httpStatus,
+          exception?.response?.message,
+        ),
+      );
   }
 }

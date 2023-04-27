@@ -16,11 +16,22 @@ export class ApiExceptionResponse {
   })
   public readonly timestamp: string;
 
-  public constructor(exception: { message: string } | string, status: number) {
+  @ApiProperty({
+    type: 'string',
+    isArray: true,
+  })
+  public readonly errors: string[];
+
+  public constructor(
+    exception: { message: string } | string,
+    status: number,
+    errros: string[] | null,
+  ) {
     this.message =
       typeof exception === 'object' ? exception.message : exception;
 
     this.status = status;
+    this.errors = errros ?? [];
     this.timestamp = new Date().toISOString();
   }
 }
