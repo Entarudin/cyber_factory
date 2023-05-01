@@ -1,5 +1,5 @@
 import { InjectRepository } from '@nestjs/typeorm';
-import { TokenPair } from '@/tokens/dao/entity/token-pair.entity';
+import { TokenPairEntity } from '@/tokens/dao/entity/token-pair.entity';
 import { TokensPairsRepository } from '@/tokens/repositories/tokens-pairs.repository';
 import { Repository } from 'typeorm';
 import { Injectable } from '@nestjs/common';
@@ -7,21 +7,21 @@ import { Injectable } from '@nestjs/common';
 @Injectable()
 export class PostgresTokensPairsRepository extends TokensPairsRepository {
   constructor(
-    @InjectRepository(TokenPair)
-    private readonly repository: Repository<TokenPair>,
+    @InjectRepository(TokenPairEntity)
+    private readonly repository: Repository<TokenPairEntity>,
   ) {
     super();
   }
 
-  public async save(token: TokenPair): Promise<TokenPair> {
+  public async save(token: TokenPairEntity): Promise<TokenPairEntity> {
     return this.repository.save(token);
   }
 
-  public async findAll(): Promise<TokenPair[]> {
+  public async findAll(): Promise<TokenPairEntity[]> {
     return this.repository.find({});
   }
 
-  public async getById(id: number): Promise<TokenPair> {
+  public async getById(id: number): Promise<TokenPairEntity> {
     return this.repository.findOne({
       where: {
         id,
@@ -29,7 +29,7 @@ export class PostgresTokensPairsRepository extends TokensPairsRepository {
     });
   }
 
-  public async findByRefreshToken(token: string): Promise<TokenPair> {
+  public async findByRefreshToken(token: string): Promise<TokenPairEntity> {
     return this.repository.findOne({
       where: {
         refreshToken: token,
@@ -37,7 +37,7 @@ export class PostgresTokensPairsRepository extends TokensPairsRepository {
     });
   }
 
-  public async update(token: TokenPair): Promise<TokenPair> {
+  public async update(token: TokenPairEntity): Promise<TokenPairEntity> {
     return this.repository.save(token);
   }
 
@@ -55,7 +55,9 @@ export class PostgresTokensPairsRepository extends TokensPairsRepository {
     await this.repository.remove(tokens);
   }
 
-  public async findByUserId(userId: number): Promise<[TokenPair[], number]> {
+  public async findByUserId(
+    userId: number,
+  ): Promise<[TokenPairEntity[], number]> {
     return this.repository.findAndCount({
       where: {
         userId: userId,

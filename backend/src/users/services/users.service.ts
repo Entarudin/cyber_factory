@@ -18,7 +18,7 @@ export class UsersService {
 
   public async create(dto: CreateUserDto): Promise<UserEntity> {
     const role = await this.getRoleExistByName(dto.role);
-    const passwordHash = await this.generatePasswordHash(dto.passwordHash);
+    const passwordHash = await this.generatePasswordHash(dto.password);
     const user = new UserEntity();
     user.email = dto.email;
     user.passwordHash = passwordHash;

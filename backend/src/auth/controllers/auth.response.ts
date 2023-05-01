@@ -1,5 +1,5 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { TokenPair } from 'src/tokens/dao/entity/token-pair.entity';
+import { TokenPairEntity } from 'src/tokens/dao/entity/token-pair.entity';
 
 export class AuthResponse {
   @ApiProperty()
@@ -8,7 +8,7 @@ export class AuthResponse {
   @ApiProperty()
   public readonly refreshToken: string;
 
-  constructor(tokenEntity: TokenPair) {
+  constructor(tokenEntity: TokenPairEntity) {
     this.accessToken = tokenEntity.accessToken;
     this.refreshToken = tokenEntity.refreshToken;
   }

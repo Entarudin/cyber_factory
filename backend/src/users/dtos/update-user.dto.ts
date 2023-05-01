@@ -1,20 +1,4 @@
-import { ApiProperty } from '@nestjs/swagger';
-import { IsDefined, IsEmail, IsString } from 'class-validator';
+import { OmitType } from '@nestjs/swagger';
+import { CreateUserDto } from './create-user.dto';
 
-export class UpdateUserDto {
-  @ApiProperty({
-    type: String,
-    required: true,
-  })
-  @IsEmail()
-  @IsDefined()
-  readonly email: string;
-
-  @ApiProperty({
-    type: String,
-    required: true,
-  })
-  @IsString()
-  @IsDefined()
-  readonly passwordHash: string;
-}
+export class UpdateUserDto extends OmitType(CreateUserDto, ['role'] as const) {}

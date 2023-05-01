@@ -4,7 +4,7 @@ import { TokensPairsRepository } from '@/tokens/repositories/tokens-pairs.reposi
 import { ConfigService } from '@nestjs/config';
 import { RoleEntity } from '@/roles/dao/entity/role.entity';
 import { CreateTokenDto } from '@/tokens/dtos';
-import { TokenPair } from '@/tokens/dao/entity/token-pair.entity';
+import { TokenPairEntity } from '@/tokens/dao/entity/token-pair.entity';
 import { TokensByRefreshTokenNotFoundException } from '@/tokens/exceptions';
 import { UserEntity } from '@/users/dao/entity/user.entity';
 import { IJwtConfig } from '@configs/jwt-config';
@@ -24,19 +24,21 @@ export class TokensService {
     private readonly jwtService: JwtService,
   ) {}
 
-  public async create(dto: CreateTokenDto): Promise<TokenPair> {
+  public async create(dto: CreateTokenDto): Promise<TokenPairEntity> {
     const countTokens = await this.getCountTokensByUserId(dto.userId);
     if (countTokens && countTokens >= 10) {
       await this.tokensRepository.deleteByUserId(dto.userId);
     }
-    const tokenPair = new TokenPair();
+    const tokenPair = new TokenPairEntity();
     tokenPair.accessToken = dto.accessToken;
     tokenPair.refreshToken = dto.refreshToken;
     tokenPair.userId = dto.userId;
     return this.tokensRepository.save(tokenPair);
   }
 
-  public async findByRefreshToken(refreshToken: string): Promise<TokenPair> {
+  public async findByRefreshToken(
+    refreshToken: string,
+  ): Promise<TokenPairEntity> {
     return this.tokensRepository.findByRefreshToken(refreshToken);
   }
 
@@ -48,7 +50,7 @@ export class TokensService {
     await this.tokensRepository.delete(findToken.id);
   }
 
-  public async generateTokens(user: UserEntity): Promise<TokenPair> {
+  public async generateTokens(user: UserEntity): Promise<TokenPairEntity> {
     const payload: JwtTokenPaylod = {
       id: user.id,
       email: user.email,

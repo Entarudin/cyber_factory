@@ -1,4 +1,4 @@
-import { TokenPair } from '@/tokens/dao/entity/token-pair.entity';
+import { TokenPairEntity } from '@/tokens/dao/entity/token-pair.entity';
 import { RoleEntity } from '@/roles/dao/entity/role.entity';
 import {
   Column,
@@ -34,12 +34,12 @@ export class UserEntity {
   @JoinTable()
   roles!: RoleEntity[];
 
-  @OneToMany(() => TokenPair, (token) => token.user, {
+  @OneToMany(() => TokenPairEntity, (token) => token.user, {
     eager: true,
     cascade: true,
     onDelete: 'CASCADE',
     onUpdate: 'CASCADE',
   })
   @JoinColumn({ referencedColumnName: 'userId' })
-  tokens!: TokenPair[];
+  tokens!: TokenPairEntity[];
 }

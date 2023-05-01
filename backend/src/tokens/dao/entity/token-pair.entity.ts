@@ -9,7 +9,7 @@ import {
 } from 'typeorm';
 
 @Entity({ name: 'tokens_pairs' })
-export class TokenPair {
+export class TokenPairEntity {
   @PrimaryGeneratedColumn()
   id: number;
 

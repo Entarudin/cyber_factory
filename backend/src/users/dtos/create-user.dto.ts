@@ -17,7 +17,7 @@ export class CreateUserDto {
   })
   @IsString()
   @IsDefined()
-  readonly passwordHash: string;
+  readonly password: string;
 
   @ApiProperty({
     required: true,

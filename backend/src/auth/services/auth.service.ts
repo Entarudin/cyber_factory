@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { BcryptService } from '@/bcrypt/services';
-import { TokenPair } from '@/tokens/dao/entity/token-pair.entity';
+import { TokenPairEntity } from '@/tokens/dao/entity/token-pair.entity';
 import { TokensService } from '@/tokens/services/tokens.service';
 import { CreateUserDto } from '@/users/dtos';
 import { UserAlreadyExistByEmailException } from '@/users/exceptions';
@@ -11,7 +11,7 @@ import {
   RefreshTokenExpiredException,
 } from '@/auth/exceptions';
 import { UserEntity } from '@/users/dao/entity/user.entity';
-import { LoginUserDto } from '@/auth/dtos/login-user.dto';
+import { AuthLoginDto } from '@/auth/dtos/auth-login.dto';
 
 @Injectable()
 export class AuthService {
@@ -21,7 +21,7 @@ export class AuthService {
     private readonly bcryptService: BcryptService,
   ) {}
 
-  public async registration(dto: CreateUserDto): Promise<TokenPair> {
+  public async registration(dto: CreateUserDto): Promise<TokenPairEntity> {
     const existUser = await this.userService.getUserByEmail(dto.email);
     if (existUser) {
       throw new UserAlreadyExistByEmailException();
@@ -30,12 +30,12 @@ export class AuthService {
     return this.tokenService.generateTokens(user);
   }
 
-  public async login(fields: LoginUserDto): Promise<TokenPair> {
+  public async login(fields: AuthLoginDto): Promise<TokenPairEntity> {
     const user = await this.validateUser(fields);
     return this.tokenService.generateTokens(user);
   }
 
-  public async refresh(dto: AuthRefreshDto): Promise<TokenPair> {
+  public async refresh(dto: AuthRefreshDto): Promise<TokenPairEntity> {
     const userData = await this.tokenService.validateRefreshToken(
       dto.refreshToken,
     );
@@ -55,7 +55,7 @@ export class AuthService {
     await this.tokenService.deleteToken(dto.refreshToken);
   }
 
-  private async validateUser(fields: LoginUserDto): Promise<UserEntity> {
+  private async validateUser(fields: AuthLoginDto): Promise<UserEntity> {
     const user = await this.userService.getUserByEmail(fields.email);
     if (!user) {
       throw new IncorectAuthDataException();
