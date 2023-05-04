@@ -12,7 +12,7 @@ import {
 @Module({
   imports: [
     TypeOrmModule.forFeature([TokenPairEntity]),
-    JwtModule.register({}),
+    JwtModule,
     JwtConfigModule,
   ],
   providers: [

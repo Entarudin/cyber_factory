@@ -10,6 +10,7 @@ import { RolesModule } from '@/roles/roles.module';
 import { JwtConfigModule } from '@/configs/jwt-config';
 import { ROUTES } from '@/routes';
 import { HealthModule } from '@/health/health.module';
+import { JwtModule } from '@nestjs/jwt';
 
 @Module({
   imports: [
@@ -20,6 +21,7 @@ import { HealthModule } from '@/health/health.module';
     RolesModule,
     AuthModule,
     HealthModule,
+    JwtModule.register({}),
     RouterModule.register(ROUTES),
     ConfigModule.forRoot({
       isGlobal: true,

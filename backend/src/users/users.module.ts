@@ -8,9 +8,16 @@ import {
 } from '@/users/repositories';
 import { BcryptModule } from '@/bcrypt/bcrypt.module';
 import { RolesModule } from '@/roles/roles.module';
+import { UsersController } from './controllers/user.controller';
+import { JwtModule } from '@nestjs/jwt';
 
 @Module({
-  imports: [TypeOrmModule.forFeature([UserEntity]), BcryptModule, RolesModule],
+  imports: [
+    TypeOrmModule.forFeature([UserEntity]),
+    BcryptModule,
+    RolesModule,
+    JwtModule,
+  ],
   providers: [
     UsersService,
     {
@@ -19,5 +26,6 @@ import { RolesModule } from '@/roles/roles.module';
     },
   ],
   exports: [UsersService, UsersRepository],
+  controllers: [UsersController],
 })
 export class UsersModule {}

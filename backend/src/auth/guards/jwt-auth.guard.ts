@@ -21,12 +21,12 @@ export class JwtAuthGuard implements CanActivate {
       const authHeader = request.headers.authorization;
       const bearer = authHeader.split(' ')[0];
       const token = authHeader.split(' ')[1];
-
       if (bearer !== 'Bearer' || !token) {
         throw new AccessTokenExpiredException();
       }
+      console.log(token);
 
-      request.user = this.jwtService.verifyAsync(token, {
+      request.user = this.jwtService.verify(token, {
         secret: this.jwtConfig.accessTokenSecret,
       });
 
