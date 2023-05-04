@@ -1,11 +1,11 @@
 import React, { FC, FormEvent } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { useAppDispatch, useInput, useActions } from 'hooks'
+import { useAppDispatch, useInput, } from 'hooks'
+import { axiosAuthLogin } from 'store/auth/actions'
 
 const LoginPage: FC = () => {
   const navigate = useNavigate()
   const dispatch = useAppDispatch()
-  const { axiosAuthLogin } = useActions()
   const [email, onChangeEmail] = useInput<HTMLInputElement>('')
   const [password, onChangePassword] = useInput<HTMLInputElement>('')
 
@@ -13,7 +13,7 @@ const LoginPage: FC = () => {
     event.preventDefault()
     dispatch(axiosAuthLogin({ email, password }))
       .then(() => navigate(-1))
-      .catch((e) => console.log(e))
+      .catch((err: any) => console.log(err))
   }
 
   return (
@@ -43,4 +43,4 @@ const LoginPage: FC = () => {
   )
 }
 
-export { LoginPage as Auth }
+export { LoginPage  }
