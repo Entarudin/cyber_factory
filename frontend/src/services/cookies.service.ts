@@ -22,12 +22,12 @@ class CookiesService {
     Cookies.set('refresh', '')
   }
 
-  public static getAccessToken(): string {
-    return Cookies.get('access') as string
+  public static getAccessToken(): string | undefined {
+    return Cookies.get('access') 
   }
 
-  public static getRefreshToken(): string {
-    return Cookies.get('refresh') as string
+  public static getRefreshToken(): string | undefined {
+    return Cookies.get('refresh') 
   }
 
   public static isAuth(): boolean {
