@@ -9,6 +9,7 @@ import { TokensModule } from '@/tokens/tokens.module';
 import { RolesModule } from '@/roles/roles.module';
 import { ROUTES } from '@/routes';
 import { HealthModule } from '@/health/health.module';
+import { CyberPhysicalSystemsModule } from './cyber-physical-systems/cyber-physical-systems.module';
 
 @Module({
   imports: [
@@ -17,6 +18,7 @@ import { HealthModule } from '@/health/health.module';
     TokensModule,
     RolesModule,
     AuthModule,
+    CyberPhysicalSystemsModule,
     HealthModule,
     RouterModule.register(ROUTES),
     ConfigModule.forRoot({
