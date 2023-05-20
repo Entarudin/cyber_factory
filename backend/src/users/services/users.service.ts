@@ -48,7 +48,7 @@ export class UsersService {
     throw new NotImplementedException();
   }
 
-  private async getUserExistById(id: number): Promise<UserEntity> {
+  public async getUserExistById(id: number): Promise<UserEntity> {
     const existUser = await this.findById(id);
     if (!existUser) {
       throw new UserByIdNotFoundException();
