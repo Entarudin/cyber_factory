@@ -60,7 +60,7 @@ export class CyberPhysicalSystemsService {
     await this.cyberPhysicalSystemsRepository.delete(id);
   }
 
-  private async getCyberPhysicalSystemExistById(
+  public async getCyberPhysicalSystemExistById(
     id: number,
   ): Promise<CyberPhysicalSystemEntity> {
     const existCyberPhysicalSystem = await this.findById(id);
