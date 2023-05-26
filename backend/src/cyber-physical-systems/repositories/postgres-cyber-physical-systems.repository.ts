@@ -3,6 +3,9 @@ import { CyberPhysicalSystemsRepository } from '@/cyber-physical-systems/reposit
 import { CyberPhysicalSystemEntity } from '@/cyber-physical-systems/dao/entity/cyber-physical-system.entity';
 import { Repository } from 'typeorm';
 import { InjectRepository } from '@nestjs/typeorm';
+import { PageOptionsDto } from '@/common/pagination/page-options.dto';
+import { PageDto } from '@/common/pagination/page.dto';
+import { PageMetaDto } from '@/common/pagination/page-meta.dto';
 
 @Injectable()
 export class PostrgresCyberPhysicalSystemsRepository extends CyberPhysicalSystemsRepository {
@@ -47,5 +50,26 @@ export class PostrgresCyberPhysicalSystemsRepository extends CyberPhysicalSystem
 
   public async delete(id: number): Promise<void> {
     await this.repository.delete(id);
+  }
+
+  public async findBy(
+    pagination: PageOptionsDto,
+  ): Promise<PageDto<CyberPhysicalSystemEntity>> {
+    const queryBuilder = this.repository.createQueryBuilder('cfs');
+
+    queryBuilder
+      .orderBy('cfs.created_date', pagination.order)
+      .skip(pagination.skip)
+      .take(pagination.take);
+
+    const itemCount = await queryBuilder.getCount();
+    const { entities } = await queryBuilder.getRawAndEntities();
+
+    const pageMetaDto = new PageMetaDto({
+      pageOptionsDto: pagination,
+      itemCount,
+    });
+
+    return new PageDto(entities, pageMetaDto);
   }
 }

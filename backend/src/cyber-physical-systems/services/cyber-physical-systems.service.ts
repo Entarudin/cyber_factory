@@ -10,6 +10,8 @@ import {
   CyberPhysicalSystemAlreadyExistByNameException,
   CyberPhysicalSystemByIdNotFoundException,
 } from '@/cyber-physical-systems/exceptions';
+import { PageOptionsDto } from '@/common/pagination/page-options.dto';
+import { PageDto } from '@/common/pagination/page.dto';
 
 @Injectable()
 export class CyberPhysicalSystemsService {
@@ -58,6 +60,12 @@ export class CyberPhysicalSystemsService {
   public async delete(id: number): Promise<void> {
     await this.getCyberPhysicalSystemExistById(id);
     await this.cyberPhysicalSystemsRepository.delete(id);
+  }
+
+  public async getList(
+    pagination: PageOptionsDto,
+  ): Promise<PageDto<CyberPhysicalSystemEntity>> {
+    return this.cyberPhysicalSystemsRepository.findBy(pagination);
   }
 
   public async getCyberPhysicalSystemExistById(

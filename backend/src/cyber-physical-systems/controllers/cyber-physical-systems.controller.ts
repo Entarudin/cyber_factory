@@ -6,11 +6,15 @@ import {
   Param,
   ParseIntPipe,
   Delete,
+  Query,
 } from '@nestjs/common';
 import { ApiOkResponse, ApiTags } from '@nestjs/swagger';
-import { CyberPhysicalSystemsService } from '../services/cyber-physical-systems.service';
-import { CreateCyberPhysicalSystemDto } from '../dtos';
-import { CyberPhysicalSystemResponse } from './cyber-physical-system.response';
+import { CyberPhysicalSystemsService } from '@/cyber-physical-systems/services/cyber-physical-systems.service';
+import { CreateCyberPhysicalSystemDto } from '@/cyber-physical-systems/dtos';
+import { CyberPhysicalSystemResponse } from '@/cyber-physical-systems/controllers/cyber-physical-system.response';
+import { PageOptionsDto } from '@/common/pagination/page-options.dto';
+import { ApiPaginatedResponse } from '@/common/pagination/api-pagination.response';
+import { CyberPhysicalSystemListResponse } from '@/cyber-physical-systems/controllers/cyber-physical-system-list.response';
 
 @ApiTags('Cyber Physical Systems')
 @Controller()
@@ -47,8 +51,13 @@ export class CyberPhysicalSystemsController {
   }
 
   @Get('/')
-  public async findAll() {
-    return this.cyberPhysicalSystemsServcie.findAll();
+  @ApiPaginatedResponse(CyberPhysicalSystemResponse)
+  public async findAll(
+    @Query() pagination: PageOptionsDto,
+  ): Promise<CyberPhysicalSystemListResponse> {
+    return new CyberPhysicalSystemListResponse(
+      await this.cyberPhysicalSystemsServcie.getList(pagination),
+    );
   }
 
   @Delete('/:id')
