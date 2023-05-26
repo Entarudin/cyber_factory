@@ -10,6 +10,7 @@ import {
   OneToMany,
   PrimaryGeneratedColumn,
 } from 'typeorm';
+import { CyberPhysicalSystemEntity } from '@/cyber-physical-systems/dao/entity/cyber-physical-system.entity';
 
 @Entity({ name: 'users' })
 export class UserEntity {
@@ -33,6 +34,13 @@ export class UserEntity {
   })
   @JoinTable()
   roles!: RoleEntity[];
+
+  @ManyToMany(
+    () => CyberPhysicalSystemEntity,
+    (CyberPhysicalSystemEntity) => CyberPhysicalSystemEntity.users,
+  )
+  @JoinTable()
+  cyberPhysicalSystems!: CyberPhysicalSystemEntity[];
 
   @OneToMany(() => TokenPairEntity, (token) => token.user, {
     eager: true,
