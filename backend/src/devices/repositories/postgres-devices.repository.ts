@@ -6,6 +6,7 @@ import { PageDto } from '@/common/pagination/page.dto';
 import { PageMetaDto } from '@/common/pagination/page-meta.dto';
 import { DevicesRepository } from '@/devices/repositories/devices.repository';
 import { DeviceEntity } from '@/devices/dao/entity/device.entity';
+import { NameOrAddressesOptions } from '../options';
 
 @Injectable()
 export class PostrgresDevicesRepository extends DevicesRepository {
@@ -59,6 +60,18 @@ export class PostrgresDevicesRepository extends DevicesRepository {
     });
 
     return new PageDto(entities, pageMetaDto);
+  }
+
+  public async findByNameOrAddresses(
+    options: NameOrAddressesOptions,
+  ): Promise<DeviceEntity> {
+    return this.repository.findOne({
+      where: {
+        name: options.name,
+        macAddress: options.macAddress,
+        ipAddress: options.ipAddress,
+      },
+    });
   }
 
   public async getById(id: number): Promise<DeviceEntity> {

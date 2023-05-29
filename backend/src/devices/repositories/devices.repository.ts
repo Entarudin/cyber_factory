@@ -1,6 +1,7 @@
 import { PageOptionsDto } from '@/common/pagination/page-options.dto';
 import { PageDto } from '@/common/pagination/page.dto';
 import { DeviceEntity } from '@/devices/dao/entity/device.entity';
+import { NameOrAddressesOptions } from '../options';
 
 export abstract class DevicesRepository {
   public abstract save(device: DeviceEntity): Promise<DeviceEntity>;
@@ -14,6 +15,10 @@ export abstract class DevicesRepository {
   public abstract findBy(
     pagination: PageOptionsDto,
   ): Promise<PageDto<DeviceEntity>>;
+
+  public abstract findByNameOrAddresses(
+    options: NameOrAddressesOptions,
+  ): Promise<DeviceEntity>;
 
   public abstract getById(id: number): Promise<DeviceEntity>;
 
