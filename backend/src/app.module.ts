@@ -9,7 +9,8 @@ import { TokensModule } from '@/tokens/tokens.module';
 import { RolesModule } from '@/roles/roles.module';
 import { ROUTES } from '@/routes';
 import { HealthModule } from '@/health/health.module';
-import { CyberPhysicalSystemsModule } from './cyber-physical-systems/cyber-physical-systems.module';
+import { CyberPhysicalSystemsModule } from '@/cyber-physical-systems/cyber-physical-systems.module';
+import { DevicesModule } from '@/devices/devices.module';
 
 @Module({
   imports: [
@@ -19,6 +20,7 @@ import { CyberPhysicalSystemsModule } from './cyber-physical-systems/cyber-physi
     RolesModule,
     AuthModule,
     CyberPhysicalSystemsModule,
+    DevicesModule,
     HealthModule,
     RouterModule.register(ROUTES),
     ConfigModule.forRoot({
