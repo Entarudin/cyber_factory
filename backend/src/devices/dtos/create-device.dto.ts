@@ -1,11 +1,5 @@
 import { ApiProperty } from '@nestjs/swagger';
-import {
-  IsDefined,
-  IsNumber,
-  IsIP,
-  IsString,
-  IsMACAddress,
-} from 'class-validator';
+import { IsDefined, IsNumber, IsIP, IsString } from 'class-validator';
 
 export class CreateDeviceDto {
   @ApiProperty({
@@ -28,7 +22,7 @@ export class CreateDeviceDto {
     type: String,
     required: true,
   })
-  @IsMACAddress()
+  @IsString()
   @IsDefined()
   public readonly macAddress: string;
 
