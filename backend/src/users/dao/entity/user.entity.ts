@@ -48,6 +48,6 @@ export class UserEntity {
     onDelete: 'CASCADE',
     onUpdate: 'CASCADE',
   })
-  @JoinColumn({ referencedColumnName: 'userId' })
+  @JoinColumn()
   tokens!: TokenPairEntity[];
 }
