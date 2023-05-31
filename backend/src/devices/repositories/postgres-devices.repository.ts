@@ -70,6 +70,7 @@ export class PostgresDevicesRepository extends DevicesRepository {
         name: options.name,
         macAddress: options.macAddress,
         ipAddress: options.ipAddress,
+        cyberPhysicalSystemId: options.cyberPhysicalSystemId,
       },
     });
   }

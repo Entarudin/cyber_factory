@@ -27,6 +27,7 @@ export class DevicesService {
       name: dto.name,
       ipAddress: dto.ipAddress,
       macAddress: dto.macAddress,
+      cyberPhysicalSystemId: dto.cyberPhysicalSystemId,
     });
 
     if (existDevice) {
