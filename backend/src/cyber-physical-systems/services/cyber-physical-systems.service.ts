@@ -1,6 +1,6 @@
 import { UsersService } from '@/users/services';
 import { CyberPhysicalSystemsRepository } from '@/cyber-physical-systems/repositories/cyber-physical-systems.repository';
-import { Injectable, NotImplementedException } from '@nestjs/common';
+import { Injectable } from '@nestjs/common';
 import {
   CreateCyberPhysicalSystemDto,
   UpdateCyberPhysicalSystemDto,
@@ -46,7 +46,9 @@ export class CyberPhysicalSystemsService {
     id: number,
     dto: UpdateCyberPhysicalSystemDto,
   ): Promise<CyberPhysicalSystemEntity> {
-    throw new NotImplementedException();
+    const cyberPhysicalSystem = await this.getCyberPhysicalSystemExistById(id);
+    cyberPhysicalSystem.name = dto.name;
+    return this.cyberPhysicalSystemsRepository.save(cyberPhysicalSystem);
   }
 
   public async findById(id: number): Promise<CyberPhysicalSystemEntity> {
