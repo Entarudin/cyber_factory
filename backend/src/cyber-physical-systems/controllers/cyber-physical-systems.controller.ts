@@ -20,7 +20,7 @@ import { CyberPhysicalSystemListResponse } from '@/cyber-physical-systems/contro
 @Controller()
 export class CyberPhysicalSystemsController {
   constructor(
-    private readonly cyberPhysicalSystemsServcie: CyberPhysicalSystemsService,
+    private readonly cyberPhysicalSystemsService: CyberPhysicalSystemsService,
   ) {}
 
   @Post('/')
@@ -31,7 +31,7 @@ export class CyberPhysicalSystemsController {
     @Body() dto: CreateCyberPhysicalSystemDto,
   ): Promise<CyberPhysicalSystemResponse> {
     return new CyberPhysicalSystemResponse(
-      await this.cyberPhysicalSystemsServcie.create(dto),
+      await this.cyberPhysicalSystemsService.create(dto),
     );
   }
 
@@ -44,7 +44,7 @@ export class CyberPhysicalSystemsController {
   ): Promise<CyberPhysicalSystemResponse> {
     console.log(id);
     return new CyberPhysicalSystemResponse(
-      await this.cyberPhysicalSystemsServcie.getCyberPhysicalSystemExistById(
+      await this.cyberPhysicalSystemsService.getCyberPhysicalSystemExistById(
         id,
       ),
     );
@@ -56,12 +56,12 @@ export class CyberPhysicalSystemsController {
     @Query() pagination: PageOptionsDto,
   ): Promise<CyberPhysicalSystemListResponse> {
     return new CyberPhysicalSystemListResponse(
-      await this.cyberPhysicalSystemsServcie.getList(pagination),
+      await this.cyberPhysicalSystemsService.getList(pagination),
     );
   }
 
   @Delete('/:id')
-  public async delele(@Param('id', ParseIntPipe) id: number): Promise<void> {
-    await this.cyberPhysicalSystemsServcie.delete(id);
+  public async delete(@Param('id', ParseIntPipe) id: number): Promise<void> {
+    await this.cyberPhysicalSystemsService.delete(id);
   }
 }

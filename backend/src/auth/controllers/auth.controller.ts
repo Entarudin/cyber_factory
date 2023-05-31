@@ -12,7 +12,7 @@ import { ConfigService } from '@nestjs/config';
 export class AuthController {
   constructor(
     private readonly authService: AuthService,
-    private readonly congigService: ConfigService,
+    private readonly configService: ConfigService,
   ) {}
 
   @Post('/registration')
@@ -89,7 +89,7 @@ export class AuthController {
   }
 
   private readonly maxAgeRefreshToken: number =
-    parseInt(this.congigService.get('JWT_REFRESH_EXPIRATION_IN_DAYS')) *
+    parseInt(this.configService.get('JWT_REFRESH_EXPIRATION_IN_DAYS')) *
     3600 *
     24 *
     1000;

@@ -9,7 +9,7 @@ import { DeviceEntity } from '@/devices/dao/entity/device.entity';
 import { NameOrAddressesOptions } from '../options';
 
 @Injectable()
-export class PostrgresDevicesRepository extends DevicesRepository {
+export class PostgresDevicesRepository extends DevicesRepository {
   constructor(
     @InjectRepository(DeviceEntity)
     private readonly repository: Repository<DeviceEntity>,

@@ -1,3 +1,5 @@
 # environments
 .env
 /environments/*/.env
+/.vscode
+

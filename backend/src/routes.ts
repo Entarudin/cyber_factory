@@ -23,7 +23,7 @@ export const ROUTES: Routes = [
     module: CyberPhysicalSystemsModule,
   },
   {
-    path: '/apit/v1/devices',
+    path: '/api/v1/devices',
     module: DevicesModule,
   },
 ];

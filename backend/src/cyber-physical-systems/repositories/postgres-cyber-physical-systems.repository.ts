@@ -8,7 +8,7 @@ import { PageDto } from '@/common/pagination/page.dto';
 import { PageMetaDto } from '@/common/pagination/page-meta.dto';
 
 @Injectable()
-export class PostrgresCyberPhysicalSystemsRepository extends CyberPhysicalSystemsRepository {
+export class PostgresCyberPhysicalSystemsRepository extends CyberPhysicalSystemsRepository {
   constructor(
     @InjectRepository(CyberPhysicalSystemEntity)
     private readonly repository: Repository<CyberPhysicalSystemEntity>,

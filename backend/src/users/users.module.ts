@@ -2,10 +2,7 @@ import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { UserEntity } from '@/users/dao/entity/user.entity';
 import { UsersService } from '@/users/services';
-import {
-  PostrgresUsersRepository,
-  UsersRepository,
-} from '@/users/repositories';
+import { PostgresUsersRepository, UsersRepository } from '@/users/repositories';
 import { BcryptModule } from '@/bcrypt/bcrypt.module';
 import { RolesModule } from '@/roles/roles.module';
 import { UsersController } from './controllers/user.controller';
@@ -22,7 +19,7 @@ import { JwtModule } from '@nestjs/jwt';
     UsersService,
     {
       provide: UsersRepository,
-      useClass: PostrgresUsersRepository,
+      useClass: PostgresUsersRepository,
     },
   ],
   exports: [UsersService, UsersRepository],

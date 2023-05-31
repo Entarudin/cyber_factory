@@ -10,7 +10,7 @@ import { UserEntity } from '@/users/dao/entity/user.entity';
 import { IJwtConfig } from '@configs/jwt-config';
 import { ConfigNamespacesEnum } from '@common/config-namespaces.enum';
 
-export type JwtTokenPaylod = {
+export type JwtTokenPayload = {
   id: number;
   email: string;
   roles: RoleEntity[];
@@ -51,7 +51,7 @@ export class TokensService {
   }
 
   public async generateTokens(user: UserEntity): Promise<TokenPairEntity> {
-    const payload: JwtTokenPaylod = {
+    const payload: JwtTokenPayload = {
       id: user.id,
       email: user.email,
       roles: user.roles,
@@ -68,9 +68,9 @@ export class TokensService {
 
   public async validateAccessToken(
     token: string,
-  ): Promise<JwtTokenPaylod | null> {
+  ): Promise<JwtTokenPayload | null> {
     try {
-      const userData: JwtTokenPaylod = await this.jwtService.verifyAsync(
+      const userData: JwtTokenPayload = await this.jwtService.verifyAsync(
         token,
         {
           secret: this.jwtConfig.accessTokenSecret,
@@ -84,9 +84,9 @@ export class TokensService {
 
   public async validateRefreshToken(
     token: string,
-  ): Promise<JwtTokenPaylod | null> {
+  ): Promise<JwtTokenPayload | null> {
     try {
-      const userData: JwtTokenPaylod = await this.jwtService.verifyAsync(
+      const userData: JwtTokenPayload = await this.jwtService.verifyAsync(
         token,
         {
           secret: this.jwtConfig.refreshTokenSecret,
@@ -102,15 +102,17 @@ export class TokensService {
     ConfigNamespacesEnum.JWT,
   );
 
-  private async generateAccessToken(paylod: JwtTokenPaylod): Promise<string> {
-    return this.jwtService.signAsync(paylod, {
+  private async generateAccessToken(payload: JwtTokenPayload): Promise<string> {
+    return this.jwtService.signAsync(payload, {
       secret: this.jwtConfig.accessTokenSecret,
       expiresIn: this.jwtConfig.accessTokenExpiration,
     });
   }
 
-  private async generateRefreshToken(paylod: JwtTokenPaylod): Promise<string> {
-    return this.jwtService.signAsync(paylod, {
+  private async generateRefreshToken(
+    payload: JwtTokenPayload,
+  ): Promise<string> {
+    return this.jwtService.signAsync(payload, {
       secret: this.jwtConfig.refreshTokenSecret,
       expiresIn: this.jwtConfig.refreshTokenExpiration,
     });
