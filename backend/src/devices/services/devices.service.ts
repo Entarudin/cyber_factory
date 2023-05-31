@@ -49,7 +49,13 @@ export class DevicesService {
   }
 
   public async update(id: number, dto: UpdateDeviceDto): Promise<DeviceEntity> {
-    throw new NotImplementedException();
+    const device = await this.getExistDeviceById(id);
+    device.ipAddress = dto.ipAddress;
+    device.macAddress = dto.macAddress;
+    device.name = dto.name;
+    device.networkInterface = dto.networkInterface;
+
+    return this.devicesRepository.save(device);
   }
 
   public async findById(id: number): Promise<DeviceEntity> {
