@@ -10,7 +10,7 @@ export abstract class DevicesRepository {
 
   public abstract findByName(name: string): Promise<DeviceEntity>;
 
-  public abstract findByIpAddress(ipAddress: string): Promise<DeviceEntity>;
+  public abstract findByMacAddress(macAddress: string): Promise<DeviceEntity>;
 
   public abstract findBy(
     pagination: PageOptionsDto,

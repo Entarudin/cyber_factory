@@ -33,10 +33,10 @@ export class PostgresDevicesRepository extends DevicesRepository {
     });
   }
 
-  public async findByIpAddress(ipAddress: string): Promise<DeviceEntity> {
+  public async findByMacAddress(macAddress: string): Promise<DeviceEntity> {
     return this.repository.findOne({
       where: {
-        ipAddress,
+        macAddress,
       },
     });
   }
@@ -68,7 +68,6 @@ export class PostgresDevicesRepository extends DevicesRepository {
     return this.repository.findOne({
       where: {
         name: options.name,
-        macAddress: options.macAddress,
         ipAddress: options.ipAddress,
         cyberPhysicalSystemId: options.cyberPhysicalSystemId,
       },

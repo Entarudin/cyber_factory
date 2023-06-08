@@ -19,7 +19,7 @@ export class DeviceEntity {
   @Column({ type: 'varchar' })
   ipAddress: string;
 
-  @Column({ type: 'varchar' })
+  @Column({ type: 'varchar', unique: true })
   macAddress: string;
 
   @Column({ type: 'varchar' })
