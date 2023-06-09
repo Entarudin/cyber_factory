@@ -18,7 +18,7 @@ import { CreateStructuralFunctionalCharacteristicDto } from '@/structural-functi
 
 @ApiTags('Structural Functional Characteristics')
 @Controller()
-export class DevicesController {
+export class StructuralFunctionalCharacteristicsController {
   constructor(
     private readonly structuralFunctionalCharacteristicsService: StructuralFunctionalCharacteristicsService,
   ) {}

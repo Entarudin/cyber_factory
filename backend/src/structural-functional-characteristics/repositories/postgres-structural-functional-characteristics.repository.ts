@@ -8,7 +8,7 @@ import { StructuralFunctionalCharacteristicEntity } from '../dao/entity/structur
 import { PageMetaDto } from '@/common/pagination/page-meta.dto';
 
 @Injectable()
-export class PostgresDevicesRepository extends StructuralFunctionalCharacteristicsRepository {
+export class PostgresStructuralFunctionalCharacteristicsRepository extends StructuralFunctionalCharacteristicsRepository {
   constructor(
     @InjectRepository(StructuralFunctionalCharacteristicEntity)
     private readonly repository: Repository<StructuralFunctionalCharacteristicEntity>,

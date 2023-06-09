@@ -11,6 +11,7 @@ import { ROUTES } from '@/routes';
 import { HealthModule } from '@/health/health.module';
 import { CyberPhysicalSystemsModule } from '@/cyber-physical-systems/cyber-physical-systems.module';
 import { DevicesModule } from '@/devices/devices.module';
+import { StructuralFunctionalCharacteristicsModule } from '@/structural-functional-characteristics/structural-functional-characteristics.module';
 
 @Module({
   imports: [
@@ -21,6 +22,7 @@ import { DevicesModule } from '@/devices/devices.module';
     AuthModule,
     CyberPhysicalSystemsModule,
     DevicesModule,
+    StructuralFunctionalCharacteristicsModule,
     HealthModule,
     RouterModule.register(ROUTES),
     ConfigModule.forRoot({

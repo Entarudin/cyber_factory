@@ -8,7 +8,9 @@ import {
 import { StructuralFunctionalCharacteristicByIdNotFoundException } from '@/structural-functional-characteristics/exceptions';
 import { PageOptionsDto } from '@/common/pagination/page-options.dto';
 import { PageDto } from '@/common/pagination/page.dto';
+import { Injectable } from '@nestjs/common';
 
+@Injectable()
 export class StructuralFunctionalCharacteristicsService {
   constructor(
     private readonly structuralFunctionalCharacteristicsRepository: StructuralFunctionalCharacteristicsRepository,
