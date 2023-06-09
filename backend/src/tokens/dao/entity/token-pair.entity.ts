@@ -29,6 +29,6 @@ export class TokenPairEntity {
   createdDate: Date;
 
   @ManyToOne(() => UserEntity, (user) => user.tokens)
-  @JoinColumn({ name: 'userId' })
+  @JoinColumn()
   user!: UserEntity;
 }

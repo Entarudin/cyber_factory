@@ -7,7 +7,7 @@ import { UserAlreadyExistByEmailException } from '@/users/exceptions';
 import { UsersService } from '@/users/services';
 import { AuthRefreshDto } from '@/auth/dtos/auth-refresh.dto';
 import {
-  IncorectAuthDataException,
+  IncorrectAuthDataException,
   RefreshTokenExpiredException,
 } from '@/auth/exceptions';
 import { UserEntity } from '@/users/dao/entity/user.entity';
@@ -58,14 +58,14 @@ export class AuthService {
   private async validateUser(fields: AuthLoginDto): Promise<UserEntity> {
     const user = await this.userService.getUserByEmail(fields.email);
     if (!user) {
-      throw new IncorectAuthDataException();
+      throw new IncorrectAuthDataException();
     }
     const passwordEquals = await this.bcryptService.compareHash(
       fields.password,
       user.passwordHash,
     );
     if (!passwordEquals) {
-      throw new IncorectAuthDataException();
+      throw new IncorrectAuthDataException();
     }
     return user;
   }

@@ -51,7 +51,7 @@ export class DevicesController {
   }
 
   @Delete('/:id')
-  public async delele(@Param('id', ParseIntPipe) id: number): Promise<void> {
+  public async delete(@Param('id', ParseIntPipe) id: number): Promise<void> {
     await this.devicesService.delete(id);
   }
 }

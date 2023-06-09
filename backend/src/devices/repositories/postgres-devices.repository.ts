@@ -9,7 +9,7 @@ import { DeviceEntity } from '@/devices/dao/entity/device.entity';
 import { NameOrAddressesOptions } from '../options';
 
 @Injectable()
-export class PostrgresDevicesRepository extends DevicesRepository {
+export class PostgresDevicesRepository extends DevicesRepository {
   constructor(
     @InjectRepository(DeviceEntity)
     private readonly repository: Repository<DeviceEntity>,
@@ -33,10 +33,10 @@ export class PostrgresDevicesRepository extends DevicesRepository {
     });
   }
 
-  public async findByIpAddress(ipAddress: string): Promise<DeviceEntity> {
+  public async findByMacAddress(macAddress: string): Promise<DeviceEntity> {
     return this.repository.findOne({
       where: {
-        ipAddress,
+        macAddress,
       },
     });
   }
@@ -68,8 +68,8 @@ export class PostrgresDevicesRepository extends DevicesRepository {
     return this.repository.findOne({
       where: {
         name: options.name,
-        macAddress: options.macAddress,
         ipAddress: options.ipAddress,
+        cyberPhysicalSystemId: options.cyberPhysicalSystemId,
       },
     });
   }

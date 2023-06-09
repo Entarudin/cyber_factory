@@ -4,7 +4,7 @@ import { DeviceEntity } from '@/devices/dao/entity/device.entity';
 import { CyberPhysicalSystemsModule } from '@/cyber-physical-systems/cyber-physical-systems.module';
 import { DevicesService } from '@/devices/services/devices.service';
 import { DevicesRepository } from '@/devices/repositories/devices.repository';
-import { PostrgresDevicesRepository } from '@/devices/repositories/postgres-devices.repository';
+import { PostgresDevicesRepository } from '@/devices/repositories/postgres-devices.repository';
 import { DevicesController } from '@/devices/controllers/devices.controller';
 
 @Module({
@@ -16,7 +16,7 @@ import { DevicesController } from '@/devices/controllers/devices.controller';
     DevicesService,
     {
       provide: DevicesRepository,
-      useClass: PostrgresDevicesRepository,
+      useClass: PostgresDevicesRepository,
     },
   ],
   exports: [DevicesService, DevicesRepository],

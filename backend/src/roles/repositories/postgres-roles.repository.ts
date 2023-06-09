@@ -6,7 +6,7 @@ import { RoleEntity } from '@/roles/dao/entity/role.entity';
 import { RolesEnum } from '@/common/roles.enum';
 
 @Injectable()
-export class PostrgresRolesRepository extends RolesRepository {
+export class PostgresRolesRepository extends RolesRepository {
   constructor(
     @InjectRepository(RoleEntity)
     private readonly repository: Repository<RoleEntity>,

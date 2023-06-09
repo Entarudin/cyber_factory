@@ -1,4 +1,4 @@
-import { Injectable, NotImplementedException } from '@nestjs/common';
+import { Injectable } from '@nestjs/common';
 import { PageOptionsDto } from '@/common/pagination/page-options.dto';
 import { PageDto } from '@/common/pagination/page.dto';
 import { DevicesRepository } from '@/devices/repositories/devices.repository';
@@ -8,6 +8,8 @@ import { DeviceEntity } from '@/devices/dao/entity/device.entity';
 import {
   DeviceExistException,
   DeviceByIdNotFoundException,
+  DeviceWithMacAddressExistException,
+  DeviceByMacAddressNotFoundException,
 } from '@/devices/exceptions';
 
 @Injectable()
@@ -18,6 +20,8 @@ export class DevicesService {
   ) {}
 
   public async create(dto: CreateDeviceDto): Promise<DeviceEntity> {
+    await this.checkExistDeviceByMacAddress(dto.macAddress);
+
     const cyberPhysicalSystem =
       await this.cyberPhysicalSystemsService.getCyberPhysicalSystemExistById(
         dto.cyberPhysicalSystemId,
@@ -26,7 +30,7 @@ export class DevicesService {
     const existDevice = await this.devicesRepository.findByNameOrAddresses({
       name: dto.name,
       ipAddress: dto.ipAddress,
-      macAddress: dto.macAddress,
+      cyberPhysicalSystemId: dto.cyberPhysicalSystemId,
     });
 
     if (existDevice) {
@@ -48,7 +52,13 @@ export class DevicesService {
   }
 
   public async update(id: number, dto: UpdateDeviceDto): Promise<DeviceEntity> {
-    throw new NotImplementedException();
+    const device = await this.getExistDeviceById(id);
+    device.ipAddress = dto.ipAddress;
+    device.macAddress = dto.macAddress;
+    device.name = dto.name;
+    device.networkInterface = dto.networkInterface;
+
+    return this.devicesRepository.save(device);
   }
 
   public async findById(id: number): Promise<DeviceEntity> {
@@ -57,6 +67,10 @@ export class DevicesService {
 
   public async findAll(): Promise<DeviceEntity[]> {
     return this.devicesRepository.findAll();
+  }
+
+  public async findByMacAddress(macAddress: string): Promise<DeviceEntity> {
+    return this.devicesRepository.findByMacAddress(macAddress);
   }
 
   public async delete(id: number): Promise<void> {
@@ -76,5 +90,26 @@ export class DevicesService {
       throw new DeviceByIdNotFoundException();
     }
     return existDevice;
+  }
+
+  public async getExistDeviceByMacAddress(
+    macAddress: string,
+  ): Promise<DeviceEntity> {
+    const existDevice = await this.findByMacAddress(macAddress);
+    if (!existDevice) {
+      throw new DeviceByMacAddressNotFoundException();
+    }
+    return existDevice;
+  }
+
+  private async checkExistDeviceByMacAddress(
+    macAddress: string,
+  ): Promise<void> {
+    const existDevice = await this.devicesRepository.findByMacAddress(
+      macAddress,
+    );
+    if (existDevice) {
+      throw new DeviceWithMacAddressExistException();
+    }
   }
 }

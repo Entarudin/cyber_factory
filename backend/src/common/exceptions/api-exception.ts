@@ -25,13 +25,13 @@ export class ApiExceptionResponse {
   public constructor(
     exception: { message: string } | string,
     status: number,
-    errros: string[] | null,
+    errors: string[] | null,
   ) {
     this.message =
       typeof exception === 'object' ? exception.message : exception;
 
     this.status = status;
-    this.errors = errros ?? [];
+    this.errors = errors ?? [];
     this.timestamp = new Date().toISOString();
   }
 }

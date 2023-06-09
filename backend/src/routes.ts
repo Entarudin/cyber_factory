@@ -4,6 +4,7 @@ import { HealthModule } from '@/health/health.module';
 import { UsersModule } from '@/users/users.module';
 import { CyberPhysicalSystemsModule } from '@/cyber-physical-systems/cyber-physical-systems.module';
 import { DevicesModule } from '@/devices/devices.module';
+import { StructuralFunctionalCharacteristicsModule } from '@/structural-functional-characteristics/structural-functional-characteristics.module';
 
 export const ROUTES: Routes = [
   {
@@ -23,7 +24,11 @@ export const ROUTES: Routes = [
     module: CyberPhysicalSystemsModule,
   },
   {
-    path: '/apit/v1/devices',
+    path: '/api/v1/devices',
     module: DevicesModule,
+  },
+  {
+    path: '/api/v1/sfc',
+    module: StructuralFunctionalCharacteristicsModule,
   },
 ];
