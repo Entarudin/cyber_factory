@@ -9,6 +9,7 @@ import {
   DeviceExistException,
   DeviceByIdNotFoundException,
   DeviceWithMacAddressExistException,
+  DeviceByMacAddressNotFoundException,
 } from '@/devices/exceptions';
 
 @Injectable()
@@ -87,6 +88,16 @@ export class DevicesService {
     const existDevice = await this.findById(id);
     if (!existDevice) {
       throw new DeviceByIdNotFoundException();
+    }
+    return existDevice;
+  }
+
+  public async getExistDeviceByMacAddress(
+    macAddress: string,
+  ): Promise<DeviceEntity> {
+    const existDevice = await this.findByMacAddress(macAddress);
+    if (!existDevice) {
+      throw new DeviceByMacAddressNotFoundException();
     }
     return existDevice;
   }
