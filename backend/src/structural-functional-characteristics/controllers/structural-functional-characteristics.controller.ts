@@ -14,7 +14,10 @@ import { ApiPaginatedResponse } from '@/common/pagination/api-pagination.respons
 import { StructuralFunctionalCharacteristicsService } from '@/structural-functional-characteristics/services/structural-functional-characteristics.service';
 import { StructuralFunctionalCharacteristicResponse } from '@/structural-functional-characteristics/controllers/structural-functional-characteristics.response';
 import { StructuralFunctionalCharacteristicListResponse } from '@/structural-functional-characteristics/controllers/structural-functional-characteristics-list.response';
-import { CreateStructuralFunctionalCharacteristicDto } from '@/structural-functional-characteristics/dtos';
+import {
+  CreateStructuralFunctionalCharacteristicDto,
+  CreateListStructuralFunctionalCharacteristicDto,
+} from '@/structural-functional-characteristics/dtos';
 
 @ApiTags('Structural Functional Characteristics')
 @Controller()
@@ -33,6 +36,13 @@ export class StructuralFunctionalCharacteristicsController {
     return new StructuralFunctionalCharacteristicResponse(
       await this.structuralFunctionalCharacteristicsService.create(dto),
     );
+  }
+
+  @Post('/upload-list')
+  public async createList(
+    @Body() dto: CreateListStructuralFunctionalCharacteristicDto,
+  ): Promise<void> {
+    await this.structuralFunctionalCharacteristicsService.createList(dto);
   }
 
   @Get('/:id')

@@ -9,7 +9,7 @@ export abstract class StructuralFunctionalCharacteristicsRepository {
 
   public abstract saveList(
     listStructuralFunctionalCharacteristics: StructuralFunctionalCharacteristicEntity[],
-  ): Promise<StructuralFunctionalCharacteristicEntity[]>;
+  ): Promise<void>;
 
   public abstract findAll(): Promise<
     StructuralFunctionalCharacteristicEntity[]

@@ -22,10 +22,19 @@ export class PostgresStructuralFunctionalCharacteristicsRepository extends Struc
     return this.repository.save(structuralFunctionalCharacteristic);
   }
 
-  public async saveList(
+  public saveList(
     listStructuralFunctionalCharacteristics: StructuralFunctionalCharacteristicEntity[],
-  ): Promise<StructuralFunctionalCharacteristicEntity[]> {
-    throw new Error('Method not implemented.');
+  ): Promise<void> {
+    const queryBuilder = this.repository.createQueryBuilder();
+
+    queryBuilder
+      .insert()
+      .into(StructuralFunctionalCharacteristicEntity)
+      .values(listStructuralFunctionalCharacteristics)
+      .orIgnore()
+      .execute();
+
+    return;
   }
 
   public async findAll(): Promise<StructuralFunctionalCharacteristicEntity[]> {
