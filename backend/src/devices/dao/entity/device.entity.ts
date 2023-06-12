@@ -1,5 +1,6 @@
 import { CyberPhysicalSystemEntity } from '@/cyber-physical-systems/dao/entity/cyber-physical-system.entity';
 import { StructuralFunctionalCharacteristicEntity } from '@/structural-functional-characteristics/dao/entity/structural-functional-characteristic.entity';
+import { SystemServiceEntity } from '@/system-services/dao/entity/system-service.entity';
 import {
   Column,
   CreateDateColumn,
@@ -56,4 +57,17 @@ export class DeviceEntity {
   )
   @JoinColumn()
   structuralFunctionalCharacteristics!: StructuralFunctionalCharacteristicEntity[];
+
+  @OneToMany(
+    () => SystemServiceEntity,
+    (systemService) => systemService.device,
+    {
+      eager: true,
+      cascade: true,
+      onDelete: 'CASCADE',
+      onUpdate: 'CASCADE',
+    },
+  )
+  @JoinColumn()
+  systemServices!: SystemServiceEntity[];
 }
