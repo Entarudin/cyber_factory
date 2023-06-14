@@ -5,6 +5,7 @@ import { UsersModule } from '@/users/users.module';
 import { CyberPhysicalSystemsModule } from '@/cyber-physical-systems/cyber-physical-systems.module';
 import { DevicesModule } from '@/devices/devices.module';
 import { StructuralFunctionalCharacteristicsModule } from '@/structural-functional-characteristics/structural-functional-characteristics.module';
+import { SystemServicesModule } from '@/system-services/system-services.module';
 
 export const ROUTES: Routes = [
   {
@@ -30,5 +31,9 @@ export const ROUTES: Routes = [
   {
     path: '/api/v1/sfc',
     module: StructuralFunctionalCharacteristicsModule,
+  },
+  {
+    path: '/api/v1/system-services',
+    module: SystemServicesModule,
   },
 ];
