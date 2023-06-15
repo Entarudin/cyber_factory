@@ -6,6 +6,7 @@ import { CyberPhysicalSystemsModule } from '@/cyber-physical-systems/cyber-physi
 import { DevicesModule } from '@/devices/devices.module';
 import { StructuralFunctionalCharacteristicsModule } from '@/structural-functional-characteristics/structural-functional-characteristics.module';
 import { SystemServicesModule } from '@/system-services/system-services.module';
+import { ApplicationsModule } from '@/applications/applications.module';
 
 export const ROUTES: Routes = [
   {
@@ -35,5 +36,9 @@ export const ROUTES: Routes = [
   {
     path: '/api/v1/system-services',
     module: SystemServicesModule,
+  },
+  {
+    path: '/api/v1/applications',
+    module: ApplicationsModule,
   },
 ];

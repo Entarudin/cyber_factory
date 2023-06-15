@@ -13,6 +13,7 @@ import { CyberPhysicalSystemsModule } from '@/cyber-physical-systems/cyber-physi
 import { DevicesModule } from '@/devices/devices.module';
 import { StructuralFunctionalCharacteristicsModule } from '@/structural-functional-characteristics/structural-functional-characteristics.module';
 import { SystemServicesModule } from '@/system-services/system-services.module';
+import { ApplicationsModule } from '@/applications/applications.module';
 
 @Module({
   imports: [
@@ -25,6 +26,7 @@ import { SystemServicesModule } from '@/system-services/system-services.module';
     DevicesModule,
     StructuralFunctionalCharacteristicsModule,
     SystemServicesModule,
+    ApplicationsModule,
     HealthModule,
     RouterModule.register(ROUTES),
     ConfigModule.forRoot({
