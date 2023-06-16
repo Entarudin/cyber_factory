@@ -14,6 +14,7 @@ import { DevicesModule } from '@/devices/devices.module';
 import { StructuralFunctionalCharacteristicsModule } from '@/structural-functional-characteristics/structural-functional-characteristics.module';
 import { SystemServicesModule } from '@/system-services/system-services.module';
 import { ApplicationsModule } from '@/applications/applications.module';
+import { NetworkInterfacesModule } from '@/network-interfaces/network-interfaces.module';
 
 @Module({
   imports: [
@@ -27,6 +28,7 @@ import { ApplicationsModule } from '@/applications/applications.module';
     StructuralFunctionalCharacteristicsModule,
     SystemServicesModule,
     ApplicationsModule,
+    NetworkInterfacesModule,
     HealthModule,
     RouterModule.register(ROUTES),
     ConfigModule.forRoot({
