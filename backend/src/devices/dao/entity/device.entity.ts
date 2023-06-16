@@ -2,6 +2,7 @@ import { CyberPhysicalSystemEntity } from '@/cyber-physical-systems/dao/entity/c
 import { StructuralFunctionalCharacteristicEntity } from '@/structural-functional-characteristics/dao/entity/structural-functional-characteristic.entity';
 import { SystemServiceEntity } from '@/system-services/dao/entity/system-service.entity';
 import { ApplicationEntity } from '@/applications/dao/entity/application.entity';
+import { NetworkInterfaceEntity } from '@/network-interfaces/dao/entity/network-interface.entity';
 import {
   Column,
   CreateDateColumn,
@@ -50,7 +51,6 @@ export class DeviceEntity {
     (structuralFunctionalCharacteristic) =>
       structuralFunctionalCharacteristic.device,
     {
-      eager: true,
       cascade: true,
       onDelete: 'CASCADE',
       onUpdate: 'CASCADE',
@@ -63,7 +63,6 @@ export class DeviceEntity {
     () => SystemServiceEntity,
     (systemService) => systemService.device,
     {
-      eager: true,
       cascade: true,
       onDelete: 'CASCADE',
       onUpdate: 'CASCADE',
@@ -73,11 +72,22 @@ export class DeviceEntity {
   systemServices!: SystemServiceEntity[];
 
   @OneToMany(() => ApplicationEntity, (application) => application.device, {
-    eager: true,
     cascade: true,
     onDelete: 'CASCADE',
     onUpdate: 'CASCADE',
   })
   @JoinColumn()
   applications!: ApplicationEntity[];
+
+  @OneToMany(
+    () => NetworkInterfaceEntity,
+    (networkInterface) => networkInterface.device,
+    {
+      cascade: true,
+      onDelete: 'CASCADE',
+      onUpdate: 'CASCADE',
+    },
+  )
+  @JoinColumn()
+  networkInterfaces!: NetworkInterfaceEntity[];
 }
