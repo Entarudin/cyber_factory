@@ -7,6 +7,7 @@ import { DevicesModule } from '@/devices/devices.module';
 import { StructuralFunctionalCharacteristicsModule } from '@/structural-functional-characteristics/structural-functional-characteristics.module';
 import { SystemServicesModule } from '@/system-services/system-services.module';
 import { ApplicationsModule } from '@/applications/applications.module';
+import { NetworkInterfacesModule } from '@/network-interfaces/network-interfaces.module';
 
 export const ROUTES: Routes = [
   {
@@ -40,5 +41,9 @@ export const ROUTES: Routes = [
   {
     path: '/api/v1/applications',
     module: ApplicationsModule,
+  },
+  {
+    path: '/api/v1/network-interfaces',
+    module: NetworkInterfacesModule,
   },
 ];
