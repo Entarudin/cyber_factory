@@ -3,6 +3,7 @@ import { StructuralFunctionalCharacteristicEntity } from '@/structural-functiona
 import { SystemServiceEntity } from '@/system-services/dao/entity/system-service.entity';
 import { ApplicationEntity } from '@/applications/dao/entity/application.entity';
 import { NetworkInterfaceEntity } from '@/network-interfaces/dao/entity/network-interface.entity';
+import { MonitorResourceEntity } from '@/monitor-resources/dao/entity/monitor-resource.entity';
 import {
   Column,
   CreateDateColumn,
@@ -90,4 +91,16 @@ export class DeviceEntity {
   )
   @JoinColumn()
   networkInterfaces!: NetworkInterfaceEntity[];
+
+  @OneToMany(
+    () => MonitorResourceEntity,
+    (monitorResource) => monitorResource.device,
+    {
+      cascade: true,
+      onDelete: 'CASCADE',
+      onUpdate: 'CASCADE',
+    },
+  )
+  @JoinColumn()
+  monitorResources!: MonitorResourceEntity[];
 }
