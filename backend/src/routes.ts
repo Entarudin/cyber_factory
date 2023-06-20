@@ -8,6 +8,7 @@ import { StructuralFunctionalCharacteristicsModule } from '@/structural-function
 import { SystemServicesModule } from '@/system-services/system-services.module';
 import { ApplicationsModule } from '@/applications/applications.module';
 import { NetworkInterfacesModule } from '@/network-interfaces/network-interfaces.module';
+import { MonitorResourcesModule } from '@/monitor-resources/monitor-resources.module';
 
 export const ROUTES: Routes = [
   {
@@ -45,5 +46,9 @@ export const ROUTES: Routes = [
   {
     path: '/api/v1/network-interfaces',
     module: NetworkInterfacesModule,
+  },
+  {
+    path: '/api/v1/monitor-resources',
+    module: MonitorResourcesModule,
   },
 ];
