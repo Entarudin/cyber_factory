@@ -9,6 +9,7 @@ import { SystemServicesModule } from '@/system-services/system-services.module';
 import { ApplicationsModule } from '@/applications/applications.module';
 import { NetworkInterfacesModule } from '@/network-interfaces/network-interfaces.module';
 import { MonitorResourcesModule } from '@/monitor-resources/monitor-resources.module';
+import { ArpTableModule } from '@/arp-table/arp-table.module';
 
 export const ROUTES: Routes = [
   {
@@ -50,5 +51,9 @@ export const ROUTES: Routes = [
   {
     path: '/api/v1/monitor-resources',
     module: MonitorResourcesModule,
+  },
+  {
+    path: '/api/v1/arp-table',
+    module: ArpTableModule,
   },
 ];
