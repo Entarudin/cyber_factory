@@ -16,6 +16,7 @@ import { SystemServicesModule } from '@/system-services/system-services.module';
 import { ApplicationsModule } from '@/applications/applications.module';
 import { NetworkInterfacesModule } from '@/network-interfaces/network-interfaces.module';
 import { MonitorResourcesModule } from '@/monitor-resources/monitor-resources.module';
+import { ArpTableModule } from './arp-table/arp-table.module';
 
 @Module({
   imports: [
@@ -31,6 +32,7 @@ import { MonitorResourcesModule } from '@/monitor-resources/monitor-resources.mo
     ApplicationsModule,
     NetworkInterfacesModule,
     MonitorResourcesModule,
+    ArpTableModule,
     HealthModule,
     RouterModule.register(ROUTES),
     ConfigModule.forRoot({
