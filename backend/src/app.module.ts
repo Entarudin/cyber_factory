@@ -3,7 +3,6 @@ import { DatabaseModule } from '@/database/database.module';
 import { ConfigModule } from '@nestjs/config';
 import { AuthModule } from '@/auth/auth.module';
 import { APP_FILTER, APP_INTERCEPTOR, RouterModule } from '@nestjs/core';
-import { GlobalExceptionsFilter } from '@common/fillters/global-exeptions.fillter';
 import { UsersModule } from '@/users/users.module';
 import { TokensModule } from '@/tokens/tokens.module';
 import { RolesModule } from '@/roles/roles.module';
@@ -16,7 +15,8 @@ import { SystemServicesModule } from '@/system-services/system-services.module';
 import { ApplicationsModule } from '@/applications/applications.module';
 import { NetworkInterfacesModule } from '@/network-interfaces/network-interfaces.module';
 import { MonitorResourcesModule } from '@/monitor-resources/monitor-resources.module';
-import { ArpTableModule } from './arp-table/arp-table.module';
+import { ArpTableModule } from '@/arp-table/arp-table.module';
+import { GlobalExceptionsFilter } from '@/common/filters/global-exceptions.filter';
 
 @Module({
   imports: [
