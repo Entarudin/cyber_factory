@@ -1,21 +1,22 @@
 import { Injectable } from '@nestjs/common';
-import { DevicesService } from '@/devices/services/devices.service';
-import { StructuralFunctionalCharacteristicsRepository } from '@/structural-functional-characteristics/repositories/structural-functional-characteristics.repository';
-import { StructuralFunctionalCharacteristicEntity } from '@/structural-functional-characteristics/dao/entity/structural-functional-characteristic.entity';
-import {
-  CreateStructuralFunctionalCharacteristicDto,
-  UpdateStructuralFunctionalCharacteristicDto,
-  CreateListStructuralFunctionalCharacteristicDto,
-  StructuralFunctionalCharacteristicItemDto,
-} from '@/structural-functional-characteristics/dtos';
-import { StructuralFunctionalCharacteristicByIdNotFoundException } from '@/structural-functional-characteristics/exceptions';
-import { PageOptionsDto } from '@/common/pagination/page-options.dto';
-import { PageDto } from '@/common/pagination/page.dto';
+
 import {
   getChunksList,
   MAX_SIZE_CHUNK,
 } from '@/common//utils/get-chunks-list.utils';
+import { PageDto } from '@/common/pagination/page.dto';
+import { PageOptionsDto } from '@/common/pagination/page-options.dto';
 import { DeviceEntity } from '@/devices/dao/entity/device.entity';
+import { DevicesService } from '@/devices/services/devices.service';
+import { StructuralFunctionalCharacteristicEntity } from '@/structural-functional-characteristics/dao/entity/structural-functional-characteristic.entity';
+import {
+  CreateListStructuralFunctionalCharacteristicDto,
+  CreateStructuralFunctionalCharacteristicDto,
+  StructuralFunctionalCharacteristicItemDto,
+  UpdateStructuralFunctionalCharacteristicDto,
+} from '@/structural-functional-characteristics/dtos';
+import { StructuralFunctionalCharacteristicByIdNotFoundException } from '@/structural-functional-characteristics/exceptions';
+import { StructuralFunctionalCharacteristicsRepository } from '@/structural-functional-characteristics/repositories/structural-functional-characteristics.repository';
 
 @Injectable()
 export class StructuralFunctionalCharacteristicsService {

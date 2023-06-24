@@ -1,5 +1,5 @@
-import { PageOptionsDto } from '@/common/pagination/page-options.dto';
 import { PageDto } from '@/common/pagination/page.dto';
+import { PageOptionsDto } from '@/common/pagination/page-options.dto';
 import { MonitorResourceEntity } from '@/monitor-resources/dao/entity/monitor-resource.entity';
 
 export abstract class MonitorResourcesRepository {

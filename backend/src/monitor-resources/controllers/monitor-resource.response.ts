@@ -1,4 +1,5 @@
 import { ApiProperty } from '@nestjs/swagger';
+
 import { MonitorResourceEntity } from '@/monitor-resources/dao/entity/monitor-resource.entity';
 
 export class MonitorResourceResponse {

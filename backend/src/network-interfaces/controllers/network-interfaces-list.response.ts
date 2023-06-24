@@ -1,6 +1,7 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { PageOptionsDto } from '@/common/pagination/page-options.dto';
+
 import { PaginatedResult } from '@/common/pagination/interfaces/pagination-result.interface';
+import { PageOptionsDto } from '@/common/pagination/page-options.dto';
 import { NetworkInterfaceResponse } from '@/network-interfaces/controllers/network-interface.response';
 import { NetworkInterfaceEntity } from '@/network-interfaces/dao/entity/network-interface.entity';
 

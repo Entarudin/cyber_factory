@@ -1,23 +1,24 @@
 import {
-  Controller,
-  Post,
   Body,
+  Controller,
+  Delete,
   Get,
   Param,
   ParseIntPipe,
-  Delete,
+  Post,
   Query,
 } from '@nestjs/common';
 import { ApiOkResponse, ApiTags } from '@nestjs/swagger';
-import { PageOptionsDto } from '@/common/pagination/page-options.dto';
+
 import { ApiPaginatedResponse } from '@/common/pagination/api-pagination.response';
+import { PageOptionsDto } from '@/common/pagination/page-options.dto';
 import { NetworkInterfaceResponse } from '@/network-interfaces/controllers/network-interface.response';
 import { NetworkInterfacesListResponse } from '@/network-interfaces/controllers/network-interfaces-list.response';
-import { NetworkInterfacesService } from '@/network-interfaces/services/network-interfaces.service';
 import {
   CreateListNetworkInterfacesDto,
   CreateNetworkInterfaceDto,
 } from '@/network-interfaces/dtos';
+import { NetworkInterfacesService } from '@/network-interfaces/services/network-interfaces.service';
 
 @ApiTags('Network Interfaces')
 @Controller()

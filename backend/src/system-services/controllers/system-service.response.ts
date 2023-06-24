@@ -1,4 +1,5 @@
 import { ApiProperty } from '@nestjs/swagger';
+
 import { SystemServiceEntity } from '@/system-services/dao/entity/system-service.entity';
 
 export class SystemServiceResponse {

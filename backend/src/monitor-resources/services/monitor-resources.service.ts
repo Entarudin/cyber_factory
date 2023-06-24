@@ -1,15 +1,16 @@
 import { Injectable } from '@nestjs/common';
-import { DevicesService } from '@/devices/services/devices.service';
-import { PageOptionsDto } from '@/common/pagination/page-options.dto';
+
 import { PageDto } from '@/common/pagination/page.dto';
-import { MonitorResourcesRepository } from '@/monitor-resources/repositories/monitor-resources.repository';
+import { PageOptionsDto } from '@/common/pagination/page-options.dto';
+import { DeviceEntity } from '@/devices/dao/entity/device.entity';
+import { DevicesService } from '@/devices/services/devices.service';
 import { MonitorResourceEntity } from '@/monitor-resources/dao/entity/monitor-resource.entity';
 import {
   CreateMonitorResourceDto,
   UpdateMonitorResourceDto,
 } from '@/monitor-resources/dtos';
 import { MonitorResourceByIdNotFoundException } from '@/monitor-resources/exceptions';
-import { DeviceEntity } from '@/devices/dao/entity/device.entity';
+import { MonitorResourcesRepository } from '@/monitor-resources/repositories/monitor-resources.repository';
 
 @Injectable()
 export class MonitorResourcesService {

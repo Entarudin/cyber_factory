@@ -1,23 +1,24 @@
 import {
-  Controller,
-  Post,
   Body,
+  Controller,
+  Delete,
   Get,
   Param,
   ParseIntPipe,
-  Delete,
+  Post,
   Query,
 } from '@nestjs/common';
 import { ApiOkResponse, ApiTags } from '@nestjs/swagger';
-import { PageOptionsDto } from '@/common/pagination/page-options.dto';
+
 import { ApiPaginatedResponse } from '@/common/pagination/api-pagination.response';
-import {
-  CreateSystemServiceDto,
-  CreateListSystemServicesDto,
-} from '@/system-services/dtos';
-import { SystemServicesService } from '@/system-services/services/system-services.service';
+import { PageOptionsDto } from '@/common/pagination/page-options.dto';
 import { SystemServiceResponse } from '@/system-services/controllers/system-service.response';
 import { SystemServicesListResponse } from '@/system-services/controllers/system-services-list.response';
+import {
+  CreateListSystemServicesDto,
+  CreateSystemServiceDto,
+} from '@/system-services/dtos';
+import { SystemServicesService } from '@/system-services/services/system-services.service';
 
 @ApiTags('System Services')
 @Controller()

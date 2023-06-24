@@ -1,4 +1,5 @@
 import { Injectable } from '@nestjs/common';
+
 import { RoleEntity } from '@/roles/dao/entity/role.entity';
 import {
   RoleAlreadyExistByNameException,

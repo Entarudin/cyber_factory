@@ -1,8 +1,9 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { PageOptionsDto } from '@/common/pagination/page-options.dto';
-import { PaginatedResult } from '@/common/pagination/interfaces/pagination-result.interface';
+
 import { ArpTableItemResponse } from '@/arp-table/controllers/arp-table-item.response';
 import { ArpTableItemEntity } from '@/arp-table/dao/entity/arp-table.entity';
+import { PaginatedResult } from '@/common/pagination/interfaces/pagination-result.interface';
+import { PageOptionsDto } from '@/common/pagination/page-options.dto';
 
 export class ArpTableResponse {
   @ApiProperty()

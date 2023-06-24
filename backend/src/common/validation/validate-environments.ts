@@ -1,6 +1,6 @@
 import { plainToClass } from 'class-transformer';
-import { validateSync } from 'class-validator';
 import { ClassConstructor } from 'class-transformer/types/interfaces';
+import { validateSync } from 'class-validator';
 
 export function validateEnvironments(
   config: Record<string, unknown>,

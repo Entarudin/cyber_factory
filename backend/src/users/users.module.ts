@@ -1,12 +1,14 @@
 import { Module } from '@nestjs/common';
+import { JwtModule } from '@nestjs/jwt';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { UserEntity } from '@/users/dao/entity/user.entity';
-import { UsersService } from '@/users/services';
-import { PostgresUsersRepository, UsersRepository } from '@/users/repositories';
+
 import { BcryptModule } from '@/bcrypt/bcrypt.module';
 import { RolesModule } from '@/roles/roles.module';
+import { UserEntity } from '@/users/dao/entity/user.entity';
+import { PostgresUsersRepository, UsersRepository } from '@/users/repositories';
+import { UsersService } from '@/users/services';
+
 import { UsersController } from './controllers/user.controller';
-import { JwtModule } from '@nestjs/jwt';
 
 @Module({
   imports: [

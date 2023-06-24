@@ -1,5 +1,5 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { IsDefined, IsNumber, IsIP, IsString } from 'class-validator';
+import { IsDefined, IsIP, IsNumber, IsString } from 'class-validator';
 
 export class CreateDeviceDto {
   @ApiProperty({

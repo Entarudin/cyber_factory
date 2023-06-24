@@ -1,8 +1,9 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { PageOptionsDto } from '@/common/pagination/page-options.dto';
-import { PaginatedResult } from '@/common/pagination/interfaces/pagination-result.interface';
-import { ApplicationEntity } from '@/applications/dao/entity/application.entity';
+
 import { ApplicationResponse } from '@/applications/controllers/application.response';
+import { ApplicationEntity } from '@/applications/dao/entity/application.entity';
+import { PaginatedResult } from '@/common/pagination/interfaces/pagination-result.interface';
+import { PageOptionsDto } from '@/common/pagination/page-options.dto';
 
 export class ApplicationsListResponse {
   @ApiProperty()

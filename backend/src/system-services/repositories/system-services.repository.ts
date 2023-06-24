@@ -1,5 +1,5 @@
-import { PageOptionsDto } from '@/common/pagination/page-options.dto';
 import { PageDto } from '@/common/pagination/page.dto';
+import { PageOptionsDto } from '@/common/pagination/page-options.dto';
 import { SystemServiceEntity } from '@/system-services/dao/entity/system-service.entity';
 
 export abstract class SystemServicesRepository {

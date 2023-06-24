@@ -1,8 +1,9 @@
 import { Injectable } from '@nestjs/common';
-import { UsersRepository } from '@/users/repositories/users.repository';
-import { UserEntity } from '@/users/dao/entity/user.entity';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
+
+import { UserEntity } from '@/users/dao/entity/user.entity';
+import { UsersRepository } from '@/users/repositories/users.repository';
 
 @Injectable()
 export class PostgresUsersRepository extends UsersRepository {

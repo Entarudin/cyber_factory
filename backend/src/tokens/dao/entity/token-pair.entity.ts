@@ -1,4 +1,3 @@
-import { UserEntity } from '@/users/dao/entity/user.entity';
 import {
   Column,
   CreateDateColumn,
@@ -7,6 +6,8 @@ import {
   ManyToOne,
   PrimaryGeneratedColumn,
 } from 'typeorm';
+
+import { UserEntity } from '@/users/dao/entity/user.entity';
 
 @Entity({ name: 'tokens_pairs' })
 export class TokenPairEntity {

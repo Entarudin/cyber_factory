@@ -1,16 +1,17 @@
 import { Injectable } from '@nestjs/common';
-import { PageOptionsDto } from '@/common/pagination/page-options.dto';
+
 import { PageDto } from '@/common/pagination/page.dto';
-import { DevicesRepository } from '@/devices/repositories/devices.repository';
+import { PageOptionsDto } from '@/common/pagination/page-options.dto';
 import { CyberPhysicalSystemsService } from '@/cyber-physical-systems/services/cyber-physical-systems.service';
-import { CreateDeviceDto, UpdateDeviceDto } from '@/devices/dtos';
 import { DeviceEntity } from '@/devices/dao/entity/device.entity';
+import { CreateDeviceDto, UpdateDeviceDto } from '@/devices/dtos';
 import {
-  DeviceExistException,
   DeviceByIdNotFoundException,
-  DeviceWithMacAddressExistException,
   DeviceByMacAddressNotFoundException,
+  DeviceExistException,
+  DeviceWithMacAddressExistException,
 } from '@/devices/exceptions';
+import { DevicesRepository } from '@/devices/repositories/devices.repository';
 
 @Injectable()
 export class DevicesService {

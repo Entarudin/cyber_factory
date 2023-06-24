@@ -1,4 +1,3 @@
-import { DeviceEntity } from '@/devices/dao/entity/device.entity';
 import {
   Column,
   CreateDateColumn,
@@ -8,6 +7,8 @@ import {
   PrimaryGeneratedColumn,
   Unique,
 } from 'typeorm';
+
+import { DeviceEntity } from '@/devices/dao/entity/device.entity';
 
 @Entity({ name: 'system_services' })
 @Unique(['name', 'status', 'deviceId'])

@@ -1,8 +1,9 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
+
 import { DevicesModule } from '@/devices/devices.module';
-import { NetworkInterfaceEntity } from '@/network-interfaces/dao/entity/network-interface.entity';
 import { NetworkInterfacesController } from '@/network-interfaces/controllers/network-interfaces.controller';
+import { NetworkInterfaceEntity } from '@/network-interfaces/dao/entity/network-interface.entity';
 import { NetworkInterfacesRepository } from '@/network-interfaces/repositories/network-interfaces.repository';
 import { PostgresNetworkInterfacesRepository } from '@/network-interfaces/repositories/postgres-network-interfaces.repository';
 import { NetworkInterfacesService } from '@/network-interfaces/services/network-interfaces.service';

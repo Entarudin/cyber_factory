@@ -1,4 +1,3 @@
-import { DeviceEntity } from '@/devices/dao/entity/device.entity';
 import {
   Column,
   CreateDateColumn,
@@ -7,6 +6,8 @@ import {
   ManyToOne,
   PrimaryGeneratedColumn,
 } from 'typeorm';
+
+import { DeviceEntity } from '@/devices/dao/entity/device.entity';
 
 @Entity({ name: 'monitor_resources' })
 export class MonitorResourceEntity {

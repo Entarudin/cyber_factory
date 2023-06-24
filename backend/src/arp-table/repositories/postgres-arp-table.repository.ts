@@ -1,14 +1,15 @@
-import { PageOptionsDto } from '@/common/pagination/page-options.dto';
-import { PageDto } from '@/common/pagination/page.dto';
+import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
-import { Injectable } from '@nestjs/common';
-import { PageMetaDto } from '@/common/pagination/page-meta.dto';
-import { ArpTableRepository } from '@/arp-table/repositories/arp-table.repository';
+
 import {
   ArpTable,
   ArpTableItemEntity,
 } from '@/arp-table/dao/entity/arp-table.entity';
+import { ArpTableRepository } from '@/arp-table/repositories/arp-table.repository';
+import { PageDto } from '@/common/pagination/page.dto';
+import { PageMetaDto } from '@/common/pagination/page-meta.dto';
+import { PageOptionsDto } from '@/common/pagination/page-options.dto';
 
 @Injectable()
 export class PostgresArpTableRepository extends ArpTableRepository {

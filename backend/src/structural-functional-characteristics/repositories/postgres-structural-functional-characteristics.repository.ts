@@ -1,11 +1,13 @@
 import { Injectable } from '@nestjs/common';
-import { Repository } from 'typeorm';
 import { InjectRepository } from '@nestjs/typeorm';
-import { StructuralFunctionalCharacteristicsRepository } from './structural-functional-characteristics.repository';
-import { PageOptionsDto } from '@/common/pagination/page-options.dto';
+import { Repository } from 'typeorm';
+
 import { PageDto } from '@/common/pagination/page.dto';
-import { StructuralFunctionalCharacteristicEntity } from '../dao/entity/structural-functional-characteristic.entity';
 import { PageMetaDto } from '@/common/pagination/page-meta.dto';
+import { PageOptionsDto } from '@/common/pagination/page-options.dto';
+
+import { StructuralFunctionalCharacteristicEntity } from '../dao/entity/structural-functional-characteristic.entity';
+import { StructuralFunctionalCharacteristicsRepository } from './structural-functional-characteristics.repository';
 
 @Injectable()
 export class PostgresStructuralFunctionalCharacteristicsRepository extends StructuralFunctionalCharacteristicsRepository {

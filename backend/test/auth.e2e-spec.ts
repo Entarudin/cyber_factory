@@ -1,7 +1,9 @@
 import { HttpStatus } from '@nestjs/common';
 import * as request from 'supertest';
+
 import { AuthLoginDto } from '@/auth/dtos';
 import { CreateUserDto } from '@/users/dtos';
+
 import { APP_URL, TESTER_EMAIL, TESTER_PASSWORD } from './utils/constants';
 
 const userDto: CreateUserDto = {

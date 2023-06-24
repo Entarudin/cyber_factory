@@ -1,4 +1,5 @@
 import { ApiProperty } from '@nestjs/swagger';
+
 import { NetworkInterfaceEntity } from '@/network-interfaces/dao/entity/network-interface.entity';
 
 export class NetworkInterfaceResponse {

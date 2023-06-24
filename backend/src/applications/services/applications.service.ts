@@ -1,21 +1,22 @@
 import { Injectable } from '@nestjs/common';
-import { DevicesService } from '@/devices/services/devices.service';
-import { PageOptionsDto } from '@/common/pagination/page-options.dto';
+
+import { ApplicationEntity } from '@/applications/dao/entity/application.entity';
+import {
+  ApplicationItemDto,
+  CreateApplicationDto,
+  CreateListApplicationsDto,
+  UpdateApplicationDto,
+} from '@/applications/dtos';
+import { ApplicationByIdNotFoundException } from '@/applications/exceptions';
+import { ApplicationsRepository } from '@/applications/repositories/applications.repository';
 import { PageDto } from '@/common/pagination/page.dto';
+import { PageOptionsDto } from '@/common/pagination/page-options.dto';
 import {
   getChunksList,
   MAX_SIZE_CHUNK,
 } from '@/common/utils/get-chunks-list.utils';
 import { DeviceEntity } from '@/devices/dao/entity/device.entity';
-import { ApplicationEntity } from '@/applications/dao/entity/application.entity';
-import {
-  CreateApplicationDto,
-  CreateListApplicationsDto,
-  ApplicationItemDto,
-  UpdateApplicationDto,
-} from '@/applications/dtos';
-import { ApplicationsRepository } from '@/applications/repositories/applications.repository';
-import { ApplicationByIdNotFoundException } from '@/applications/exceptions';
+import { DevicesService } from '@/devices/services/devices.service';
 
 @Injectable()
 export class ApplicationsService {

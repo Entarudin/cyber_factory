@@ -1,6 +1,7 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { PageOptionsDto } from '@/common/pagination/page-options.dto';
+
 import { PaginatedResult } from '@/common/pagination/interfaces/pagination-result.interface';
+import { PageOptionsDto } from '@/common/pagination/page-options.dto';
 import { MonitorResourceResponse } from '@/monitor-resources/controllers/monitor-resource.response';
 import { MonitorResourceEntity } from '@/monitor-resources/dao/entity/monitor-resource.entity';
 

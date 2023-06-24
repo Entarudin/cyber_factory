@@ -7,16 +7,17 @@ import {
   OneToMany,
   PrimaryGeneratedColumn,
 } from 'typeorm';
-import { CyberPhysicalSystemEntity } from '@/cyber-physical-systems/dao/entity/cyber-physical-system.entity';
-import { StructuralFunctionalCharacteristicEntity } from '@/structural-functional-characteristics/dao/entity/structural-functional-characteristic.entity';
-import { SystemServiceEntity } from '@/system-services/dao/entity/system-service.entity';
+
 import { ApplicationEntity } from '@/applications/dao/entity/application.entity';
-import { NetworkInterfaceEntity } from '@/network-interfaces/dao/entity/network-interface.entity';
-import { MonitorResourceEntity } from '@/monitor-resources/dao/entity/monitor-resource.entity';
 import {
   ArpTable,
   ArpTableItemEntity,
 } from '@/arp-table/dao/entity/arp-table.entity';
+import { CyberPhysicalSystemEntity } from '@/cyber-physical-systems/dao/entity/cyber-physical-system.entity';
+import { MonitorResourceEntity } from '@/monitor-resources/dao/entity/monitor-resource.entity';
+import { NetworkInterfaceEntity } from '@/network-interfaces/dao/entity/network-interface.entity';
+import { StructuralFunctionalCharacteristicEntity } from '@/structural-functional-characteristics/dao/entity/structural-functional-characteristic.entity';
+import { SystemServiceEntity } from '@/system-services/dao/entity/system-service.entity';
 
 @Entity({ name: 'devices' })
 export class DeviceEntity {

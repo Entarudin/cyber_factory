@@ -1,12 +1,11 @@
-import { registerAs } from '@nestjs/config';
-
+import { ConfigNamespacesEnum } from '@common/constants/config-namespaces.enum';
+import { validateEnvironments } from '@common/validation/validate-environments';
 import {
   AppEnvironmentVariables,
   Environment,
   IAppConfig,
 } from '@configs/app-config';
-import { validateEnvironments } from '@common/validation/validate-environments';
-import { ConfigNamespacesEnum } from '@common/constants/config-namespaces.enum';
+import { registerAs } from '@nestjs/config';
 
 export default registerAs(ConfigNamespacesEnum.APP, (): IAppConfig => {
   validateEnvironments(process.env, AppEnvironmentVariables);

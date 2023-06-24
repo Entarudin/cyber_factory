@@ -1,11 +1,12 @@
-import { Controller, Post, Body, Res, Req, Get } from '@nestjs/common';
-import { ApiOkResponse, ApiTags, ApiCookieAuth } from '@nestjs/swagger';
-import { AuthService } from '@/auth/services/auth.service';
-import { CreateUserDto } from '@/users/dtos';
+import { Body, Controller, Get, Post, Req, Res } from '@nestjs/common';
+import { ConfigService } from '@nestjs/config';
+import { ApiCookieAuth, ApiOkResponse, ApiTags } from '@nestjs/swagger';
+import { CookieOptions, Request, Response } from 'express';
+
 import { AuthResponse } from '@/auth/controllers/auth.response';
 import { AuthLoginDto } from '@/auth/dtos';
-import { Response, Request, CookieOptions } from 'express';
-import { ConfigService } from '@nestjs/config';
+import { AuthService } from '@/auth/services/auth.service';
+import { CreateUserDto } from '@/users/dtos';
 
 @ApiTags('Authentication')
 @Controller()

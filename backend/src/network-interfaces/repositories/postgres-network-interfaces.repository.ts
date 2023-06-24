@@ -1,11 +1,13 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
-import { NetworkInterfacesRepository } from '@/network-interfaces/repositories/network-interfaces.repository';
-import { PageOptionsDto } from '@/common/pagination/page-options.dto';
+
 import { PageDto } from '@/common/pagination/page.dto';
-import { NetworkInterfaceEntity } from '../dao/entity/network-interface.entity';
 import { PageMetaDto } from '@/common/pagination/page-meta.dto';
+import { PageOptionsDto } from '@/common/pagination/page-options.dto';
+import { NetworkInterfacesRepository } from '@/network-interfaces/repositories/network-interfaces.repository';
+
+import { NetworkInterfaceEntity } from '../dao/entity/network-interface.entity';
 
 @Injectable()
 export class PostgresNetworkInterfacesRepository extends NetworkInterfacesRepository {

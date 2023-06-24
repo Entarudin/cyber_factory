@@ -1,4 +1,5 @@
 import { ApiProperty } from '@nestjs/swagger';
+
 import { ArpTableItemEntity } from '@/arp-table/dao/entity/arp-table.entity';
 
 export class ArpTableItemResponse {

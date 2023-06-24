@@ -1,24 +1,25 @@
 import { Injectable } from '@nestjs/common';
-import { DevicesService } from '@/devices/services/devices.service';
-import { PageOptionsDto } from '@/common/pagination/page-options.dto';
+
+import {
+  ArpTable,
+  ArpTableItemEntity,
+} from '@/arp-table/dao/entity/arp-table.entity';
+import {
+  ArpTableItemDto,
+  CreateArpTableDto,
+  CreateArpTableItemDto,
+  UpdateArpTableItemDto,
+} from '@/arp-table/dtos';
+import { ArpTableItemByIdNotFoundException } from '@/arp-table/exceptions/arp-table-item-by-id-not-found.exception';
+import { ArpTableRepository } from '@/arp-table/repositories/arp-table.repository';
 import { PageDto } from '@/common/pagination/page.dto';
+import { PageOptionsDto } from '@/common/pagination/page-options.dto';
 import {
   getChunksList,
   MAX_SIZE_CHUNK,
 } from '@/common/utils/get-chunks-list.utils';
 import { DeviceEntity } from '@/devices/dao/entity/device.entity';
-import {
-  ArpTable,
-  ArpTableItemEntity,
-} from '@/arp-table/dao/entity/arp-table.entity';
-import { ArpTableRepository } from '@/arp-table/repositories/arp-table.repository';
-import {
-  ArpTableItemDto,
-  CreateArpTableItemDto,
-  UpdateArpTableItemDto,
-  CreateArpTableDto,
-} from '@/arp-table/dtos';
-import { ArpTableItemByIdNotFoundException } from '@/arp-table/exceptions/arp-table-item-by-id-not-found.exception';
+import { DevicesService } from '@/devices/services/devices.service';
 
 @Injectable()
 export class ArpTableService {

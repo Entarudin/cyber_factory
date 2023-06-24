@@ -1,9 +1,9 @@
-import { PageOptionsDto } from '@/common/pagination/page-options.dto';
-import { PageDto } from '@/common/pagination/page.dto';
 import {
   ArpTable,
   ArpTableItemEntity,
 } from '@/arp-table/dao/entity/arp-table.entity';
+import { PageDto } from '@/common/pagination/page.dto';
+import { PageOptionsDto } from '@/common/pagination/page-options.dto';
 
 export abstract class ArpTableRepository {
   public abstract save(

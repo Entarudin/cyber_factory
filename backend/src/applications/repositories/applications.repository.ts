@@ -1,6 +1,6 @@
-import { PageOptionsDto } from '@/common/pagination/page-options.dto';
-import { PageDto } from '@/common/pagination/page.dto';
 import { ApplicationEntity } from '@/applications/dao/entity/application.entity';
+import { PageDto } from '@/common/pagination/page.dto';
+import { PageOptionsDto } from '@/common/pagination/page-options.dto';
 
 export abstract class ApplicationsRepository {
   public abstract save(

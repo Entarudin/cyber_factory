@@ -1,8 +1,9 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { PageOptionsDto } from '@/common/pagination/page-options.dto';
+
 import { PaginatedResult } from '@/common/pagination/interfaces/pagination-result.interface';
-import { SystemServiceEntity } from '@/system-services/dao/entity/system-service.entity';
+import { PageOptionsDto } from '@/common/pagination/page-options.dto';
 import { SystemServiceResponse } from '@/system-services/controllers/system-service.response';
+import { SystemServiceEntity } from '@/system-services/dao/entity/system-service.entity';
 
 export class SystemServicesListResponse {
   @ApiProperty()

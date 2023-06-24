@@ -1,9 +1,10 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
-import { RolesRepository } from '@/roles/repositories/roles.repository';
-import { RoleEntity } from '@/roles/dao/entity/role.entity';
+
 import { RolesEnum } from '@/common/constants/roles.enum';
+import { RoleEntity } from '@/roles/dao/entity/role.entity';
+import { RolesRepository } from '@/roles/repositories/roles.repository';
 
 @Injectable()
 export class PostgresRolesRepository extends RolesRepository {

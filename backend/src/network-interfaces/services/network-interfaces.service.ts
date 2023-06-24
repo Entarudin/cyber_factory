@@ -1,21 +1,22 @@
 import { Injectable } from '@nestjs/common';
-import { DevicesService } from '@/devices/services/devices.service';
-import { PageOptionsDto } from '@/common/pagination/page-options.dto';
-import { PageDto } from '@/common/pagination/page.dto';
+
 import {
   getChunksList,
   MAX_SIZE_CHUNK,
 } from '@/common//utils/get-chunks-list.utils';
+import { PageDto } from '@/common/pagination/page.dto';
+import { PageOptionsDto } from '@/common/pagination/page-options.dto';
+import { DeviceEntity } from '@/devices/dao/entity/device.entity';
+import { DevicesService } from '@/devices/services/devices.service';
 import { NetworkInterfaceEntity } from '@/network-interfaces/dao/entity/network-interface.entity';
 import {
   CreateListNetworkInterfacesDto,
   CreateNetworkInterfaceDto,
-  UpdateNetworkInterfaceDto,
   NetworkInterfaceItemDto,
+  UpdateNetworkInterfaceDto,
 } from '@/network-interfaces/dtos';
 import { NetworkInterfaceByIdNotFoundException } from '@/network-interfaces/exceptions';
 import { NetworkInterfacesRepository } from '@/network-interfaces/repositories/network-interfaces.repository';
-import { DeviceEntity } from '@/devices/dao/entity/device.entity';
 
 @Injectable()
 export class NetworkInterfacesService {

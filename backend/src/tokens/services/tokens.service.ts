@@ -1,14 +1,15 @@
-import { Injectable } from '@nestjs/common';
-import { JwtService } from '@nestjs/jwt';
-import { TokensPairsRepository } from '@/tokens/repositories/tokens-pairs.repository';
-import { ConfigService } from '@nestjs/config';
-import { RoleEntity } from '@/roles/dao/entity/role.entity';
-import { CreateTokenDto } from '@/tokens/dtos';
-import { TokenPairEntity } from '@/tokens/dao/entity/token-pair.entity';
-import { TokensByRefreshTokenNotFoundException } from '@/tokens/exceptions';
-import { UserEntity } from '@/users/dao/entity/user.entity';
-import { IJwtConfig } from '@configs/jwt-config';
 import { ConfigNamespacesEnum } from '@common/constants/config-namespaces.enum';
+import { IJwtConfig } from '@configs/jwt-config';
+import { Injectable } from '@nestjs/common';
+import { ConfigService } from '@nestjs/config';
+import { JwtService } from '@nestjs/jwt';
+
+import { RoleEntity } from '@/roles/dao/entity/role.entity';
+import { TokenPairEntity } from '@/tokens/dao/entity/token-pair.entity';
+import { CreateTokenDto } from '@/tokens/dtos';
+import { TokensByRefreshTokenNotFoundException } from '@/tokens/exceptions';
+import { TokensPairsRepository } from '@/tokens/repositories/tokens-pairs.repository';
+import { UserEntity } from '@/users/dao/entity/user.entity';
 
 export type JwtTokenPayload = {
   id: number;

@@ -1,6 +1,7 @@
-import { DeviceMacAddressDto } from '@/devices/dtos';
 import { ApiProperty, OmitType } from '@nestjs/swagger';
 import { IsDefined, IsString } from 'class-validator';
+
+import { DeviceMacAddressDto } from '@/devices/dtos';
 
 export class CreateNetworkInterfaceDto extends DeviceMacAddressDto {
   @ApiProperty({

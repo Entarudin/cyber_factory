@@ -1,11 +1,12 @@
-import { PageOptionsDto } from '@/common/pagination/page-options.dto';
-import { PageDto } from '@/common/pagination/page.dto';
-import { ApplicationEntity } from '@/applications/dao/entity/application.entity';
-import { ApplicationsRepository } from '@/applications/repositories/applications.repository';
+import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
-import { Injectable } from '@nestjs/common';
+
+import { ApplicationEntity } from '@/applications/dao/entity/application.entity';
+import { ApplicationsRepository } from '@/applications/repositories/applications.repository';
+import { PageDto } from '@/common/pagination/page.dto';
 import { PageMetaDto } from '@/common/pagination/page-meta.dto';
+import { PageOptionsDto } from '@/common/pagination/page-options.dto';
 
 @Injectable()
 export class PostgresApplicationsRepository extends ApplicationsRepository {

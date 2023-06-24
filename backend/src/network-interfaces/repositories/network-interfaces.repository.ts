@@ -1,5 +1,5 @@
-import { PageOptionsDto } from '@/common/pagination/page-options.dto';
 import { PageDto } from '@/common/pagination/page.dto';
+import { PageOptionsDto } from '@/common/pagination/page-options.dto';
 import { NetworkInterfaceEntity } from '@/network-interfaces/dao/entity/network-interface.entity';
 
 export abstract class NetworkInterfacesRepository {

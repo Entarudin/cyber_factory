@@ -1,13 +1,13 @@
+import { ConfigNamespacesEnum } from '@common/constants/config-namespaces.enum';
+import { AppConfigModule, IAppConfig } from '@configs/app-config';
+import {
+  DatabaseConfigModule,
+  IDatabaseConfig,
+} from '@configs/database-config';
 import { Module } from '@nestjs/common';
+import { ConfigService } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { SnakeNamingStrategy } from 'typeorm-naming-strategies';
-import {
-  IDatabaseConfig,
-  DatabaseConfigModule,
-} from '@configs/database-config';
-import { ConfigNamespacesEnum } from '@common/constants/config-namespaces.enum';
-import { ConfigService } from '@nestjs/config';
-import { AppConfigModule, IAppConfig } from '@configs/app-config';
 
 @Module({
   imports: [

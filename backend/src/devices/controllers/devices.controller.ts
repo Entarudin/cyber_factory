@@ -1,19 +1,21 @@
 import {
-  Controller,
-  Post,
   Body,
+  Controller,
+  Delete,
   Get,
   Param,
   ParseIntPipe,
-  Delete,
+  Post,
   Query,
 } from '@nestjs/common';
 import { ApiOkResponse, ApiTags } from '@nestjs/swagger';
-import { PageOptionsDto } from '@/common/pagination/page-options.dto';
+
 import { ApiPaginatedResponse } from '@/common/pagination/api-pagination.response';
+import { PageOptionsDto } from '@/common/pagination/page-options.dto';
 import { DevicesService } from '@/devices/services/devices.service';
-import { DeviceResponse } from './device.response';
+
 import { CreateDeviceDto } from '../dtos';
+import { DeviceResponse } from './device.response';
 import { DeviceListResponse } from './device-list.response';
 
 @ApiTags('Devices')

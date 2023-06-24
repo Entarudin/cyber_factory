@@ -1,21 +1,22 @@
 import { Injectable } from '@nestjs/common';
-import { DevicesService } from '@/devices/services/devices.service';
-import { PageOptionsDto } from '@/common/pagination/page-options.dto';
-import { PageDto } from '@/common/pagination/page.dto';
+
 import {
   getChunksList,
   MAX_SIZE_CHUNK,
 } from '@/common//utils/get-chunks-list.utils';
+import { PageDto } from '@/common/pagination/page.dto';
+import { PageOptionsDto } from '@/common/pagination/page-options.dto';
 import { DeviceEntity } from '@/devices/dao/entity/device.entity';
-import { SystemServicesRepository } from '@/system-services/repositories/system-services.repository';
+import { DevicesService } from '@/devices/services/devices.service';
+import { SystemServiceEntity } from '@/system-services/dao/entity/system-service.entity';
 import {
   CreateListSystemServicesDto,
   CreateSystemServiceDto,
-  UpdateSystemServiceDto,
   SystemServiceItemDto,
+  UpdateSystemServiceDto,
 } from '@/system-services/dtos';
-import { SystemServiceEntity } from '../dao/entity/system-service.entity';
 import { SystemServiceByIdNotFoundException } from '@/system-services/exceptions';
+import { SystemServicesRepository } from '@/system-services/repositories/system-services.repository';
 
 @Injectable()
 export class SystemServicesService {
