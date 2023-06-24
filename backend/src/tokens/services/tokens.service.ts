@@ -22,7 +22,6 @@ export class TokensService {
     private readonly tokensRepository: TokensPairsRepository,
     private readonly configService: ConfigService,
     private readonly jwtService: JwtService,
-    private readonly MAX_SIZE_TOKENS_PAIR = 10,
   ) {}
 
   public async create(dto: CreateTokenDto): Promise<TokenPairEntity> {
@@ -123,4 +122,6 @@ export class TokensService {
     const [, count] = await this.tokensRepository.findByUserId(userId);
     return count;
   }
+
+  private readonly MAX_SIZE_TOKENS_PAIR = 10;
 }
