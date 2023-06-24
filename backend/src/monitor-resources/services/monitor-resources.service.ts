@@ -22,7 +22,7 @@ export class MonitorResourcesService {
     dto: CreateMonitorResourceDto,
   ): Promise<MonitorResourceEntity> {
     const existDevice = await this.devicesService.getOrFailByMacAddress(
-      dto.macAddress,
+      dto.deviceMacAddress,
     );
 
     const monitorResource = this.buildMonitorResource(

@@ -28,7 +28,7 @@ export class SystemServicesService {
     dto: CreateSystemServiceDto,
   ): Promise<SystemServiceEntity> {
     const existDevice = await this.devicesService.getOrFailByMacAddress(
-      dto.macAddress,
+      dto.deviceMacAddress,
     );
 
     const systemService = this.buildSystemService(
@@ -41,9 +41,9 @@ export class SystemServicesService {
   }
 
   public async createList(dto: CreateListSystemServicesDto): Promise<void> {
-    const { items, macAddress } = dto;
+    const { items, deviceMacAddress } = dto;
     const existDevice = await this.devicesService.getOrFailByMacAddress(
-      macAddress,
+      deviceMacAddress,
     );
 
     if (items.length <= MAX_SIZE_CHUNK) {

@@ -28,7 +28,7 @@ export class NetworkInterfacesService {
     dto: CreateNetworkInterfaceDto,
   ): Promise<NetworkInterfaceEntity> {
     const existDevice = await this.devicesService.getOrFailByMacAddress(
-      dto.macAddress,
+      dto.deviceMacAddress,
     );
 
     const application = this.buildNetworkInterface(
@@ -41,9 +41,9 @@ export class NetworkInterfacesService {
   }
 
   public async createList(dto: CreateListNetworkInterfacesDto): Promise<void> {
-    const { items, macAddress } = dto;
+    const { items, deviceMacAddress } = dto;
     const existDevice = await this.devicesService.getOrFailByMacAddress(
-      macAddress,
+      deviceMacAddress,
     );
 
     if (items.length <= MAX_SIZE_CHUNK) {

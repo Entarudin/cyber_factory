@@ -1,15 +1,8 @@
 import { ApiProperty, OmitType } from '@nestjs/swagger';
 import { IsDefined, IsString } from 'class-validator';
+import { DeviceMacAddressDto } from '@/devices/dtos';
 
-export class CreateApplicationDto {
-  @ApiProperty({
-    type: String,
-    required: true,
-  })
-  @IsString()
-  @IsDefined()
-  public readonly macAddress: string;
-
+export class CreateApplicationDto extends DeviceMacAddressDto {
   @ApiProperty({
     type: String,
     required: true,
@@ -35,5 +28,5 @@ export class CreateApplicationDto {
   public readonly description: string;
 }
 export class ApplicationItemDto extends OmitType(CreateApplicationDto, [
-  'macAddress',
+  'deviceMacAddress',
 ] as const) {}

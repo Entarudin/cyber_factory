@@ -28,7 +28,7 @@ export class StructuralFunctionalCharacteristicsService {
     dto: CreateStructuralFunctionalCharacteristicDto,
   ): Promise<StructuralFunctionalCharacteristicEntity> {
     const existDevice = await this.devicesService.getOrFailByMacAddress(
-      dto.macAddress,
+      dto.deviceMacAddress,
     );
 
     const structuralFunctionalCharacteristic =
@@ -46,9 +46,9 @@ export class StructuralFunctionalCharacteristicsService {
   public async createList(
     dto: CreateListStructuralFunctionalCharacteristicDto,
   ): Promise<void> {
-    const { items, macAddress } = dto;
+    const { items, deviceMacAddress } = dto;
     const existDevice = await this.devicesService.getOrFailByMacAddress(
-      macAddress,
+      deviceMacAddress,
     );
 
     if (items.length <= MAX_SIZE_CHUNK) {

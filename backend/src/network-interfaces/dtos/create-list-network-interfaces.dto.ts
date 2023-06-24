@@ -1,15 +1,6 @@
-import { ApiProperty } from '@nestjs/swagger';
-import { IsDefined, IsString } from 'class-validator';
 import { NetworkInterfaceItemDto } from '@/network-interfaces/dtos';
+import { DeviceMacAddressDto } from '@/devices/dtos';
 
-export class CreateListNetworkInterfacesDto {
-  @ApiProperty({
-    type: String,
-    required: true,
-  })
-  @IsString()
-  @IsDefined()
-  public readonly macAddress: string;
-
+export class CreateListNetworkInterfacesDto extends DeviceMacAddressDto {
   public readonly items: NetworkInterfaceItemDto[];
 }
