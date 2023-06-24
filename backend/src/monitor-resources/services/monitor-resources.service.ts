@@ -21,8 +21,8 @@ export class MonitorResourcesService {
   public async create(
     dto: CreateMonitorResourceDto,
   ): Promise<MonitorResourceEntity> {
-    const existDevice = await this.devicesService.getExistDeviceByMacAddress(
-      dto.macAddress,
+    const existDevice = await this.devicesService.getOrFailByMacAddress(
+      dto.deviceMacAddress,
     );
 
     const monitorResource = this.buildMonitorResource(
@@ -43,7 +43,7 @@ export class MonitorResourcesService {
     id: number,
     dto: UpdateMonitorResourceDto,
   ): Promise<MonitorResourceEntity> {
-    const existMonitorResource = await this.getExistMonitorResourceById(id);
+    const existMonitorResource = await this.getOrFailById(id);
 
     existMonitorResource.cpuLoad = dto.cpuLoad;
     existMonitorResource.ramLoad = dto.ramLoad;
@@ -68,7 +68,7 @@ export class MonitorResourcesService {
   }
 
   public async delete(id: number): Promise<void> {
-    await this.getExistMonitorResourceById(id);
+    await this.getOrFailById(id);
     await this.monitorResourcesRepository.delete(id);
   }
 
@@ -78,9 +78,7 @@ export class MonitorResourcesService {
     return this.monitorResourcesRepository.findBy(pagination);
   }
 
-  public async getExistMonitorResourceById(
-    id: number,
-  ): Promise<MonitorResourceEntity> {
+  public async getOrFailById(id: number): Promise<MonitorResourceEntity> {
     const existMonitorResource = await this.findById(id);
     if (!existMonitorResource) {
       throw new MonitorResourceByIdNotFoundException();

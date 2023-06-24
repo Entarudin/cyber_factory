@@ -1,15 +1,6 @@
-import { ApiProperty } from '@nestjs/swagger';
-import { IsDefined, IsString } from 'class-validator';
 import { ArpTableItemDto } from '@/arp-table/dtos';
+import { DeviceMacAddressDto } from '@/devices/dtos';
 
-export class CreateArpTableDto {
-  @ApiProperty({
-    type: String,
-    required: true,
-  })
-  @IsString()
-  @IsDefined()
-  public readonly deviceMacAddress: string;
-
+export class CreateArpTableDto extends DeviceMacAddressDto {
   public readonly items: ArpTableItemDto[];
 }

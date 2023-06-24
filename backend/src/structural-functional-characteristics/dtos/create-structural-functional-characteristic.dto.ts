@@ -1,15 +1,8 @@
+import { DeviceMacAddressDto } from '@/devices/dtos';
 import { ApiProperty, OmitType } from '@nestjs/swagger';
 import { IsDefined, IsString } from 'class-validator';
 
-export class CreateStructuralFunctionalCharacteristicDto {
-  @ApiProperty({
-    type: String,
-    required: true,
-  })
-  @IsString()
-  @IsDefined()
-  public readonly macAddress: string;
-
+export class CreateStructuralFunctionalCharacteristicDto extends DeviceMacAddressDto {
   @ApiProperty({
     type: String,
     required: true,
@@ -29,5 +22,5 @@ export class CreateStructuralFunctionalCharacteristicDto {
 
 export class StructuralFunctionalCharacteristicItemDto extends OmitType(
   CreateStructuralFunctionalCharacteristicDto,
-  ['macAddress'] as const,
+  ['deviceMacAddress'] as const,
 ) {}

@@ -23,7 +23,7 @@ export class CyberPhysicalSystemsService {
   public async create(
     dto: CreateCyberPhysicalSystemDto,
   ): Promise<CyberPhysicalSystemEntity> {
-    const user = await this.usersService.getUserExistById(dto.userId);
+    const user = await this.usersService.getOrFailById(dto.userId);
     const existCyberPhysicalSystem = await this.getByName(dto.name);
 
     if (existCyberPhysicalSystem) {
@@ -46,7 +46,7 @@ export class CyberPhysicalSystemsService {
     id: number,
     dto: UpdateCyberPhysicalSystemDto,
   ): Promise<CyberPhysicalSystemEntity> {
-    const cyberPhysicalSystem = await this.getCyberPhysicalSystemExistById(id);
+    const cyberPhysicalSystem = await this.getOrFailById(id);
     cyberPhysicalSystem.name = dto.name;
     return this.cyberPhysicalSystemsRepository.save(cyberPhysicalSystem);
   }
@@ -60,7 +60,7 @@ export class CyberPhysicalSystemsService {
   }
 
   public async delete(id: number): Promise<void> {
-    await this.getCyberPhysicalSystemExistById(id);
+    await this.getOrFailById(id);
     await this.cyberPhysicalSystemsRepository.delete(id);
   }
 
@@ -70,9 +70,7 @@ export class CyberPhysicalSystemsService {
     return this.cyberPhysicalSystemsRepository.findBy(pagination);
   }
 
-  public async getCyberPhysicalSystemExistById(
-    id: number,
-  ): Promise<CyberPhysicalSystemEntity> {
+  public async getOrFailById(id: number): Promise<CyberPhysicalSystemEntity> {
     const existCyberPhysicalSystem = await this.findById(id);
     if (!existCyberPhysicalSystem) {
       throw new CyberPhysicalSystemByIdNotFoundException();

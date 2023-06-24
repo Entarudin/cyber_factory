@@ -11,7 +11,10 @@ import {
 import { StructuralFunctionalCharacteristicByIdNotFoundException } from '@/structural-functional-characteristics/exceptions';
 import { PageOptionsDto } from '@/common/pagination/page-options.dto';
 import { PageDto } from '@/common/pagination/page.dto';
-import { getChunksList, MAX_SIZE_CHUNK } from '@/common/get-chunks-list.utils';
+import {
+  getChunksList,
+  MAX_SIZE_CHUNK,
+} from '@/common//utils/get-chunks-list.utils';
 import { DeviceEntity } from '@/devices/dao/entity/device.entity';
 
 @Injectable()
@@ -24,8 +27,8 @@ export class StructuralFunctionalCharacteristicsService {
   public async create(
     dto: CreateStructuralFunctionalCharacteristicDto,
   ): Promise<StructuralFunctionalCharacteristicEntity> {
-    const existDevice = await this.devicesService.getExistDeviceByMacAddress(
-      dto.macAddress,
+    const existDevice = await this.devicesService.getOrFailByMacAddress(
+      dto.deviceMacAddress,
     );
 
     const structuralFunctionalCharacteristic =
@@ -43,9 +46,9 @@ export class StructuralFunctionalCharacteristicsService {
   public async createList(
     dto: CreateListStructuralFunctionalCharacteristicDto,
   ): Promise<void> {
-    const { items, macAddress } = dto;
-    const existDevice = await this.devicesService.getExistDeviceByMacAddress(
-      macAddress,
+    const { items, deviceMacAddress } = dto;
+    const existDevice = await this.devicesService.getOrFailByMacAddress(
+      deviceMacAddress,
     );
 
     if (items.length <= MAX_SIZE_CHUNK) {
@@ -88,8 +91,9 @@ export class StructuralFunctionalCharacteristicsService {
     id: number,
     dto: UpdateStructuralFunctionalCharacteristicDto,
   ): Promise<StructuralFunctionalCharacteristicEntity> {
-    const existStructuralFunctionalCharacteristic =
-      await this.getExistStructuralFunctionalCharacteristicById(id);
+    const existStructuralFunctionalCharacteristic = await this.getOrFailById(
+      id,
+    );
 
     existStructuralFunctionalCharacteristic.name = dto.name;
     existStructuralFunctionalCharacteristic.version = dto.version;
@@ -110,7 +114,7 @@ export class StructuralFunctionalCharacteristicsService {
   }
 
   public async delete(id: number): Promise<void> {
-    await this.getExistStructuralFunctionalCharacteristicById(id);
+    await this.getOrFailById(id);
     await this.structuralFunctionalCharacteristicsRepository.delete(id);
   }
 
@@ -122,7 +126,7 @@ export class StructuralFunctionalCharacteristicsService {
     );
   }
 
-  public async getExistStructuralFunctionalCharacteristicById(
+  public async getOrFailById(
     id: number,
   ): Promise<StructuralFunctionalCharacteristicEntity> {
     const existStructuralFunctionalCharacteristic = await this.findById(id);

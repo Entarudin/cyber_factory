@@ -1,15 +1,8 @@
+import { DeviceMacAddressDto } from '@/devices/dtos';
 import { ApiProperty, OmitType } from '@nestjs/swagger';
-import { IsDefined, IsNumber, IsString } from 'class-validator';
+import { IsDefined, IsNumber } from 'class-validator';
 
-export class CreateMonitorResourceDto {
-  @ApiProperty({
-    type: String,
-    required: true,
-  })
-  @IsString()
-  @IsDefined()
-  public readonly macAddress: string;
-
+export class CreateMonitorResourceDto extends DeviceMacAddressDto {
   @ApiProperty({
     type: Number,
     required: true,
@@ -68,5 +61,5 @@ export class CreateMonitorResourceDto {
 }
 
 export class MonitorResourceItemDto extends OmitType(CreateMonitorResourceDto, [
-  'macAddress',
+  'deviceMacAddress',
 ] as const) {}

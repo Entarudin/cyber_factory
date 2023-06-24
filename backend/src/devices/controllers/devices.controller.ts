@@ -33,16 +33,16 @@ export class DevicesController {
   @ApiOkResponse({
     type: DeviceResponse,
   })
-  public async findById(
+  public async getById(
     @Param('id', ParseIntPipe) id: number,
   ): Promise<DeviceResponse> {
     console.log(id);
-    return new DeviceResponse(await this.devicesService.getExistDeviceById(id));
+    return new DeviceResponse(await this.devicesService.getOrFailById(id));
   }
 
   @Get('/')
   @ApiPaginatedResponse(DeviceResponse)
-  public async findAll(
+  public async getList(
     @Query() pagination: PageOptionsDto,
   ): Promise<DeviceListResponse> {
     return new DeviceListResponse(

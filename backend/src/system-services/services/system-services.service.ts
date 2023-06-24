@@ -2,7 +2,10 @@ import { Injectable } from '@nestjs/common';
 import { DevicesService } from '@/devices/services/devices.service';
 import { PageOptionsDto } from '@/common/pagination/page-options.dto';
 import { PageDto } from '@/common/pagination/page.dto';
-import { getChunksList, MAX_SIZE_CHUNK } from '@/common/get-chunks-list.utils';
+import {
+  getChunksList,
+  MAX_SIZE_CHUNK,
+} from '@/common//utils/get-chunks-list.utils';
 import { DeviceEntity } from '@/devices/dao/entity/device.entity';
 import { SystemServicesRepository } from '@/system-services/repositories/system-services.repository';
 import {
@@ -24,8 +27,8 @@ export class SystemServicesService {
   public async create(
     dto: CreateSystemServiceDto,
   ): Promise<SystemServiceEntity> {
-    const existDevice = await this.devicesService.getExistDeviceByMacAddress(
-      dto.macAddress,
+    const existDevice = await this.devicesService.getOrFailByMacAddress(
+      dto.deviceMacAddress,
     );
 
     const systemService = this.buildSystemService(
@@ -38,9 +41,9 @@ export class SystemServicesService {
   }
 
   public async createList(dto: CreateListSystemServicesDto): Promise<void> {
-    const { items, macAddress } = dto;
-    const existDevice = await this.devicesService.getExistDeviceByMacAddress(
-      macAddress,
+    const { items, deviceMacAddress } = dto;
+    const existDevice = await this.devicesService.getOrFailByMacAddress(
+      deviceMacAddress,
     );
 
     if (items.length <= MAX_SIZE_CHUNK) {
@@ -57,22 +60,21 @@ export class SystemServicesService {
       return;
     }
 
-    const chunksStructuralFunctionalCharacteristics =
-      getChunksList<SystemServiceItemDto>(items, MAX_SIZE_CHUNK);
+    const chunksSystemServices = getChunksList<SystemServiceItemDto>(
+      items,
+      MAX_SIZE_CHUNK,
+    );
 
-    for (const chunk of chunksStructuralFunctionalCharacteristics) {
-      const listStructuralFunctionalCharacteristics = chunk.map(
-        (systemService) =>
-          this.buildSystemService(
-            systemService.name,
-            systemService.status,
-            existDevice,
-          ),
+    for (const chunk of chunksSystemServices) {
+      const listSystemServices = chunk.map((systemService) =>
+        this.buildSystemService(
+          systemService.name,
+          systemService.status,
+          existDevice,
+        ),
       );
 
-      await this.systemServicesRepository.saveList(
-        listStructuralFunctionalCharacteristics,
-      );
+      await this.systemServicesRepository.saveList(listSystemServices);
     }
 
     return;
@@ -82,7 +84,7 @@ export class SystemServicesService {
     id: number,
     dto: UpdateSystemServiceDto,
   ): Promise<SystemServiceEntity> {
-    const existSystemService = await this.getExistSystemServiceById(id);
+    const existSystemService = await this.getOrFailById(id);
 
     existSystemService.name = dto.name;
     existSystemService.status = dto.status;
@@ -99,7 +101,7 @@ export class SystemServicesService {
   }
 
   public async delete(id: number): Promise<void> {
-    await this.getExistSystemServiceById(id);
+    await this.getOrFailById(id);
     await this.systemServicesRepository.delete(id);
   }
 
@@ -109,9 +111,7 @@ export class SystemServicesService {
     return this.systemServicesRepository.findBy(pagination);
   }
 
-  public async getExistSystemServiceById(
-    id: number,
-  ): Promise<SystemServiceEntity> {
+  public async getOrFailById(id: number): Promise<SystemServiceEntity> {
     const existSystemService = await this.findById(id);
     if (!existSystemService) {
       throw new SystemServiceByIdNotFoundException();

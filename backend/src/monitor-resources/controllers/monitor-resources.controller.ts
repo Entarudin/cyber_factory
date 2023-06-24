@@ -39,18 +39,18 @@ export class MonitorResourcesController {
   @ApiOkResponse({
     type: MonitorResourceResponse,
   })
-  public async findById(
+  public async getById(
     @Param('id', ParseIntPipe) id: number,
   ): Promise<MonitorResourceResponse> {
     console.log(id);
     return new MonitorResourceResponse(
-      await this.monitorResourcesService.getExistMonitorResourceById(id),
+      await this.monitorResourcesService.getOrFailById(id),
     );
   }
 
   @Get('/')
   @ApiPaginatedResponse(MonitorResourceResponse)
-  public async findAll(
+  public async getList(
     @Query() pagination: PageOptionsDto,
   ): Promise<MonitorResourcesListResponse> {
     return new MonitorResourcesListResponse(

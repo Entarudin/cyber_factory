@@ -2,7 +2,10 @@ import { Injectable } from '@nestjs/common';
 import { DevicesService } from '@/devices/services/devices.service';
 import { PageOptionsDto } from '@/common/pagination/page-options.dto';
 import { PageDto } from '@/common/pagination/page.dto';
-import { getChunksList, MAX_SIZE_CHUNK } from '@/common/get-chunks-list.utils';
+import {
+  getChunksList,
+  MAX_SIZE_CHUNK,
+} from '@/common//utils/get-chunks-list.utils';
 import { NetworkInterfaceEntity } from '@/network-interfaces/dao/entity/network-interface.entity';
 import {
   CreateListNetworkInterfacesDto,
@@ -24,8 +27,8 @@ export class NetworkInterfacesService {
   public async create(
     dto: CreateNetworkInterfaceDto,
   ): Promise<NetworkInterfaceEntity> {
-    const existDevice = await this.devicesService.getExistDeviceByMacAddress(
-      dto.macAddress,
+    const existDevice = await this.devicesService.getOrFailByMacAddress(
+      dto.deviceMacAddress,
     );
 
     const application = this.buildNetworkInterface(
@@ -38,9 +41,9 @@ export class NetworkInterfacesService {
   }
 
   public async createList(dto: CreateListNetworkInterfacesDto): Promise<void> {
-    const { items, macAddress } = dto;
-    const existDevice = await this.devicesService.getExistDeviceByMacAddress(
-      macAddress,
+    const { items, deviceMacAddress } = dto;
+    const existDevice = await this.devicesService.getOrFailByMacAddress(
+      deviceMacAddress,
     );
 
     if (items.length <= MAX_SIZE_CHUNK) {
@@ -81,7 +84,7 @@ export class NetworkInterfacesService {
     id: number,
     dto: UpdateNetworkInterfaceDto,
   ): Promise<NetworkInterfaceEntity> {
-    const existNetworkInterface = await this.getExistNetworkInterfaceById(id);
+    const existNetworkInterface = await this.getOrFailById(id);
 
     existNetworkInterface.name = dto.name;
     existNetworkInterface.ipAddress = dto.ipAddress;
@@ -98,7 +101,7 @@ export class NetworkInterfacesService {
   }
 
   public async delete(id: number): Promise<void> {
-    await this.getExistNetworkInterfaceById(id);
+    await this.getOrFailById(id);
     await this.networkInterfacesRepository.delete(id);
   }
 
@@ -108,9 +111,7 @@ export class NetworkInterfacesService {
     return this.networkInterfacesRepository.findBy(pagination);
   }
 
-  public async getExistNetworkInterfaceById(
-    id: number,
-  ): Promise<NetworkInterfaceEntity> {
+  public async getOrFailById(id: number): Promise<NetworkInterfaceEntity> {
     const existNetworkInterface = await this.findById(id);
     if (!existNetworkInterface) {
       throw new NetworkInterfaceByIdNotFoundException();

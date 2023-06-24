@@ -49,20 +49,18 @@ export class StructuralFunctionalCharacteristicsController {
   @ApiOkResponse({
     type: StructuralFunctionalCharacteristicResponse,
   })
-  public async findById(
+  public async getById(
     @Param('id', ParseIntPipe) id: number,
   ): Promise<StructuralFunctionalCharacteristicResponse> {
     console.log(id);
     return new StructuralFunctionalCharacteristicResponse(
-      await this.structuralFunctionalCharacteristicsService.getExistStructuralFunctionalCharacteristicById(
-        id,
-      ),
+      await this.structuralFunctionalCharacteristicsService.getOrFailById(id),
     );
   }
 
   @Get('/')
   @ApiPaginatedResponse(StructuralFunctionalCharacteristicResponse)
-  public async findAll(
+  public async getList(
     @Query() pagination: PageOptionsDto,
   ): Promise<StructuralFunctionalCharacteristicListResponse> {
     return new StructuralFunctionalCharacteristicListResponse(

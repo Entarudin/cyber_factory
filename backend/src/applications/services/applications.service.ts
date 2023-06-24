@@ -2,7 +2,10 @@ import { Injectable } from '@nestjs/common';
 import { DevicesService } from '@/devices/services/devices.service';
 import { PageOptionsDto } from '@/common/pagination/page-options.dto';
 import { PageDto } from '@/common/pagination/page.dto';
-import { getChunksList, MAX_SIZE_CHUNK } from '@/common/get-chunks-list.utils';
+import {
+  getChunksList,
+  MAX_SIZE_CHUNK,
+} from '@/common/utils/get-chunks-list.utils';
 import { DeviceEntity } from '@/devices/dao/entity/device.entity';
 import { ApplicationEntity } from '@/applications/dao/entity/application.entity';
 import {
@@ -22,8 +25,8 @@ export class ApplicationsService {
   ) {}
 
   public async create(dto: CreateApplicationDto): Promise<ApplicationEntity> {
-    const existDevice = await this.devicesService.getExistDeviceByMacAddress(
-      dto.macAddress,
+    const existDevice = await this.devicesService.getOrFailByMacAddress(
+      dto.deviceMacAddress,
     );
 
     const application = this.buildApplication(
@@ -37,9 +40,9 @@ export class ApplicationsService {
   }
 
   public async createList(dto: CreateListApplicationsDto): Promise<void> {
-    const { items, macAddress } = dto;
-    const existDevice = await this.devicesService.getExistDeviceByMacAddress(
-      macAddress,
+    const { items, deviceMacAddress } = dto;
+    const existDevice = await this.devicesService.getOrFailByMacAddress(
+      deviceMacAddress,
     );
 
     if (items.length <= MAX_SIZE_CHUNK) {
@@ -82,7 +85,7 @@ export class ApplicationsService {
     id: number,
     dto: UpdateApplicationDto,
   ): Promise<ApplicationEntity> {
-    const existApplication = await this.getExistApplicationById(id);
+    const existApplication = await this.getOrFailById(id);
 
     existApplication.name = dto.name;
     existApplication.version = dto.version;
@@ -100,7 +103,7 @@ export class ApplicationsService {
   }
 
   public async delete(id: number): Promise<void> {
-    await this.getExistApplicationById(id);
+    await this.getOrFailById(id);
     await this.applicationsRepository.delete(id);
   }
 
@@ -110,7 +113,7 @@ export class ApplicationsService {
     return this.applicationsRepository.findBy(pagination);
   }
 
-  public async getExistApplicationById(id: number): Promise<ApplicationEntity> {
+  public async getOrFailById(id: number): Promise<ApplicationEntity> {
     const existApplication = await this.findById(id);
     if (!existApplication) {
       throw new ApplicationByIdNotFoundException();

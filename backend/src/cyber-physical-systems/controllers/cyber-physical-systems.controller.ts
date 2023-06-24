@@ -39,20 +39,18 @@ export class CyberPhysicalSystemsController {
   @ApiOkResponse({
     type: CyberPhysicalSystemResponse,
   })
-  public async findById(
+  public async getById(
     @Param('id', ParseIntPipe) id: number,
   ): Promise<CyberPhysicalSystemResponse> {
     console.log(id);
     return new CyberPhysicalSystemResponse(
-      await this.cyberPhysicalSystemsService.getCyberPhysicalSystemExistById(
-        id,
-      ),
+      await this.cyberPhysicalSystemsService.getOrFailById(id),
     );
   }
 
   @Get('/')
   @ApiPaginatedResponse(CyberPhysicalSystemResponse)
-  public async findAll(
+  public async getList(
     @Query() pagination: PageOptionsDto,
   ): Promise<CyberPhysicalSystemListResponse> {
     return new CyberPhysicalSystemListResponse(

@@ -45,18 +45,18 @@ export class ApplicationsController {
   @ApiOkResponse({
     type: ApplicationResponse,
   })
-  public async findById(
+  public async getById(
     @Param('id', ParseIntPipe) id: number,
   ): Promise<ApplicationResponse> {
     console.log(id);
     return new ApplicationResponse(
-      await this.applicationsService.getExistApplicationById(id),
+      await this.applicationsService.getOrFailById(id),
     );
   }
 
   @Get('/')
   @ApiPaginatedResponse(ApplicationResponse)
-  public async findAll(
+  public async getList(
     @Query() pagination: PageOptionsDto,
   ): Promise<ApplicationsListResponse> {
     return new ApplicationsListResponse(
