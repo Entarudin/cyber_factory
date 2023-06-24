@@ -2,7 +2,7 @@ import { plainToClass } from 'class-transformer';
 import { validateSync } from 'class-validator';
 import { ClassConstructor } from 'class-transformer/types/interfaces';
 
-export function validateUtil(
+export function validateEnvironments(
   config: Record<string, unknown>,
   envVariablesClass: ClassConstructor<any>,
 ) {

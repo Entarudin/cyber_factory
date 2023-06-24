@@ -5,11 +5,11 @@ import {
   Environment,
   IAppConfig,
 } from '@configs/app-config';
-import { validateUtil } from '@common/validate.utils';
-import { ConfigNamespacesEnum } from '@common/config-namespaces.enum';
+import { validateEnvironments } from '@common/validation/validate-environments';
+import { ConfigNamespacesEnum } from '@common/constants/config-namespaces.enum';
 
 export default registerAs(ConfigNamespacesEnum.APP, (): IAppConfig => {
-  validateUtil(process.env, AppEnvironmentVariables);
+  validateEnvironments(process.env, AppEnvironmentVariables);
   return {
     nodeEnv: process.env.APP_ENV,
     port: parseInt(process.env.BACKEND_ENV_PORT),

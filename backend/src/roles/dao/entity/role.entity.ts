@@ -1,4 +1,4 @@
-import { RolesEnum } from '@/common/roles.enum';
+import { RolesEnum } from '@/common/constants/roles.enum';
 import { UserEntity } from '@/users/dao/entity/user.entity';
 import {
   Column,

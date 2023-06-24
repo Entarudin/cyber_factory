@@ -4,13 +4,13 @@ import {
   DatabaseEnvironmentVariables,
   IDatabaseConfig,
 } from '@configs/database-config';
-import { validateUtil } from '@common/validate.utils';
-import { ConfigNamespacesEnum } from '@common/config-namespaces.enum';
+import { validateEnvironments } from '@common/validation/validate-environments';
+import { ConfigNamespacesEnum } from '@common/constants/config-namespaces.enum';
 
 export default registerAs(
   ConfigNamespacesEnum.DATABASE,
   (): IDatabaseConfig => {
-    validateUtil(process.env, DatabaseEnvironmentVariables);
+    validateEnvironments(process.env, DatabaseEnvironmentVariables);
     return {
       host: process.env.POSTGRES_HOST,
       port: parseInt(process.env.POSTGRES_PORT),

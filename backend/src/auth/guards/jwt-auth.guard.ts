@@ -4,7 +4,7 @@ import { JwtService } from '@nestjs/jwt';
 import { ConfigService } from '@nestjs/config';
 import { AccessTokenExpiredException } from '../exceptions';
 import { IJwtConfig } from '@/configs/jwt-config';
-import { ConfigNamespacesEnum } from '@/common/config-namespaces.enum';
+import { ConfigNamespacesEnum } from '@/common/constants/config-namespaces.enum';
 
 @Injectable()
 export class JwtAuthGuard implements CanActivate {

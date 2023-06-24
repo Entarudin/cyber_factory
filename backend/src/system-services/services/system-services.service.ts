@@ -2,7 +2,10 @@ import { Injectable } from '@nestjs/common';
 import { DevicesService } from '@/devices/services/devices.service';
 import { PageOptionsDto } from '@/common/pagination/page-options.dto';
 import { PageDto } from '@/common/pagination/page.dto';
-import { getChunksList, MAX_SIZE_CHUNK } from '@/common/get-chunks-list.utils';
+import {
+  getChunksList,
+  MAX_SIZE_CHUNK,
+} from '@/common//utils/get-chunks-list.utils';
 import { DeviceEntity } from '@/devices/dao/entity/device.entity';
 import { SystemServicesRepository } from '@/system-services/repositories/system-services.repository';
 import {

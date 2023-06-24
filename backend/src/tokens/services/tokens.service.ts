@@ -8,7 +8,7 @@ import { TokenPairEntity } from '@/tokens/dao/entity/token-pair.entity';
 import { TokensByRefreshTokenNotFoundException } from '@/tokens/exceptions';
 import { UserEntity } from '@/users/dao/entity/user.entity';
 import { IJwtConfig } from '@configs/jwt-config';
-import { ConfigNamespacesEnum } from '@common/config-namespaces.enum';
+import { ConfigNamespacesEnum } from '@common/constants/config-namespaces.enum';
 
 export type JwtTokenPayload = {
   id: number;

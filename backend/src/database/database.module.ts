@@ -5,7 +5,7 @@ import {
   IDatabaseConfig,
   DatabaseConfigModule,
 } from '@configs/database-config';
-import { ConfigNamespacesEnum } from '@common/config-namespaces.enum';
+import { ConfigNamespacesEnum } from '@common/constants/config-namespaces.enum';
 import { ConfigService } from '@nestjs/config';
 import { AppConfigModule, IAppConfig } from '@configs/app-config';
 
