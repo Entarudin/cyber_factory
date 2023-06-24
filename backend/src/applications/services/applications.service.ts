@@ -25,7 +25,7 @@ export class ApplicationsService {
   ) {}
 
   public async create(dto: CreateApplicationDto): Promise<ApplicationEntity> {
-    const existDevice = await this.devicesService.getExistDeviceByMacAddress(
+    const existDevice = await this.devicesService.getOrFailByMacAddress(
       dto.macAddress,
     );
 
@@ -41,7 +41,7 @@ export class ApplicationsService {
 
   public async createList(dto: CreateListApplicationsDto): Promise<void> {
     const { items, macAddress } = dto;
-    const existDevice = await this.devicesService.getExistDeviceByMacAddress(
+    const existDevice = await this.devicesService.getOrFailByMacAddress(
       macAddress,
     );
 
@@ -85,7 +85,7 @@ export class ApplicationsService {
     id: number,
     dto: UpdateApplicationDto,
   ): Promise<ApplicationEntity> {
-    const existApplication = await this.getExistApplicationById(id);
+    const existApplication = await this.getOrFailById(id);
 
     existApplication.name = dto.name;
     existApplication.version = dto.version;
@@ -103,7 +103,7 @@ export class ApplicationsService {
   }
 
   public async delete(id: number): Promise<void> {
-    await this.getExistApplicationById(id);
+    await this.getOrFailById(id);
     await this.applicationsRepository.delete(id);
   }
 
@@ -113,7 +113,7 @@ export class ApplicationsService {
     return this.applicationsRepository.findBy(pagination);
   }
 
-  public async getExistApplicationById(id: number): Promise<ApplicationEntity> {
+  public async getOrFailById(id: number): Promise<ApplicationEntity> {
     const existApplication = await this.findById(id);
     if (!existApplication) {
       throw new ApplicationByIdNotFoundException();

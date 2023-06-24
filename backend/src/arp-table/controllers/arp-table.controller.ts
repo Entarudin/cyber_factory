@@ -40,7 +40,7 @@ export class ArpTableController {
   @ApiOkResponse({
     type: ArpTableItemResponse,
   })
-  public async findById(
+  public async getById(
     @Param('id', ParseIntPipe) id: number,
   ): Promise<ArpTableItemResponse> {
     console.log(id);
@@ -51,7 +51,7 @@ export class ArpTableController {
 
   @Get('/')
   @ApiPaginatedResponse(ArpTableItemResponse)
-  public async findAll(
+  public async getList(
     @Query() pagination: PageOptionsDto,
   ): Promise<ArpTableResponse> {
     return new ArpTableResponse(await this.arpTableService.getList(pagination));

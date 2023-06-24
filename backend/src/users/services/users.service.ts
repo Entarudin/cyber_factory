@@ -17,7 +17,7 @@ export class UsersService {
   ) {}
 
   public async create(dto: CreateUserDto): Promise<UserEntity> {
-    const role = await this.getRoleExistByName(dto.role);
+    const role = await this.getExistRoleByName(dto.role);
     const passwordHash = await this.generatePasswordHash(dto.password);
     const user = new UserEntity();
     user.email = dto.email;
@@ -35,11 +35,11 @@ export class UsersService {
   }
 
   public async delete(id: number): Promise<void> {
-    await this.getUserExistById(id);
+    await this.getOrFailById(id);
     await this.usersRepository.delete(id);
   }
 
-  public async getUserByEmail(email: string): Promise<UserEntity | undefined> {
+  public async getByEmail(email: string): Promise<UserEntity | undefined> {
     return this.usersRepository.findByEmail(email);
   }
 
@@ -48,7 +48,7 @@ export class UsersService {
     throw new NotImplementedException();
   }
 
-  public async getUserExistById(id: number): Promise<UserEntity> {
+  public async getOrFailById(id: number): Promise<UserEntity> {
     const existUser = await this.findById(id);
     if (!existUser) {
       throw new UserByIdNotFoundException();
@@ -56,7 +56,7 @@ export class UsersService {
     return existUser;
   }
 
-  private async getRoleExistByName(roleName: string): Promise<RoleEntity> {
+  private async getExistRoleByName(roleName: string): Promise<RoleEntity> {
     const existsRole = await this.rolesService.findByName(roleName);
     if (!existsRole) {
       throw new RoleByNameNotFoundException();

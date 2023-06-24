@@ -47,18 +47,18 @@ export class SystemServicesController {
   @ApiOkResponse({
     type: SystemServiceResponse,
   })
-  public async findById(
+  public async getById(
     @Param('id', ParseIntPipe) id: number,
   ): Promise<SystemServiceResponse> {
     console.log(id);
     return new SystemServiceResponse(
-      await this.systemServicesService.getExistSystemServiceById(id),
+      await this.systemServicesService.getOrFailById(id),
     );
   }
 
   @Get('/')
   @ApiPaginatedResponse(SystemServiceResponse)
-  public async findAll(
+  public async getList(
     @Query() pagination: PageOptionsDto,
   ): Promise<SystemServicesListResponse> {
     return new SystemServicesListResponse(

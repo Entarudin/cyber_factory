@@ -22,11 +22,12 @@ export class TokensService {
     private readonly tokensRepository: TokensPairsRepository,
     private readonly configService: ConfigService,
     private readonly jwtService: JwtService,
+    private readonly MAX_SIZE_TOKENS_PAIR = 10,
   ) {}
 
   public async create(dto: CreateTokenDto): Promise<TokenPairEntity> {
     const countTokens = await this.getCountTokensByUserId(dto.userId);
-    if (countTokens && countTokens >= 10) {
+    if (countTokens && countTokens >= this.MAX_SIZE_TOKENS_PAIR) {
       await this.tokensRepository.deleteByUserId(dto.userId);
     }
     const tokenPair = new TokenPairEntity();

@@ -49,18 +49,18 @@ export class NetworkInterfacesController {
   @ApiOkResponse({
     type: NetworkInterfaceResponse,
   })
-  public async findById(
+  public async getById(
     @Param('id', ParseIntPipe) id: number,
   ): Promise<NetworkInterfaceResponse> {
     console.log(id);
     return new NetworkInterfaceResponse(
-      await this.networkInterfacesService.getExistNetworkInterfaceById(id),
+      await this.networkInterfacesService.getOrFailById(id),
     );
   }
 
   @Get('/')
   @ApiPaginatedResponse(NetworkInterfaceResponse)
-  public async findAll(
+  public async getList(
     @Query() pagination: PageOptionsDto,
   ): Promise<NetworkInterfacesListResponse> {
     return new NetworkInterfacesListResponse(

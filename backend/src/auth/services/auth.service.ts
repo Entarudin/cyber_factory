@@ -22,7 +22,7 @@ export class AuthService {
   ) {}
 
   public async registration(dto: CreateUserDto): Promise<TokenPairEntity> {
-    const existUser = await this.userService.getUserByEmail(dto.email);
+    const existUser = await this.userService.getByEmail(dto.email);
     if (existUser) {
       throw new UserAlreadyExistByEmailException();
     }
@@ -56,7 +56,7 @@ export class AuthService {
   }
 
   private async validateUser(fields: AuthLoginDto): Promise<UserEntity> {
-    const user = await this.userService.getUserByEmail(fields.email);
+    const user = await this.userService.getByEmail(fields.email);
     if (!user) {
       throw new IncorrectAuthDataException();
     }

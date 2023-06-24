@@ -27,7 +27,7 @@ export class NetworkInterfacesService {
   public async create(
     dto: CreateNetworkInterfaceDto,
   ): Promise<NetworkInterfaceEntity> {
-    const existDevice = await this.devicesService.getExistDeviceByMacAddress(
+    const existDevice = await this.devicesService.getOrFailByMacAddress(
       dto.macAddress,
     );
 
@@ -42,7 +42,7 @@ export class NetworkInterfacesService {
 
   public async createList(dto: CreateListNetworkInterfacesDto): Promise<void> {
     const { items, macAddress } = dto;
-    const existDevice = await this.devicesService.getExistDeviceByMacAddress(
+    const existDevice = await this.devicesService.getOrFailByMacAddress(
       macAddress,
     );
 
@@ -84,7 +84,7 @@ export class NetworkInterfacesService {
     id: number,
     dto: UpdateNetworkInterfaceDto,
   ): Promise<NetworkInterfaceEntity> {
-    const existNetworkInterface = await this.getExistNetworkInterfaceById(id);
+    const existNetworkInterface = await this.getOrFailById(id);
 
     existNetworkInterface.name = dto.name;
     existNetworkInterface.ipAddress = dto.ipAddress;
@@ -101,7 +101,7 @@ export class NetworkInterfacesService {
   }
 
   public async delete(id: number): Promise<void> {
-    await this.getExistNetworkInterfaceById(id);
+    await this.getOrFailById(id);
     await this.networkInterfacesRepository.delete(id);
   }
 
@@ -111,9 +111,7 @@ export class NetworkInterfacesService {
     return this.networkInterfacesRepository.findBy(pagination);
   }
 
-  public async getExistNetworkInterfaceById(
-    id: number,
-  ): Promise<NetworkInterfaceEntity> {
+  public async getOrFailById(id: number): Promise<NetworkInterfaceEntity> {
     const existNetworkInterface = await this.findById(id);
     if (!existNetworkInterface) {
       throw new NetworkInterfaceByIdNotFoundException();

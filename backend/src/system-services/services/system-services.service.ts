@@ -27,7 +27,7 @@ export class SystemServicesService {
   public async create(
     dto: CreateSystemServiceDto,
   ): Promise<SystemServiceEntity> {
-    const existDevice = await this.devicesService.getExistDeviceByMacAddress(
+    const existDevice = await this.devicesService.getOrFailByMacAddress(
       dto.macAddress,
     );
 
@@ -42,7 +42,7 @@ export class SystemServicesService {
 
   public async createList(dto: CreateListSystemServicesDto): Promise<void> {
     const { items, macAddress } = dto;
-    const existDevice = await this.devicesService.getExistDeviceByMacAddress(
+    const existDevice = await this.devicesService.getOrFailByMacAddress(
       macAddress,
     );
 
@@ -60,22 +60,21 @@ export class SystemServicesService {
       return;
     }
 
-    const chunksStructuralFunctionalCharacteristics =
-      getChunksList<SystemServiceItemDto>(items, MAX_SIZE_CHUNK);
+    const chunksSystemServices = getChunksList<SystemServiceItemDto>(
+      items,
+      MAX_SIZE_CHUNK,
+    );
 
-    for (const chunk of chunksStructuralFunctionalCharacteristics) {
-      const listStructuralFunctionalCharacteristics = chunk.map(
-        (systemService) =>
-          this.buildSystemService(
-            systemService.name,
-            systemService.status,
-            existDevice,
-          ),
+    for (const chunk of chunksSystemServices) {
+      const listSystemServices = chunk.map((systemService) =>
+        this.buildSystemService(
+          systemService.name,
+          systemService.status,
+          existDevice,
+        ),
       );
 
-      await this.systemServicesRepository.saveList(
-        listStructuralFunctionalCharacteristics,
-      );
+      await this.systemServicesRepository.saveList(listSystemServices);
     }
 
     return;
@@ -85,7 +84,7 @@ export class SystemServicesService {
     id: number,
     dto: UpdateSystemServiceDto,
   ): Promise<SystemServiceEntity> {
-    const existSystemService = await this.getExistSystemServiceById(id);
+    const existSystemService = await this.getOrFailById(id);
 
     existSystemService.name = dto.name;
     existSystemService.status = dto.status;
@@ -102,7 +101,7 @@ export class SystemServicesService {
   }
 
   public async delete(id: number): Promise<void> {
-    await this.getExistSystemServiceById(id);
+    await this.getOrFailById(id);
     await this.systemServicesRepository.delete(id);
   }
 
@@ -112,9 +111,7 @@ export class SystemServicesService {
     return this.systemServicesRepository.findBy(pagination);
   }
 
-  public async getExistSystemServiceById(
-    id: number,
-  ): Promise<SystemServiceEntity> {
+  public async getOrFailById(id: number): Promise<SystemServiceEntity> {
     const existSystemService = await this.findById(id);
     if (!existSystemService) {
       throw new SystemServiceByIdNotFoundException();

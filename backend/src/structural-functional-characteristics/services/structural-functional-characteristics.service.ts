@@ -27,7 +27,7 @@ export class StructuralFunctionalCharacteristicsService {
   public async create(
     dto: CreateStructuralFunctionalCharacteristicDto,
   ): Promise<StructuralFunctionalCharacteristicEntity> {
-    const existDevice = await this.devicesService.getExistDeviceByMacAddress(
+    const existDevice = await this.devicesService.getOrFailByMacAddress(
       dto.macAddress,
     );
 
@@ -47,7 +47,7 @@ export class StructuralFunctionalCharacteristicsService {
     dto: CreateListStructuralFunctionalCharacteristicDto,
   ): Promise<void> {
     const { items, macAddress } = dto;
-    const existDevice = await this.devicesService.getExistDeviceByMacAddress(
+    const existDevice = await this.devicesService.getOrFailByMacAddress(
       macAddress,
     );
 
@@ -91,8 +91,9 @@ export class StructuralFunctionalCharacteristicsService {
     id: number,
     dto: UpdateStructuralFunctionalCharacteristicDto,
   ): Promise<StructuralFunctionalCharacteristicEntity> {
-    const existStructuralFunctionalCharacteristic =
-      await this.getExistStructuralFunctionalCharacteristicById(id);
+    const existStructuralFunctionalCharacteristic = await this.getOrFailById(
+      id,
+    );
 
     existStructuralFunctionalCharacteristic.name = dto.name;
     existStructuralFunctionalCharacteristic.version = dto.version;
@@ -113,7 +114,7 @@ export class StructuralFunctionalCharacteristicsService {
   }
 
   public async delete(id: number): Promise<void> {
-    await this.getExistStructuralFunctionalCharacteristicById(id);
+    await this.getOrFailById(id);
     await this.structuralFunctionalCharacteristicsRepository.delete(id);
   }
 
@@ -125,7 +126,7 @@ export class StructuralFunctionalCharacteristicsService {
     );
   }
 
-  public async getExistStructuralFunctionalCharacteristicById(
+  public async getOrFailById(
     id: number,
   ): Promise<StructuralFunctionalCharacteristicEntity> {
     const existStructuralFunctionalCharacteristic = await this.findById(id);

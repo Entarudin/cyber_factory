@@ -28,7 +28,7 @@ export class ArpTableService {
   ) {}
 
   public async create(dto: CreateArpTableItemDto): Promise<ArpTableItemEntity> {
-    const existDevice = await this.devicesService.getExistDeviceByMacAddress(
+    const existDevice = await this.devicesService.getOrFailByMacAddress(
       dto.deviceMacAddress,
     );
 
@@ -43,7 +43,7 @@ export class ArpTableService {
 
   public async createList(dto: CreateArpTableDto): Promise<void> {
     const { items, deviceMacAddress } = dto;
-    const existDevice = await this.devicesService.getExistDeviceByMacAddress(
+    const existDevice = await this.devicesService.getOrFailByMacAddress(
       deviceMacAddress,
     );
 
