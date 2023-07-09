@@ -1,17 +1,18 @@
 import { Injectable } from '@nestjs/common';
-import { BcryptService } from '@/bcrypt/services';
-import { TokenPairEntity } from '@/tokens/dao/entity/token-pair.entity';
-import { TokensService } from '@/tokens/services/tokens.service';
-import { CreateUserDto } from '@/users/dtos';
-import { UserAlreadyExistByEmailException } from '@/users/exceptions';
-import { UsersService } from '@/users/services';
+
+import { AuthLoginDto } from '@/auth/dtos/auth-login.dto';
 import { AuthRefreshDto } from '@/auth/dtos/auth-refresh.dto';
 import {
   IncorrectAuthDataException,
   RefreshTokenExpiredException,
 } from '@/auth/exceptions';
+import { BcryptService } from '@/bcrypt/services';
+import { TokenPairEntity } from '@/tokens/dao/entity/token-pair.entity';
+import { TokensService } from '@/tokens/services/tokens.service';
 import { UserEntity } from '@/users/dao/entity/user.entity';
-import { AuthLoginDto } from '@/auth/dtos/auth-login.dto';
+import { CreateUserDto } from '@/users/dtos';
+import { UserAlreadyExistByEmailException } from '@/users/exceptions';
+import { UsersService } from '@/users/services';
 
 @Injectable()
 export class AuthService {
@@ -22,7 +23,7 @@ export class AuthService {
   ) {}
 
   public async registration(dto: CreateUserDto): Promise<TokenPairEntity> {
-    const existUser = await this.userService.getUserByEmail(dto.email);
+    const existUser = await this.userService.getByEmail(dto.email);
     if (existUser) {
       throw new UserAlreadyExistByEmailException();
     }
@@ -56,7 +57,7 @@ export class AuthService {
   }
 
   private async validateUser(fields: AuthLoginDto): Promise<UserEntity> {
-    const user = await this.userService.getUserByEmail(fields.email);
+    const user = await this.userService.getByEmail(fields.email);
     if (!user) {
       throw new IncorrectAuthDataException();
     }

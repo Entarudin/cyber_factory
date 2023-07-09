@@ -1,5 +1,3 @@
-import { TokenPairEntity } from '@/tokens/dao/entity/token-pair.entity';
-import { RoleEntity } from '@/roles/dao/entity/role.entity';
 import {
   Column,
   CreateDateColumn,
@@ -10,7 +8,10 @@ import {
   OneToMany,
   PrimaryGeneratedColumn,
 } from 'typeorm';
+
 import { CyberPhysicalSystemEntity } from '@/cyber-physical-systems/dao/entity/cyber-physical-system.entity';
+import { RoleEntity } from '@/roles/dao/entity/role.entity';
+import { TokenPairEntity } from '@/tokens/dao/entity/token-pair.entity';
 
 @Entity({ name: 'users' })
 export class UserEntity {

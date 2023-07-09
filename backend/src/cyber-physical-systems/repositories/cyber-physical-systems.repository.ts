@@ -1,5 +1,5 @@
-import { PageOptionsDto } from '@/common/pagination/page-options.dto';
 import { PageDto } from '@/common/pagination/page.dto';
+import { PageOptionsDto } from '@/common/pagination/page-options.dto';
 import { CyberPhysicalSystemEntity } from '@/cyber-physical-systems/dao/entity/cyber-physical-system.entity';
 
 export abstract class CyberPhysicalSystemsRepository {

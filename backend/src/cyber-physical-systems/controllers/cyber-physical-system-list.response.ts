@@ -1,8 +1,10 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { CyberPhysicalSystemEntity } from '@/cyber-physical-systems/dao/entity/cyber-physical-system.entity';
-import { CyberPhysicalSystemResponse } from './cyber-physical-system.response';
-import { PageOptionsDto } from '@/common/pagination/page-options.dto';
+
 import { PaginatedResult } from '@/common/pagination/interfaces/pagination-result.interface';
+import { PageOptionsDto } from '@/common/pagination/page-options.dto';
+import { CyberPhysicalSystemEntity } from '@/cyber-physical-systems/dao/entity/cyber-physical-system.entity';
+
+import { CyberPhysicalSystemResponse } from './cyber-physical-system.response';
 
 export class CyberPhysicalSystemListResponse {
   @ApiProperty()

@@ -1,5 +1,3 @@
-import { RolesEnum } from '@/common/roles.enum';
-import { UserEntity } from '@/users/dao/entity/user.entity';
 import {
   Column,
   CreateDateColumn,
@@ -7,6 +5,9 @@ import {
   ManyToMany,
   PrimaryGeneratedColumn,
 } from 'typeorm';
+
+import { RolesEnum } from '@/common/constants/roles.enum';
+import { UserEntity } from '@/users/dao/entity/user.entity';
 
 @Entity({ name: 'roles' })
 export class RoleEntity {

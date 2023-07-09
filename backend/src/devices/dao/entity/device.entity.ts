@@ -1,5 +1,3 @@
-import { CyberPhysicalSystemEntity } from '@/cyber-physical-systems/dao/entity/cyber-physical-system.entity';
-import { StructuralFunctionalCharacteristicEntity } from '@/structural-functional-characteristics/dao/entity/structural-functional-characteristic.entity';
 import {
   Column,
   CreateDateColumn,
@@ -9,6 +7,17 @@ import {
   OneToMany,
   PrimaryGeneratedColumn,
 } from 'typeorm';
+
+import { ApplicationEntity } from '@/applications/dao/entity/application.entity';
+import {
+  ArpTable,
+  ArpTableItemEntity,
+} from '@/arp-table/dao/entity/arp-table.entity';
+import { CyberPhysicalSystemEntity } from '@/cyber-physical-systems/dao/entity/cyber-physical-system.entity';
+import { MonitorResourceEntity } from '@/monitor-resources/dao/entity/monitor-resource.entity';
+import { NetworkInterfaceEntity } from '@/network-interfaces/dao/entity/network-interface.entity';
+import { StructuralFunctionalCharacteristicEntity } from '@/structural-functional-characteristics/dao/entity/structural-functional-characteristic.entity';
+import { SystemServiceEntity } from '@/system-services/dao/entity/system-service.entity';
 
 @Entity({ name: 'devices' })
 export class DeviceEntity {
@@ -48,7 +57,6 @@ export class DeviceEntity {
     (structuralFunctionalCharacteristic) =>
       structuralFunctionalCharacteristic.device,
     {
-      eager: true,
       cascade: true,
       onDelete: 'CASCADE',
       onUpdate: 'CASCADE',
@@ -56,4 +64,56 @@ export class DeviceEntity {
   )
   @JoinColumn()
   structuralFunctionalCharacteristics!: StructuralFunctionalCharacteristicEntity[];
+
+  @OneToMany(
+    () => SystemServiceEntity,
+    (systemService) => systemService.device,
+    {
+      cascade: true,
+      onDelete: 'CASCADE',
+      onUpdate: 'CASCADE',
+    },
+  )
+  @JoinColumn()
+  systemServices!: SystemServiceEntity[];
+
+  @OneToMany(() => ApplicationEntity, (application) => application.device, {
+    cascade: true,
+    onDelete: 'CASCADE',
+    onUpdate: 'CASCADE',
+  })
+  @JoinColumn()
+  applications!: ApplicationEntity[];
+
+  @OneToMany(
+    () => NetworkInterfaceEntity,
+    (networkInterface) => networkInterface.device,
+    {
+      cascade: true,
+      onDelete: 'CASCADE',
+      onUpdate: 'CASCADE',
+    },
+  )
+  @JoinColumn()
+  networkInterfaces!: NetworkInterfaceEntity[];
+
+  @OneToMany(
+    () => MonitorResourceEntity,
+    (monitorResource) => monitorResource.device,
+    {
+      cascade: true,
+      onDelete: 'CASCADE',
+      onUpdate: 'CASCADE',
+    },
+  )
+  @JoinColumn()
+  monitorResources!: MonitorResourceEntity[];
+
+  @OneToMany(() => ArpTableItemEntity, (arpTableItem) => arpTableItem.device, {
+    cascade: true,
+    onDelete: 'CASCADE',
+    onUpdate: 'CASCADE',
+  })
+  @JoinColumn()
+  arpTable!: ArpTable;
 }

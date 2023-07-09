@@ -1,4 +1,5 @@
 import { ApiProperty } from '@nestjs/swagger';
+
 import { DeviceEntity } from '@/devices/dao/entity/device.entity';
 
 export class DeviceResponse {

@@ -1,11 +1,12 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { DeviceEntity } from '@/devices/dao/entity/device.entity';
+
 import { CyberPhysicalSystemsModule } from '@/cyber-physical-systems/cyber-physical-systems.module';
-import { DevicesService } from '@/devices/services/devices.service';
+import { DevicesController } from '@/devices/controllers/devices.controller';
+import { DeviceEntity } from '@/devices/dao/entity/device.entity';
 import { DevicesRepository } from '@/devices/repositories/devices.repository';
 import { PostgresDevicesRepository } from '@/devices/repositories/postgres-devices.repository';
-import { DevicesController } from '@/devices/controllers/devices.controller';
+import { DevicesService } from '@/devices/services/devices.service';
 
 @Module({
   imports: [

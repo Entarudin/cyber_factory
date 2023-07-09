@@ -1,5 +1,3 @@
-import { DeviceEntity } from '@/devices/dao/entity/device.entity';
-import { UserEntity } from '@/users/dao/entity/user.entity';
 import {
   Column,
   CreateDateColumn,
@@ -9,6 +7,9 @@ import {
   OneToMany,
   PrimaryGeneratedColumn,
 } from 'typeorm';
+
+import { DeviceEntity } from '@/devices/dao/entity/device.entity';
+import { UserEntity } from '@/users/dao/entity/user.entity';
 
 @Entity({ name: 'cyber_physical_systems' })
 export class CyberPhysicalSystemEntity {

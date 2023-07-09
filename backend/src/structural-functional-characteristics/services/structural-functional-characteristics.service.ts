@@ -1,14 +1,22 @@
+import { Injectable } from '@nestjs/common';
+
+import {
+  getChunksList,
+  MAX_SIZE_CHUNK,
+} from '@/common//utils/get-chunks-list.utils';
+import { PageDto } from '@/common/pagination/page.dto';
+import { PageOptionsDto } from '@/common/pagination/page-options.dto';
+import { DeviceEntity } from '@/devices/dao/entity/device.entity';
 import { DevicesService } from '@/devices/services/devices.service';
-import { StructuralFunctionalCharacteristicsRepository } from '@/structural-functional-characteristics/repositories/structural-functional-characteristics.repository';
 import { StructuralFunctionalCharacteristicEntity } from '@/structural-functional-characteristics/dao/entity/structural-functional-characteristic.entity';
 import {
+  CreateListStructuralFunctionalCharacteristicDto,
   CreateStructuralFunctionalCharacteristicDto,
+  StructuralFunctionalCharacteristicItemDto,
   UpdateStructuralFunctionalCharacteristicDto,
 } from '@/structural-functional-characteristics/dtos';
 import { StructuralFunctionalCharacteristicByIdNotFoundException } from '@/structural-functional-characteristics/exceptions';
-import { PageOptionsDto } from '@/common/pagination/page-options.dto';
-import { PageDto } from '@/common/pagination/page.dto';
-import { Injectable } from '@nestjs/common';
+import { StructuralFunctionalCharacteristicsRepository } from '@/structural-functional-characteristics/repositories/structural-functional-characteristics.repository';
 
 @Injectable()
 export class StructuralFunctionalCharacteristicsService {
@@ -20,27 +28,73 @@ export class StructuralFunctionalCharacteristicsService {
   public async create(
     dto: CreateStructuralFunctionalCharacteristicDto,
   ): Promise<StructuralFunctionalCharacteristicEntity> {
-    const existDevice = await this.devicesService.getExistDeviceByMacAddress(
-      dto.macAddress,
+    const existDevice = await this.devicesService.getOrFailByMacAddress(
+      dto.deviceMacAddress,
     );
 
     const structuralFunctionalCharacteristic =
-      new StructuralFunctionalCharacteristicEntity();
-    structuralFunctionalCharacteristic.name = dto.name;
-    structuralFunctionalCharacteristic.version = dto.version;
-    structuralFunctionalCharacteristic.device = existDevice;
+      this.buildStructuralFunctionalCharacteristic(
+        dto.name,
+        dto.version,
+        existDevice,
+      );
 
     return this.structuralFunctionalCharacteristicsRepository.save(
       structuralFunctionalCharacteristic,
     );
   }
 
+  public async createList(
+    dto: CreateListStructuralFunctionalCharacteristicDto,
+  ): Promise<void> {
+    const { items, deviceMacAddress } = dto;
+    const existDevice = await this.devicesService.getOrFailByMacAddress(
+      deviceMacAddress,
+    );
+
+    if (items.length <= MAX_SIZE_CHUNK) {
+      const listStructuralFunctionalCharacteristics = items.map((sfc) =>
+        this.buildStructuralFunctionalCharacteristic(
+          sfc.name,
+          sfc.version,
+          existDevice,
+        ),
+      );
+      await this.structuralFunctionalCharacteristicsRepository.saveList(
+        listStructuralFunctionalCharacteristics,
+      );
+
+      return;
+    }
+
+    const chunksStructuralFunctionalCharacteristics =
+      getChunksList<StructuralFunctionalCharacteristicItemDto>(
+        items,
+        MAX_SIZE_CHUNK,
+      );
+
+    for (const chunk of chunksStructuralFunctionalCharacteristics) {
+      const listStructuralFunctionalCharacteristics = chunk.map((sfc) =>
+        this.buildStructuralFunctionalCharacteristic(
+          sfc.name,
+          sfc.version,
+          existDevice,
+        ),
+      );
+      await this.structuralFunctionalCharacteristicsRepository.saveList(
+        listStructuralFunctionalCharacteristics,
+      );
+    }
+    return;
+  }
+
   public async update(
     id: number,
     dto: UpdateStructuralFunctionalCharacteristicDto,
   ): Promise<StructuralFunctionalCharacteristicEntity> {
-    const existStructuralFunctionalCharacteristic =
-      await this.getExistStructuralFunctionalCharacteristicById(id);
+    const existStructuralFunctionalCharacteristic = await this.getOrFailById(
+      id,
+    );
 
     existStructuralFunctionalCharacteristic.name = dto.name;
     existStructuralFunctionalCharacteristic.version = dto.version;
@@ -61,7 +115,7 @@ export class StructuralFunctionalCharacteristicsService {
   }
 
   public async delete(id: number): Promise<void> {
-    await this.getExistStructuralFunctionalCharacteristicById(id);
+    await this.getOrFailById(id);
     await this.structuralFunctionalCharacteristicsRepository.delete(id);
   }
 
@@ -73,7 +127,7 @@ export class StructuralFunctionalCharacteristicsService {
     );
   }
 
-  public async getExistStructuralFunctionalCharacteristicById(
+  public async getOrFailById(
     id: number,
   ): Promise<StructuralFunctionalCharacteristicEntity> {
     const existStructuralFunctionalCharacteristic = await this.findById(id);
@@ -81,5 +135,18 @@ export class StructuralFunctionalCharacteristicsService {
       throw new StructuralFunctionalCharacteristicByIdNotFoundException();
     }
     return existStructuralFunctionalCharacteristic;
+  }
+
+  private buildStructuralFunctionalCharacteristic(
+    name: string,
+    version: string,
+    device: DeviceEntity,
+  ): StructuralFunctionalCharacteristicEntity {
+    const structuralFunctionalCharacteristic =
+      new StructuralFunctionalCharacteristicEntity();
+    structuralFunctionalCharacteristic.name = name;
+    structuralFunctionalCharacteristic.version = version;
+    structuralFunctionalCharacteristic.device = device;
+    return structuralFunctionalCharacteristic;
   }
 }

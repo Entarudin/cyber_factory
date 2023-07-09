@@ -1,20 +1,21 @@
 import {
-  Controller,
-  Post,
   Body,
+  Controller,
+  Delete,
   Get,
   Param,
   ParseIntPipe,
-  Delete,
+  Post,
   Query,
 } from '@nestjs/common';
 import { ApiOkResponse, ApiTags } from '@nestjs/swagger';
-import { CyberPhysicalSystemsService } from '@/cyber-physical-systems/services/cyber-physical-systems.service';
-import { CreateCyberPhysicalSystemDto } from '@/cyber-physical-systems/dtos';
-import { CyberPhysicalSystemResponse } from '@/cyber-physical-systems/controllers/cyber-physical-system.response';
-import { PageOptionsDto } from '@/common/pagination/page-options.dto';
+
 import { ApiPaginatedResponse } from '@/common/pagination/api-pagination.response';
+import { PageOptionsDto } from '@/common/pagination/page-options.dto';
+import { CyberPhysicalSystemResponse } from '@/cyber-physical-systems/controllers/cyber-physical-system.response';
 import { CyberPhysicalSystemListResponse } from '@/cyber-physical-systems/controllers/cyber-physical-system-list.response';
+import { CreateCyberPhysicalSystemDto } from '@/cyber-physical-systems/dtos';
+import { CyberPhysicalSystemsService } from '@/cyber-physical-systems/services/cyber-physical-systems.service';
 
 @ApiTags('Cyber Physical Systems')
 @Controller()
@@ -39,20 +40,18 @@ export class CyberPhysicalSystemsController {
   @ApiOkResponse({
     type: CyberPhysicalSystemResponse,
   })
-  public async findById(
+  public async getById(
     @Param('id', ParseIntPipe) id: number,
   ): Promise<CyberPhysicalSystemResponse> {
     console.log(id);
     return new CyberPhysicalSystemResponse(
-      await this.cyberPhysicalSystemsService.getCyberPhysicalSystemExistById(
-        id,
-      ),
+      await this.cyberPhysicalSystemsService.getOrFailById(id),
     );
   }
 
   @Get('/')
   @ApiPaginatedResponse(CyberPhysicalSystemResponse)
-  public async findAll(
+  public async getList(
     @Query() pagination: PageOptionsDto,
   ): Promise<CyberPhysicalSystemListResponse> {
     return new CyberPhysicalSystemListResponse(

@@ -1,20 +1,24 @@
 import {
-  Controller,
-  Post,
   Body,
+  Controller,
+  Delete,
   Get,
   Param,
   ParseIntPipe,
-  Delete,
+  Post,
   Query,
 } from '@nestjs/common';
 import { ApiOkResponse, ApiTags } from '@nestjs/swagger';
-import { PageOptionsDto } from '@/common/pagination/page-options.dto';
+
 import { ApiPaginatedResponse } from '@/common/pagination/api-pagination.response';
-import { StructuralFunctionalCharacteristicsService } from '@/structural-functional-characteristics/services/structural-functional-characteristics.service';
+import { PageOptionsDto } from '@/common/pagination/page-options.dto';
 import { StructuralFunctionalCharacteristicResponse } from '@/structural-functional-characteristics/controllers/structural-functional-characteristics.response';
 import { StructuralFunctionalCharacteristicListResponse } from '@/structural-functional-characteristics/controllers/structural-functional-characteristics-list.response';
-import { CreateStructuralFunctionalCharacteristicDto } from '@/structural-functional-characteristics/dtos';
+import {
+  CreateListStructuralFunctionalCharacteristicDto,
+  CreateStructuralFunctionalCharacteristicDto,
+} from '@/structural-functional-characteristics/dtos';
+import { StructuralFunctionalCharacteristicsService } from '@/structural-functional-characteristics/services/structural-functional-characteristics.service';
 
 @ApiTags('Structural Functional Characteristics')
 @Controller()
@@ -35,24 +39,29 @@ export class StructuralFunctionalCharacteristicsController {
     );
   }
 
+  @Post('/upload-list')
+  public async createList(
+    @Body() dto: CreateListStructuralFunctionalCharacteristicDto,
+  ): Promise<void> {
+    await this.structuralFunctionalCharacteristicsService.createList(dto);
+  }
+
   @Get('/:id')
   @ApiOkResponse({
     type: StructuralFunctionalCharacteristicResponse,
   })
-  public async findById(
+  public async getById(
     @Param('id', ParseIntPipe) id: number,
   ): Promise<StructuralFunctionalCharacteristicResponse> {
     console.log(id);
     return new StructuralFunctionalCharacteristicResponse(
-      await this.structuralFunctionalCharacteristicsService.getExistStructuralFunctionalCharacteristicById(
-        id,
-      ),
+      await this.structuralFunctionalCharacteristicsService.getOrFailById(id),
     );
   }
 
   @Get('/')
   @ApiPaginatedResponse(StructuralFunctionalCharacteristicResponse)
-  public async findAll(
+  public async getList(
     @Query() pagination: PageOptionsDto,
   ): Promise<StructuralFunctionalCharacteristicListResponse> {
     return new StructuralFunctionalCharacteristicListResponse(

@@ -1,8 +1,9 @@
+import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
+import { Repository } from 'typeorm';
+
 import { TokenPairEntity } from '@/tokens/dao/entity/token-pair.entity';
 import { TokensPairsRepository } from '@/tokens/repositories/tokens-pairs.repository';
-import { Repository } from 'typeorm';
-import { Injectable } from '@nestjs/common';
 
 @Injectable()
 export class PostgresTokensPairsRepository extends TokensPairsRepository {
