@@ -11,7 +11,7 @@ import {
 import { DeviceEntity } from '@/devices/dao/entity/device.entity';
 
 @Entity({ name: 'structural_functional_characteristics' })
-@Unique(['name', 'version'])
+@Unique(['name', 'version', 'deviceId'])
 export class StructuralFunctionalCharacteristicEntity {
   @PrimaryGeneratedColumn()
   id?: number;
