@@ -10,34 +10,35 @@ export class MonitorResourceResponse {
   public readonly cpuLoad: number;
 
   @ApiProperty()
-  public readonly ramLoad: number;
+  public readonly cpuUsage: number;
+
+  @ApiProperty()
+  public readonly cpuAvgLoad: number;
 
   @ApiProperty()
   public readonly cpuTemperature: number;
 
   @ApiProperty()
-  public readonly countTransmittedUdpPackets: number;
+  public readonly ramUsage: number;
 
   @ApiProperty()
-  public readonly countTransmittedTcpPackets: number;
+  public readonly swapUsage: number;
 
   @ApiProperty()
-  public readonly countTransmittedArpPackets: number;
+  public readonly diskUsage: number;
 
   @ApiProperty()
-  public readonly diskLoad: number;
+  public readonly uptime: string;
 
   constructor(monitorResourceEntity: MonitorResourceEntity) {
     this.id = monitorResourceEntity.id;
     this.cpuLoad = monitorResourceEntity.cpuLoad;
-    this.ramLoad = monitorResourceEntity.ramLoad;
+    this.cpuUsage = monitorResourceEntity.cpuUsage;
+    this.cpuAvgLoad = monitorResourceEntity.cpuAvgLoad;
     this.cpuTemperature = monitorResourceEntity.cpuTemperature;
-    this.countTransmittedTcpPackets =
-      monitorResourceEntity.countTransmittedTcpPackets;
-    this.countTransmittedUdpPackets =
-      monitorResourceEntity.countTransmittedUdpPackets;
-    this.countTransmittedArpPackets =
-      monitorResourceEntity.countTransmittedArpPackets;
-    this.diskLoad = monitorResourceEntity.diskLoad;
+    this.ramUsage = monitorResourceEntity.ramUsage;
+    this.swapUsage = monitorResourceEntity.swapUsage;
+    this.diskUsage = monitorResourceEntity.diskUsage;
+    this.uptime = monitorResourceEntity.uptime;
   }
 }

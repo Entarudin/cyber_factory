@@ -1,5 +1,5 @@
 import { ApiProperty, OmitType } from '@nestjs/swagger';
-import { IsDefined, IsNumber } from 'class-validator';
+import { IsDefined, IsNumber, IsString } from 'class-validator';
 
 import { DeviceMacAddressDto } from '@/devices/dtos';
 
@@ -18,7 +18,15 @@ export class CreateMonitorResourceDto extends DeviceMacAddressDto {
   })
   @IsNumber()
   @IsDefined()
-  public readonly ramLoad: number;
+  public readonly cpuUsage: number;
+
+  @ApiProperty({
+    type: Number,
+    required: true,
+  })
+  @IsNumber()
+  @IsDefined()
+  public readonly cpuAvgLoad: number;
 
   @ApiProperty({
     type: Number,
@@ -34,7 +42,7 @@ export class CreateMonitorResourceDto extends DeviceMacAddressDto {
   })
   @IsNumber()
   @IsDefined()
-  public readonly countTransmittedUdpPackets: number;
+  public readonly ramUsage: number;
 
   @ApiProperty({
     type: Number,
@@ -42,7 +50,7 @@ export class CreateMonitorResourceDto extends DeviceMacAddressDto {
   })
   @IsNumber()
   @IsDefined()
-  public readonly countTransmittedTcpPackets: number;
+  public readonly swapUsage: number;
 
   @ApiProperty({
     type: Number,
@@ -50,15 +58,15 @@ export class CreateMonitorResourceDto extends DeviceMacAddressDto {
   })
   @IsNumber()
   @IsDefined()
-  public readonly countTransmittedArpPackets: number;
+  public readonly diskUsage: number;
 
   @ApiProperty({
     type: Number,
     required: true,
   })
-  @IsNumber()
+  @IsString()
   @IsDefined()
-  public readonly diskLoad: number;
+  public readonly uptime: string;
 }
 
 export class MonitorResourceItemDto extends OmitType(CreateMonitorResourceDto, [
