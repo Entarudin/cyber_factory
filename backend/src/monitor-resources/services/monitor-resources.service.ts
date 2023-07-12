@@ -28,12 +28,13 @@ export class MonitorResourcesService {
 
     const monitorResource = this.buildMonitorResource(
       dto.cpuLoad,
-      dto.ramLoad,
+      dto.cpuUsage,
+      dto.cpuAvgLoad,
       dto.cpuTemperature,
-      dto.countTransmittedUdpPackets,
-      dto.countTransmittedTcpPackets,
-      dto.countTransmittedArpPackets,
-      dto.diskLoad,
+      dto.ramUsage,
+      dto.swapUsage,
+      dto.diskUsage,
+      dto.uptime,
       existDevice,
     );
 
@@ -47,15 +48,13 @@ export class MonitorResourcesService {
     const existMonitorResource = await this.getOrFailById(id);
 
     existMonitorResource.cpuLoad = dto.cpuLoad;
-    existMonitorResource.ramLoad = dto.ramLoad;
+    existMonitorResource.cpuUsage = dto.cpuUsage;
+    existMonitorResource.cpuAvgLoad = dto.cpuAvgLoad;
     existMonitorResource.cpuTemperature = dto.cpuTemperature;
-    existMonitorResource.countTransmittedUdpPackets =
-      dto.countTransmittedUdpPackets;
-    existMonitorResource.countTransmittedTcpPackets =
-      dto.countTransmittedTcpPackets;
-    existMonitorResource.countTransmittedArpPackets =
-      dto.countTransmittedArpPackets;
-    existMonitorResource.diskLoad = dto.diskLoad;
+    existMonitorResource.ramUsage = dto.ramUsage;
+    existMonitorResource.swapUsage = dto.swapUsage;
+    existMonitorResource.diskUsage = dto.diskUsage;
+    existMonitorResource.uptime = dto.uptime;
 
     return this.monitorResourcesRepository.save(existMonitorResource);
   }
@@ -89,22 +88,24 @@ export class MonitorResourcesService {
 
   private buildMonitorResource(
     cpuLoad: number,
-    ramLoad: number,
+    cpuUsage: number,
+    cpuAvgLoad: number,
     cpuTemperature: number,
-    countTransmittedUdpPackets: number,
-    countTransmittedTcpPackets: number,
-    countTransmittedArpPackets: number,
-    diskLoad: number,
+    ramUsage: number,
+    swapUsage: number,
+    diskUsage: number,
+    uptime: string,
     device: DeviceEntity,
   ): MonitorResourceEntity {
     const monitorResource = new MonitorResourceEntity();
     monitorResource.cpuLoad = cpuLoad;
-    monitorResource.ramLoad = ramLoad;
+    monitorResource.cpuUsage = cpuUsage;
+    monitorResource.cpuAvgLoad = cpuAvgLoad;
     monitorResource.cpuTemperature = cpuTemperature;
-    monitorResource.countTransmittedUdpPackets = countTransmittedUdpPackets;
-    monitorResource.countTransmittedTcpPackets = countTransmittedTcpPackets;
-    monitorResource.countTransmittedArpPackets = countTransmittedArpPackets;
-    monitorResource.diskLoad = diskLoad;
+    monitorResource.ramUsage = ramUsage;
+    monitorResource.swapUsage = swapUsage;
+    monitorResource.diskUsage = diskUsage;
+    monitorResource.uptime = uptime;
     monitorResource.device = device;
     return monitorResource;
   }

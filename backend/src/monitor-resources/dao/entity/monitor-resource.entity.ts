@@ -14,26 +14,29 @@ export class MonitorResourceEntity {
   @PrimaryGeneratedColumn()
   id?: number;
 
-  @Column()
+  @Column({ type: 'decimal' })
   cpuLoad: number;
 
-  @Column()
-  ramLoad: number;
+  @Column({ type: 'decimal' })
+  cpuUsage: number;
 
-  @Column()
+  @Column({ type: 'decimal' })
+  cpuAvgLoad: number;
+
+  @Column({ type: 'decimal' })
   cpuTemperature: number;
 
-  @Column()
-  countTransmittedUdpPackets: number;
+  @Column({ type: 'decimal' })
+  ramUsage: number;
 
-  @Column()
-  countTransmittedTcpPackets: number;
+  @Column({ type: 'decimal' })
+  swapUsage: number;
 
-  @Column()
-  countTransmittedArpPackets: number;
+  @Column({ type: 'decimal' })
+  diskUsage: number;
 
-  @Column()
-  diskLoad: number;
+  @Column({ type: 'varchar' })
+  uptime: string;
 
   @Column()
   deviceId!: number;
