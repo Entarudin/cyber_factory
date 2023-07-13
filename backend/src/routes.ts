@@ -7,6 +7,7 @@ import { CountPacketsModule } from '@/count-packets/count-packets.module';
 import { CyberPhysicalSystemsModule } from '@/cyber-physical-systems/cyber-physical-systems.module';
 import { DevicesModule } from '@/devices/devices.module';
 import { HealthModule } from '@/health/health.module';
+import { HostsModule } from '@/hosts/hosts.module';
 import { MonitorResourcesModule } from '@/monitor-resources/monitor-resources.module';
 import { NetworkInterfacesModule } from '@/network-interfaces/network-interfaces.module';
 import { StructuralFunctionalCharacteristicsModule } from '@/structural-functional-characteristics/structural-functional-characteristics.module';
@@ -61,5 +62,9 @@ export const ROUTES: Routes = [
   {
     path: '/api/v1/count-packets',
     module: CountPacketsModule,
+  },
+  {
+    path: '/api/v1/hosts',
+    module: HostsModule,
   },
 ];
