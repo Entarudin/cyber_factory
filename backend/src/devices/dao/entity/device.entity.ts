@@ -13,6 +13,7 @@ import {
   ArpTable,
   ArpTableItemEntity,
 } from '@/arp-table/dao/entity/arp-table.entity';
+import { CountPacketsEntity } from '@/count-packets/dao/entity/count-packets.entity';
 import { CyberPhysicalSystemEntity } from '@/cyber-physical-systems/dao/entity/cyber-physical-system.entity';
 import { MonitorResourceEntity } from '@/monitor-resources/dao/entity/monitor-resource.entity';
 import { NetworkInterfaceEntity } from '@/network-interfaces/dao/entity/network-interface.entity';
@@ -116,4 +117,12 @@ export class DeviceEntity {
   })
   @JoinColumn()
   arpTable!: ArpTable;
+
+  @OneToMany(() => CountPacketsEntity, (countPackets) => countPackets.device, {
+    cascade: true,
+    onDelete: 'CASCADE',
+    onUpdate: 'CASCADE',
+  })
+  @JoinColumn()
+  countPackets!: ArpTable;
 }
