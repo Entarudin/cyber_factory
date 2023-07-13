@@ -13,7 +13,7 @@ import { DeviceEntity } from '@/devices/dao/entity/device.entity';
 import { DevicesService } from '@/devices/services/devices.service';
 
 @Injectable()
-export class MonitorResourcesService {
+export class CountPacketsService {
   constructor(
     private readonly countPacketsRepository: CountPacketsRepository,
     private readonly devicesService: DevicesService,

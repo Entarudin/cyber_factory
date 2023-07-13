@@ -6,6 +6,7 @@ import { ApplicationsModule } from '@/applications/applications.module';
 import { ArpTableModule } from '@/arp-table/arp-table.module';
 import { AuthModule } from '@/auth/auth.module';
 import { GlobalExceptionsFilter } from '@/common/filters/global-exceptions.filter';
+import { CountPacketsModule } from '@/count-packets/count-packets.module';
 import { CyberPhysicalSystemsModule } from '@/cyber-physical-systems/cyber-physical-systems.module';
 import { DatabaseModule } from '@/database/database.module';
 import { DevicesModule } from '@/devices/devices.module';
@@ -34,6 +35,7 @@ import { UsersModule } from '@/users/users.module';
     NetworkInterfacesModule,
     MonitorResourcesModule,
     ArpTableModule,
+    CountPacketsModule,
     HealthModule,
     RouterModule.register(ROUTES),
     ConfigModule.forRoot({
