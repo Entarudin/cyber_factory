@@ -1,6 +1,6 @@
 import { DeviceMacAddressDto } from '@/devices/dtos';
 import { HostItemDto } from '@/hosts/dtos';
 
-export class CreateArpTableDto extends DeviceMacAddressDto {
+export class CreateListHostsDto extends DeviceMacAddressDto {
   public readonly items: HostItemDto[];
 }
