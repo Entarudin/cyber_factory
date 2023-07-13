@@ -11,6 +11,7 @@ import { CyberPhysicalSystemsModule } from '@/cyber-physical-systems/cyber-physi
 import { DatabaseModule } from '@/database/database.module';
 import { DevicesModule } from '@/devices/devices.module';
 import { HealthModule } from '@/health/health.module';
+import { HostsModule } from '@/hosts/hosts.module';
 import { MonitorResourcesModule } from '@/monitor-resources/monitor-resources.module';
 import { NetworkInterfacesModule } from '@/network-interfaces/network-interfaces.module';
 import { RolesModule } from '@/roles/roles.module';
@@ -36,6 +37,7 @@ import { UsersModule } from '@/users/users.module';
     MonitorResourcesModule,
     ArpTableModule,
     CountPacketsModule,
+    HostsModule,
     HealthModule,
     RouterModule.register(ROUTES),
     ConfigModule.forRoot({
