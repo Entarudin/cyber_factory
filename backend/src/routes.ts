@@ -3,6 +3,7 @@ import { Routes } from '@nestjs/core';
 import { ApplicationsModule } from '@/applications/applications.module';
 import { ArpTableModule } from '@/arp-table/arp-table.module';
 import { AuthModule } from '@/auth/auth.module';
+import { CountPacketsModule } from '@/count-packets/count-packets.module';
 import { CyberPhysicalSystemsModule } from '@/cyber-physical-systems/cyber-physical-systems.module';
 import { DevicesModule } from '@/devices/devices.module';
 import { HealthModule } from '@/health/health.module';
@@ -56,5 +57,9 @@ export const ROUTES: Routes = [
   {
     path: '/api/v1/arp-table',
     module: ArpTableModule,
+  },
+  {
+    path: '/api/v1/count-packets',
+    module: CountPacketsModule,
   },
 ];
